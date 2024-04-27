@@ -1,6 +1,37 @@
+import alimentosFrutales.*
+import posicionamiento.*
+import objects.*
+import obstaculos.*
+import wollok.game.*
 
-test "testX" {
-
-	assert.that(true)
-
+describe "Acciones de Pikachu" {
+	
+	method initialize() {
+		// Dimensiones
+		game.cellSize(50)
+		game.width(18)
+		game.height(12)
+		game.clear()
+	}
+	
+	test "PIKACHU y su ENERGIA al COMER FRUTAS...
+		Pikachu, inicia con 100 de energia.
+		Come un anana y adquiere su energia y queda en 180.
+		Come un baya y adquiere su energia negativa y queda en 130.
+		Come un platano y adquiere su energia y queda en 180." {
+		// Estado inicial pedido:
+		const anana   = new Anana()
+		const baya    = new Baya()
+		const platano = new Platano()
+		// Caso prueba:
+		assert.equals(100, pikachu.energia())
+		pikachu.comerFruta(anana)
+		assert.equals(180, pikachu.energia())
+		pikachu.comerFruta(baya)
+		assert.equals(130, pikachu.energia())
+		pikachu.comerFruta(platano)
+		assert.equals(180, pikachu.energia())
+	}
+		
 }
+
