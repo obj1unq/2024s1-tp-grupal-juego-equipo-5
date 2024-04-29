@@ -19,16 +19,16 @@ describe "Acciones de Pikachu" {
 		Come una baya y adquiere su energia negativa y queda en 130.
 		Come un platano y adquiere su energia y queda en 180." {
 		// Estado inicial pedido:
-		const anana   = new Anana()
+		const manzana = new Manzana()
 		const baya    = new Baya()
-		const platano = new Platano()
+		const banana  = new Banana()
 		// Caso prueba:
 		assert.equals(100, pikachu.energia())
-		pikachu.comerFruta(anana)
+		pikachu.comerFruta(manzana)
 		assert.equals(180, pikachu.energia())
 		pikachu.comerFruta(baya)
 		assert.equals(130, pikachu.energia())
-		pikachu.comerFruta(platano)
+		pikachu.comerFruta(banana)
 		assert.equals(180, pikachu.energia())
 	}
 	

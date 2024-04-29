@@ -10,18 +10,18 @@ object frutaManager {
 
 	method crearFruta() {
 		if (frutas.size() < 6) {
-			frutas.add([ ananaFactory, bayaFactory, platanoFactory ].anyOne().crearFruta())
+			frutas.add([ manzanaFactory, bayaFactory, bananaFactory ].anyOne().crearFruta())
 		}
 	}
 
 }
 
-object ananaFactory {
+object manzanaFactory {
 
 	method crearFruta() {
-		const anana = new Anana()
-		game.addVisual(anana)
-		return anana
+		const manzana = new Manzana()
+		game.addVisual(manzana)
+		return manzana
 	}
 
 }
@@ -36,20 +36,20 @@ object bayaFactory {
 
 }
 
-object platanoFactory {
+object bananaFactory {
 
 	method crearFruta() {
-		const platano = new Platano()
-		game.addVisual(platano)
-		return platano
+		const banana = new Banana()
+		game.addVisual(banana)
+		return banana
 	}
 
 }
 
-class Anana {
+class Manzana {
 
 	const property energia = 80
-	const property image = "f.anana.png"
+	const property image = "f.manzana.png"
 	var property position = randomizer.emptyPosition()
 
 	method esAtravesable() {
@@ -90,10 +90,10 @@ class Baya {
 
 }
 
-class Platano {
+class Banana {
 
 	const property energia = 50
-	const property image = "f.platano.png"
+	const property image = "f.banana.png"
 	var property position = randomizer.emptyPosition()
 
 	method esAtravesable() {
