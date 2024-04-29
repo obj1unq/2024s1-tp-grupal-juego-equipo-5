@@ -38,7 +38,7 @@ object paredFactory {
 class Pared {
 	const property position
 	
-	method image() = "pared.jpg"
+	method image() = "pared.png"
 
 	method esAtravesable() = false
 

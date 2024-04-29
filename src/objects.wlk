@@ -94,7 +94,7 @@ object pokebola {
 object evee {
 
 	var property position = game.at(2, 4)
-	var property image = "preso-evee-50x50.png"
+	var property image = "preso-evee.png"
 
 	method esAtravesable() = true
 
@@ -108,7 +108,7 @@ object evee {
 object pidgeot {
 
 	var property position = game.at(0, 4)
-	var property image = "preso-pidgeot-50x50.png"
+	var property image = "preso-pidgeot.png"
 
 	method esAtravesable() = true
 
@@ -122,7 +122,7 @@ object pidgeot {
 object charmander {
 
 	var property position = game.at(2, 4)
-	var property image = "preso-charmarder-50x50.png"
+	var property image = "preso-charmander.png"
 
 	method esAtravesable() = true
 
@@ -162,7 +162,7 @@ object caminando {
 
 	method puedeMover() = true
 
-	method image() = "caminando.png"
+	method image() = "caminando-der.png"
 
 	method activar() {
 	}
@@ -183,7 +183,7 @@ object feliz {
 // ESTADOS DE POKEBOLA
 object libre {
 
-	const property image = "pokebola-libre-50x50.png"
+	const property image = "pokebola-libre.png"
 
 	method siguiente() {
 		return ocupada
@@ -193,7 +193,7 @@ object libre {
 
 object ocupada {
 
-	const property image = "pokebola-ocupada-50x50.png"
+	const property image = "pokebola-ocupada.png" // tamaño 120x50 cambiar?
 
 	method siguiente() {
 		return libre
@@ -204,7 +204,7 @@ object ocupada {
 // ESTADOS DE POKEMON SECUNDARIOS
 object pkLibre {
 
-	method image(pokemon) = "libre-" + pokemon + "-50x50.png"
+	method image(pokemon) = "libre-" + pokemon + ".png"
 
 	method siguiente() {
 		return pkPreso
@@ -214,7 +214,7 @@ object pkLibre {
 
 object pkPreso {
 
-	method image(pokemon) = "preso-" + pokemon + "-50x50.png"
+	method image(pokemon) = "preso-" + pokemon + ".png"
 
 	method siguiente() {
 		return pkLibre

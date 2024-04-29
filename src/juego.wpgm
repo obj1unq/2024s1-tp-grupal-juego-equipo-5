@@ -11,19 +11,22 @@ program juego {
 	
 	config.dimensiones()
 	
-	game.ground("piso-03.png")
+	game.ground("piso-05.png")
 	// PISO PARA NIVEL 1 game.ground("piso-01.png")
 	// PISO PARA NIVEL 2 game.ground("piso-02.png")
 	// PISO PARA NIVEL 3 game.ground("piso-03.png")
+	// PISO PARA NIVEL 4 game.ground("piso-04.png")
 	
 	game.addVisual(pikachu)
+	
 	game.addVisual(pokebola)
-	game.addVisual(evee)
 	
 	paredFactory.levantarBordes() // TODOS LOS NIVELES
+	
+	game.addVisual(charmander)
 	// PRISIONERO: VISUAL PARA NIVEL 1 CAMBIAR POSICION game.addVisual(evee)
 	// PRISIONERO: VISUAL PARA NIVEL 2 CAMBIAR POSICION game.addVisual(pidgeot)
-	// NO SE VE, PRISIONERO: VISUAL PARA NIVEL 3 CAMBIAR POSICION game.addVisual(charmander)
+	// PRISIONERO: VISUAL PARA NIVEL 3 CAMBIAR POSICION game.addVisual(charmander)
 	
 	config.teclas()
 	
