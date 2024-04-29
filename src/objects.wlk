@@ -87,6 +87,16 @@ object pokebola {
 
 }
 
+object llave {
+	var property position = game.at(3, 10)
+	var property image = "llave.png"
+
+	method esAtravesable() = true
+
+	method colision(pokemon) {
+		game.removeVisual(self)
+	}	
+}
 
 // POKEMONS PRISIONEROS POR NIVEL
 

@@ -21,6 +21,8 @@ program juego {
 	
 	game.addVisual(pokebola)
 	
+	game.addVisual(llave)
+	
 	paredFactory.levantarBordes() // TODOS LOS NIVELES
 	
 	game.addVisual(charmander)
