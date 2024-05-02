@@ -34,6 +34,7 @@ object pikachu {
 	method mover(dir) {
 		self.validarMover(dir)
 		position = dir.siguiente(position)
+		self.estado().aspecto(dir.toString())
 	}
 
 	method validarMover(dir) {
@@ -169,10 +170,10 @@ object buscando {
 }
 
 object caminando {
-
+	var property aspecto = "derecha"
 	method puedeMover() = true
 
-	method image() = "caminando-der.png"
+	method image() = "caminando-"+self.aspecto()+".png"
 
 	method activar() {
 	}
