@@ -8,7 +8,7 @@ object config {
 	method dimensiones() {
 		game.cellSize(50)
 		game.width(18)
-		game.height(12)
+		game.height(13)
 	}
 	// CONFIG. DE TECLAS DE PIKACHU
 	method teclas() {
