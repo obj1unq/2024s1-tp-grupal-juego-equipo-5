@@ -38,8 +38,22 @@ object paredFactory {
 class Pared {
 	const property position
 	
-	method image() = "pared.png"
+	method image() = "pared-normal.png"
 
 	method esAtravesable() = false
 
 }
+
+object paredes {
+	method nivel1() {
+		// INTERNAS
+		paredFactory.levantarParedDe( 4, game.at(10,1), arriba )
+		paredFactory.levantarParedDe( 4, game.at(10,7), arriba )
+		paredFactory.levantarParedDe( 3, game.at(5,2) , arriba )
+		paredFactory.levantarParedDe(14, game.at(2,6) , derecha)
+		paredFactory.levantarParedDe( 8, game.at(1,4) , derecha)
+		// BORDES
+		paredFactory.levantarBordes()
+	}
+}
+

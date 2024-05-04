@@ -11,11 +11,7 @@ program juego {
 	
 	config.dimensiones()
 	
-	game.ground("piso-05.png")
-	// PISO PARA NIVEL 1 game.ground("piso-01.png")
-	// PISO PARA NIVEL 2 game.ground("piso-02.png")
-	// PISO PARA NIVEL 3 game.ground("piso-03.png")
-	// PISO PARA NIVEL 4 game.ground("piso-04.png")
+	game.ground("piso-liso-beige.png")
 	
 	game.addVisual(pikachu)
 	
@@ -23,7 +19,7 @@ program juego {
 	
 	game.addVisual(llave)
 	
-	paredFactory.levantarBordes() // TODOS LOS NIVELES
+	paredes.nivel1()
 	
 	game.addVisual(charmander)
 	// PRISIONERO: VISUAL PARA NIVEL 1 CAMBIAR POSICION game.addVisual(evee)
