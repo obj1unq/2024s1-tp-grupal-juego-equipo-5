@@ -3,7 +3,7 @@ import posicionamiento.*
 import randomizer.*
 import wollok.game.*
 
-// OBSTACULOS
+// PAREDES
 
 object paredFactory {
 	const property paredes = #{}
@@ -28,9 +28,9 @@ object paredFactory {
 	}
 	
 	method levantarBordes() {
-		self.levantarParedDe(game.height(), game.at(0,0)               , arriba)
-		self.levantarParedDe(game.height(), game.at(game.width() -1 ,0), arriba)
-		self.levantarParedDe(game.width(),  game.at(1,game.height() -1), derecha)
+		self.levantarParedDe(game.height() -1, game.at(0,0)               , arriba)
+		self.levantarParedDe(game.height() -1, game.at(game.width() -1 ,0), arriba)
+		self.levantarParedDe(game.width(),  game.at(1,game.height() -2), derecha)
 		self.levantarParedDe(game.width(),  game.at(1,0)               , derecha)
 	}
 }
