@@ -1,4 +1,5 @@
 import alimentosFrutales.*
+import config.*
 import posicionamiento.*
 import objects.*
 import obstaculos.*
@@ -7,10 +8,7 @@ import wollok.game.*
 describe "Acciones de Pikachu" {
 	
 	method initialize() {
-		// Dimensiones
-		game.width(18)
-		game.height(12)
-		game.clear()
+		config.dimensiones()
 	}
 	
 	test "PIKACHU y su ENERGIA al COMER FRUTAS...

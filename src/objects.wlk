@@ -82,21 +82,18 @@ object pokebola {
 		pokemon.estado(capturado)
 	}
 
-	method esAtravesable() {
-		return true
-	}
-
+	method esAtravesable() = true
 }
 
 object llave {
 	var property position = game.at(3, 10)
 	var property image = "llave.png"
 
-	method esAtravesable() = true
-
 	method colision(pokemon) {
 		game.removeVisual(self)
 	}	
+	
+	method esAtravesable() = true
 }
 
 // POKEMONS PRISIONEROS POR NIVEL
@@ -104,13 +101,18 @@ object llave {
 // NIVEL 1
 object evee {
 
-	var property position = game.at(2, 4)
-	var property image = "preso-evee.png"
+	var property position = game.at(2, 2)
+	var property image = "preso-" + self + ".png"
 
 	method esAtravesable() = true
 
 	method colision(pokemon) {
+		self.liberar()
 		game.removeVisual(self)
+	}
+	
+	method liberar() {
+		image = "libre-" + self + ".png"
 	}
 
 }
@@ -118,13 +120,18 @@ object evee {
 // NIVEL 2
 object pidgeot {
 
-	var property position = game.at(0, 4)
-	var property image = "preso-pidgeot.png"
+	var property position = game.at(2, 2)
+	var property image = "preso-" + self + ".png"
 
 	method esAtravesable() = true
 
 	method colision(pokemon) {
+		self.liberar()
 		game.removeVisual(self)
+	}
+	
+	method liberar() {
+		image = "libre-" + self + ".png"
 	}
 
 }
@@ -132,13 +139,18 @@ object pidgeot {
 // NIVEL 3
 object charmander {
 
-	var property position = game.at(2, 4)
-	var property image = "preso-charmander.png"
+	var property position = game.at(2, 2)
+	var property image = "preso-" + self + ".png"
 
 	method esAtravesable() = true
 
 	method colision(pokemon) {
+		self.liberar()
 		game.removeVisual(self)
+	}
+	
+	method liberar() {
+		image = "libre-" + self + ".png"
 	}
 
 }
@@ -158,26 +170,14 @@ object capturado {
 
 }
 
-object buscando {
-
-	method puedeMover() = true
-
-	method image() = "buscando.png"
-
-	method activar() {
-	}
-
-}
-
 object caminando {
 	var property aspecto = "derecha"
 	method puedeMover() = true
 
-	method image() = "caminando-"+self.aspecto()+".png"
+	method image() = "caminando-" + aspecto + ".png"
 
 	method activar() {
 	}
-
 }
 
 object feliz {
@@ -208,27 +208,6 @@ object ocupada {
 
 	method siguiente() {
 		return libre
-	}
-
-}
-
-// ESTADOS DE POKEMON SECUNDARIOS
-object pkLibre {
-
-	method image(pokemon) = "libre-" + pokemon + ".png"
-
-	method siguiente() {
-		return pkPreso
-	}
-
-}
-
-object pkPreso {
-
-	method image(pokemon) = "preso-" + pokemon + ".png"
-
-	method siguiente() {
-		return pkLibre
 	}
 
 }
