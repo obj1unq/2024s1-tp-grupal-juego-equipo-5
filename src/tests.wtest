@@ -7,8 +7,19 @@ import wollok.game.*
 
 describe "Acciones de Pikachu" {
 	
+	const manzana = new Manzana()
+	const baya    = new Baya()
+	const banana  = new Banana()
+	const pared   = new Pared(position = game.at(9,8))
+	
 	method initialize() {
+		game.clear()
 		config.dimensiones()
+		game.addVisual(pikachu)
+		game.addVisual(pared)
+		game.addVisual(llave)
+		game.addVisual(evee)
+		game.addVisual(pokebola)
 	}
 	
 	test "PIKACHU y su ENERGIA al COMER FRUTAS...
@@ -16,10 +27,8 @@ describe "Acciones de Pikachu" {
 		Come un anana y adquiere su energia y queda en 180.
 		Come una baya y adquiere su energia negativa y queda en 130.
 		Come un platano y adquiere su energia y queda en 180." {
-		// Estado inicial pedido:
-		const manzana = new Manzana()
-		const baya    = new Baya()
-		const banana  = new Banana()
+		// Estado inicial, no pedido.
+		pikachu.energia(100)
 		// Caso prueba:
 		assert.equals(100, pikachu.energia())
 		pikachu.comerFruta(manzana)
@@ -30,18 +39,36 @@ describe "Acciones de Pikachu" {
 		assert.equals(180, pikachu.energia())
 	}
 	
+	test "PIKACHU y su ENERGIA al COMER FRUTAS PARA MORIR...
+		Pikachu, inicia con 0 de energia.
+		Caminando come una baya y queda en -50. Por esa razón, muere." {
+		// Estado inicial, no pedido.
+		pikachu.energia(0)
+		// Caso prueba:
+		assert.equals(0, pikachu.energia())
+		assert.equals(caminando, pikachu.estado())
+		pikachu.comerFruta(baya)
+		assert.equals(-50, pikachu.energia())
+		assert.equals(muerto, pikachu.estado())
+	}
+	
 	test "PIKACHU y sus MOVIMIENTOS posibles...
-		Pikachu, se mueve hacia los 4 lados desde la celda (5,5)." {
+		Pikachu, se mueve hacia los 4 lados desde la celda (5,5).
+		Cambiando su ASPECTO en cada movimiento." {
 		// Estado inicial pedido:
 		pikachu.position(game.at(5,5))
 		// Caso prueba:
 		pikachu.mover(derecha)
+		assert.equals("caminando-derecha.png", pikachu.image())
 		assert.equals(game.at(6,5), pikachu.position())
 		pikachu.mover(izquierda)
+		assert.equals("caminando-izquierda.png", pikachu.image())
 		assert.equals(game.at(5,5), pikachu.position())
 		pikachu.mover(arriba)
+		assert.equals("caminando-arriba.png", pikachu.image())
 		assert.equals(game.at(5,6), pikachu.position())
 		pikachu.mover(abajo)
+		assert.equals("caminando-abajo.png", pikachu.image())
 		assert.equals(game.at(5,5), pikachu.position())
 	}
 	
@@ -49,13 +76,31 @@ describe "Acciones de Pikachu" {
 		Pikachu, se quiere mover hacia la pared y no puede,
 		porque la pared no es atravesable." {
 		// Estado inicial pedido:
-		pikachu.position(game.at(5,5))
-		const pared = new Pared(position = game.at(6,5))
-		game.addVisual(pared)
+		pikachu.position(game.at(8,8))
 		// Caso prueba:
-		assert.equals(game.at(6,5), pared.position())
-		assert.notThat(pikachu.puedeMover(derecha))
-		assert.throwsException( {pikachu.validarMover(derecha)} )
+		assert.equals(game.at(9,8), pared.position())
+		assert.throwsException({ pikachu.mover(derecha) })
+	}
+	
+	test "PIKACHU encuentra la LLAVE, rescata al pokemon PRISIONERO y puede entrar a su POKEBOLA..." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		assert.notThat(pikachu.tengoLlave())
+		assert.notThat(pikachu.heRescatadoAlPrisionero())
+		llave.colision(pikachu)
+		assert.that(pikachu.tengoLlave())
+		evee.colision(pikachu)
+		assert.that(pikachu.heRescatadoAlPrisionero())
+		assert.that(pokebola.esAtravesable())
+	}
+	
+	test "PIKACHU encuentra la LLAVE, SIN rescatar al pokemon PRISIONERO y NO puede entrar a su POKEBOLA..." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		llave.colision(pikachu)
+		assert.that(pikachu.tengoLlave())
+		assert.notThat(pikachu.heRescatadoAlPrisionero())
+		assert.notThat(pokebola.esAtravesable())
 	}
 }
 

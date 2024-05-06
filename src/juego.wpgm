@@ -9,27 +9,25 @@ program juego {
 	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	
-	config.dimensiones()
-	
 	game.ground("piso-liso-beige.png")
+	
+	config.dimensiones()
 	
 	game.addVisual(pikachu)
 	
 	game.addVisual(pokebola)
-	
 	game.addVisual(llave)
 	
-	paredes.nivel1()
-	
+	game.addVisual(evee)
+	game.addVisual(pidgeot)
 	game.addVisual(charmander)
-	// PRISIONERO: VISUAL PARA NIVEL 1 CAMBIAR POSICION game.addVisual(evee)
-	// PRISIONERO: VISUAL PARA NIVEL 2 CAMBIAR POSICION game.addVisual(pidgeot)
-	// PRISIONERO: VISUAL PARA NIVEL 3 CAMBIAR POSICION game.addVisual(charmander)
+	
 	
 	config.teclas()
+	config.colisiones()
+	config.frutas()
 	
-	game.onCollideDo(pikachu, { objeto => objeto.colision(pikachu) })
-	game.onTick(2000, "CREAR FRUTA", { frutaManager.crearFruta() })	
+	paredes.nivel1()
 	
 	game.start()
 }

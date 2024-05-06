@@ -7,11 +7,12 @@ import wollok.game.*
 object pikachu {
 
 	var property estado = caminando
-	var property miPokebola = pokebola
-	var property position = game.at(3, 5)
+	var property position = game.at(1, 1)
+	var property tengoLlave = false
+	var property heRescatadoAlPrisionero = false
+	var property energia = 100
 	const escenario = tablero
-	var energia = 100
-
+	
 	method estado(estadoACambiar) {
 		if (estado != estadoACambiar) {
 			estado = estadoACambiar
@@ -21,16 +22,21 @@ object pikachu {
 
 	method image() = estado.image()
 
-	method energia() = energia
-
 	method text() = energia.toString()
 
 	method textColor() = "FF00FF"
 
 	method comerFruta(fruta) {
-		energia = energia + fruta.energia()
+		energia += fruta.energia()
+		self.siEstaAgotadoMuere()
 	}
 
+	method siEstaAgotadoMuere() {
+		if (energia < 0) {
+			self.estado(muerto)
+		}
+	} 
+	
 	method mover(dir) {
 		self.validarMover(dir)
 		position = dir.siguiente(position)
@@ -44,171 +50,132 @@ object pikachu {
 	}
 
 	method puedeMover(dir) {
-		return estado.puedeMover() && escenario.puedeIr(self.position(), dir)
+		return estado.puedeMover() && escenario.puedeIr(self.position(), dir) 
 	}
-
-	method entrarAPokebola() {
-		self.validarEstaConSuPokebola()
-		miPokebola.cambiarEstado(self)
+	
+	method obtenerLlave() {
+		tengoLlave = true
 	}
-
-	method validarEstaConSuPokebola() {
-		if (not self.mismaPosicionQue(miPokebola)) {
-			self.error("No está mi pokebola")
-		}
+	
+	method liberarPokemon() {
+		heRescatadoAlPrisionero = true
 	}
-
-	method mismaPosicionQue(cosa) {
-		return cosa.position() == self.position()
-	}
-
 }
 
 object pokebola {
 
-	var property position = game.at(10, 10)
+	var property position = game.at(16,10)
 	var property miPokemon = pikachu
-	var estado = libre
-
-	method cambiarEstado(pokemon) {
-		estado = estado.siguiente()
-	}
-
-	method image() {
-		return estado.image()
-	}
-
+	const property image = "pokebola.png"
+	
+	method esAtravesable() = miPokemon.heRescatadoAlPrisionero()
+	
 	method colision(pokemon) {
-		pokemon.estado(capturado)
+		pokemon.estado(ganador)
+		game.schedule(1000, { game.removeVisual(self) })
 	}
-
-	method esAtravesable() = true
 }
 
 object llave {
 	var property position = game.at(3, 10)
 	var property image = "llave.png"
-
-	method colision(pokemon) {
-		game.removeVisual(self)
-	}	
 	
 	method esAtravesable() = true
+	
+	method colision(pokemon) {
+		pokemon.obtenerLlave()
+		game.removeVisual(self)
+	}
 }
 
-// POKEMONS PRISIONEROS POR NIVEL
+// POKEMONS PRISIONEROS - REPETIMOS MUCHO CÓDIGO - REVEER class Prisionero? y después Herencia de distintos tipos de pokemons prisioneros?
 
-// NIVEL 1
 object evee {
+	
+	const property rescatador = pikachu
+	var property position = game.at(2,2)
+	var property image = "preso-" + self.toString() + ".png"
 
-	var property position = game.at(2, 2)
-	var property image = "preso-" + self + ".png"
-
-	method esAtravesable() = true
+	method esAtravesable() = rescatador.tengoLlave()
 
 	method colision(pokemon) {
-		self.liberar()
-		game.removeVisual(self)
+		pokemon.liberarPokemon()
+		image = "libre-" + self.toString() + ".png"
+		game.say(self, "Gracias por liberarme!")
+		game.schedule(2000, { game.removeVisual(self) })
 	}
-	
-	method liberar() {
-		image = "libre-" + self + ".png"
-	}
-
 }
 
-// NIVEL 2
 object pidgeot {
+	
+	const property rescatador = pikachu
+	var property position = game.at(2,3)
+	var property image = "preso-" + self.toString() + ".png"
 
-	var property position = game.at(2, 2)
-	var property image = "preso-" + self + ".png"
-
-	method esAtravesable() = true
+	method esAtravesable() = rescatador.tengoLlave()
 
 	method colision(pokemon) {
-		self.liberar()
-		game.removeVisual(self)
+		pokemon.liberarPokemon()
+		image = "libre-" + self.toString() + ".png"
+		game.say(self, "Gracias por liberarme!")
+		game.schedule(2000, { game.removeVisual(self) })
 	}
-	
-	method liberar() {
-		image = "libre-" + self + ".png"
-	}
-
 }
 
-// NIVEL 3
 object charmander {
+	
+	const property rescatador = pikachu
+	var property position = game.at(3,2)
+	var property image = "preso-" + self.toString() + ".png"
 
-	var property position = game.at(2, 2)
-	var property image = "preso-" + self + ".png"
-
-	method esAtravesable() = true
+	method esAtravesable() = rescatador.tengoLlave()
 
 	method colision(pokemon) {
-		self.liberar()
-		game.removeVisual(self)
+		pokemon.liberarPokemon()
+		image = "libre-" + self.toString() + ".png"
+		game.say(self, "Gracias por liberarme!")
+		game.schedule(2000, { game.removeVisual(self) })
 	}
-	
-	method liberar() {
-		image = "libre-" + self + ".png"
-	}
-
 }
 
 
 // ESTADOS DE PIKACHU
-object capturado {
+object caminando {
+	
+	var property aspecto = "derecha"
+	
+	method image() = "caminando-" + aspecto + ".png"
+	
+	method puedeMover() = true
 
+	method activar() {
+	}
+}
+
+object ganador {
+
+	var property aspecto = ""
+	
+	method image() = "ganador.png"
+	
 	method puedeMover() = false
 
-	method image() = "capturado.png"
+	method activar() {
+		game.say(pikachu, "Lo logré!")
+	}
+}
+
+object muerto {
+	
+	var property aspecto = ""
+	
+	method image() = "muerto.png"
+	
+	method puedeMover() = false
 
 	method activar() {
-		game.say(pikachu, "Me salvé!")
-		game.removeVisual(pikachu)
+		game.say(pikachu, "Perdí!")
+		game.schedule(2000, { game.stop() })
 	}
-
-}
-
-object caminando {
-	var property aspecto = "derecha"
-	method puedeMover() = true
-
-	method image() = "caminando-" + aspecto + ".png"
-
-	method activar() {
-	}
-}
-
-object feliz {
-
-	method puedeMover() = true
-
-	method image() = "feliz.png"
-
-	method activar() {
-	}
-
-}
-
-// ESTADOS DE POKEBOLA
-object libre {
-
-	const property image = "pokebola-libre.png"
-
-	method siguiente() {
-		return ocupada
-	}
-
-}
-
-object ocupada {
-
-	const property image = "pokebola-ocupada.png" // tamaño 120x50 cambiar?
-
-	method siguiente() {
-		return libre
-	}
-
 }
 
