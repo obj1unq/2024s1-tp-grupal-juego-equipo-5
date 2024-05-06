@@ -17,8 +17,14 @@ object config {
 		keyboard.left().onPressDo({ pikachu.mover(izquierda)})
 		keyboard.right().onPressDo({ pikachu.mover(derecha)})
 		keyboard.enter().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu")})
-		keyboard.s().onPressDo({ pikachu.entrarAPokebola()})
 	}
-
+	// CONFIG. COLISIONES
+	method colisiones() {
+		game.onCollideDo(pikachu, { objeto => objeto.colision(pikachu) })
+	}
+	// CONFIG. FRUTAS
+	method frutas() {
+		game.onTick(2000, "CREAR FRUTA", { frutaManager.crearFruta() })
+	}
 }
 
