@@ -22,12 +22,11 @@ program juego {
 	game.addVisual(pidgeot)
 	game.addVisual(charmander)
 	
-	
 	config.teclas()
 	config.colisiones()
 	config.frutas()
 	
-	paredes.nivel1()
+	paredesDelNivel.cuatro()
 	
 	game.start()
 }
