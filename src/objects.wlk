@@ -8,8 +8,8 @@ object pikachu {
 
 	var property estado = caminando
 	var property position = game.at(1, 1)
-	var property tengoLlave = false
-	var property heRescatadoAlPrisionero = false
+	var property tengoLlave = false // HAY UNA SOLA LLAVE POR NIVEL
+	var property heRescatadoAlPrisionero = false // HAY UN SOLO PRISIONERO POR NIVEL
 	var property energia = 100
 	const escenario = tablero
 	
@@ -88,56 +88,80 @@ object llave {
 	}
 }
 
-// POKEMONS PRISIONEROS - REPETIMOS MUCHO CÓDIGO - REVEER class Prisionero? y después Herencia de distintos tipos de pokemons prisioneros?
+// POKEMONS PRISIONEROS - Repetimos código en la imagen, se puede mejorar...
 
-object evee {
+class Prisionero {
 	
 	const property rescatador = pikachu
-	var property position = game.at(2,2)
-	var property image = "preso-" + self.toString() + ".png"
-
+	
+	method position()
+	
+	method image()
+	
 	method esAtravesable() = rescatador.tengoLlave()
 
 	method colision(pokemon) {
 		pokemon.liberarPokemon()
-		image = "libre-" + self.toString() + ".png"
+		self.liberar()
 		game.say(self, "Gracias por liberarme!")
 		game.schedule(2000, { game.removeVisual(self) })
 	}
-}
-
-object pidgeot {
 	
-	const property rescatador = pikachu
-	var property position = game.at(2,3)
-	var property image = "preso-" + self.toString() + ".png"
+	method liberar()
 
-	method esAtravesable() = rescatador.tengoLlave()
-
-	method colision(pokemon) {
-		pokemon.liberarPokemon()
-		image = "libre-" + self.toString() + ".png"
-		game.say(self, "Gracias por liberarme!")
-		game.schedule(2000, { game.removeVisual(self) })
-	}
 }
-
-object charmander {
+class Charmander inherits Prisionero {
 	
-	const property rescatador = pikachu
-	var property position = game.at(3,2)
-	var property image = "preso-" + self.toString() + ".png"
+	var property position
+	var property image = "preso-charmander.png"
 
-	method esAtravesable() = rescatador.tengoLlave()
-
-	method colision(pokemon) {
-		pokemon.liberarPokemon()
-		image = "libre-" + self.toString() + ".png"
-		game.say(self, "Gracias por liberarme!")
-		game.schedule(2000, { game.removeVisual(self) })
+	override method liberar(){
+		image = "libre-charmander.png"
 	}
 }
 
+class Evee inherits Prisionero {
+	
+	var property position
+	var property image = "preso-evee.png"
+
+	override method liberar(){
+		image = "libre-evee.png"
+	}
+	
+}
+
+class Pidgeot inherits Prisionero {
+	
+	var property position
+	var property image = "preso-pidgeot.png"
+
+	override method liberar(){
+		image = "libre-pidgeot.png"
+	}
+}
+
+
+
+class Squirtle inherits Prisionero {
+	
+	var property position = game.at(3,3)
+	var property image = "preso-squirtle.png"
+
+	override method liberar(){
+		image = "libre-squirtle.png"
+	}
+}
+
+class Vulpix inherits Prisionero {
+	
+	var property position = game.at(3,3)
+	var property image = "preso-vulpix.png"
+
+	override method liberar(){
+		image = "libre-vulpix.png"
+	}
+}
 
 // ESTADOS DE PIKACHU
 object caminando {
