@@ -18,15 +18,17 @@ program juego {
 	game.addVisual(pokebola)
 	game.addVisual(llave)
 	
-	game.addVisual(evee)
-	game.addVisual(pidgeot)
-	game.addVisual(charmander)
+	game.addVisual(new Charmander(position = game.at(1,2)))
+	game.addVisual(new Evee(position = game.at(2,2)))
+	game.addVisual(new Pidgeot(position = game.at(2,3)))
+	game.addVisual(new Squirtle(position = game.at(3,3)))
+	game.addVisual(new Vulpix(position = game.at(1,3)))
 	
 	config.teclas()
 	config.colisiones()
 	config.frutas()
 	
-	paredesDelNivel.cuatro()
+	paredesDelNivel.uno()
 	
 	game.start()
 }

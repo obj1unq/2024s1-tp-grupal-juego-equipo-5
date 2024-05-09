@@ -7,19 +7,23 @@ import wollok.game.*
 
 describe "Acciones de Pikachu" {
 	
+	// FRUTAS
 	const manzana = new Manzana()
-	const baya    = new Baya()
 	const banana  = new Banana()
+	const baya    = new Baya()
+	// PRISIONERO EJEMPLIFICADOR
+	const evee    = new Evee(position = game.at(2,3))
+	// OBSTACULOS
 	const pared   = new Pared(position = game.at(9,8))
 	
 	method initialize() {
 		game.clear()
 		config.dimensiones()
 		game.addVisual(pikachu)
-		game.addVisual(pared)
 		game.addVisual(llave)
-		game.addVisual(evee)
 		game.addVisual(pokebola)
+		game.addVisual(evee)
+		game.addVisual(pared)
 	}
 	
 	test "PIKACHU y su ENERGIA al COMER FRUTAS...
