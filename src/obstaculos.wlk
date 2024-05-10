@@ -4,6 +4,16 @@ import randomizer.*
 import wollok.game.*
 
 // PAREDES
+class Pared {
+
+	const property position
+
+	method image() = "pared-normal.png"
+
+	method esAtravesable() = false
+
+}
+
 object paredFactory {
 
 	const property paredes = #{}
@@ -35,19 +45,15 @@ object paredFactory {
 
 }
 
-class Pared {
-
-	const property position
-
-	method image() = "pared-normal.png"
-
-	method esAtravesable() = false
-
+class MapaDeParedesDelNivel {
+	
+	method agregar()
+	
 }
 
-object paredesDelNivel {
-
-	method uno() {
+object mapaDeParedesDelNivel1 inherits MapaDeParedesDelNivel {
+	
+	override method agregar() {
 		// INTERNAS
 		paredFactory.levantarParedDe(4, game.at(10, 1), arriba)
 		paredFactory.levantarParedDe(4, game.at(10, 7), arriba)
@@ -63,8 +69,12 @@ object paredesDelNivel {
 		// VISUALES
 		paredFactory.agregarVisualParedes()
 	}
+	
+}
 
-	method dos() {
+object mapaDeParedesDelNivel2 inherits MapaDeParedesDelNivel {
+		
+	override method agregar() {
 		// INTERNAS
 		paredFactory.levantarParedDe(6, game.at(5, 1), arriba)
         paredFactory.levantarParedDe(3, game.at(5, 8), arriba)
@@ -78,7 +88,11 @@ object paredesDelNivel {
 		paredFactory.agregarVisualParedes()
 	}
 	
-	method tres() {
+}
+
+object mapaDeParedesDelNivel3 inherits MapaDeParedesDelNivel {
+		
+	override method agregar() {
 		// INTERNAS
 		paredFactory.levantarParedDe(8, game.at(1, 4), derecha)
         paredFactory.levantarParedDe(2, game.at(8, 3), abajo)
@@ -100,7 +114,11 @@ object paredesDelNivel {
 		paredFactory.agregarVisualParedes()
 	}
 	
-	method cuatro() {
+}
+
+object mapaDeParedesDelNivel4 inherits MapaDeParedesDelNivel {
+		
+	override method agregar() {
 		// INTERNAS
 		paredFactory.levantarParedDe(7, game.at(1, 2), derecha)
         paredFactory.levantarParedDe(3, game.at(5, 4), arriba)
@@ -122,7 +140,11 @@ object paredesDelNivel {
 		paredFactory.agregarVisualParedes()
 	}
 	
-	method cinco() {
+}
+
+object mapaDeParedesDelNivel5 inherits MapaDeParedesDelNivel {
+		
+	override method agregar() {
 		// INTERNAS
 		paredFactory.levantarParedDe(2, game.at(1, 6), abajo)
 		paredFactory.levantarParedDe(9, game.at(3, 1), arriba)
@@ -142,6 +164,6 @@ object paredesDelNivel {
 		// VISUALES
 		paredFactory.agregarVisualParedes()
 	}
-
+	
 }
 

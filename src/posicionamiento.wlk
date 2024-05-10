@@ -41,7 +41,7 @@ object tablero {
 	method pertenece(position) {
 		return position.x().between(0, game.width()  - 1) 
 			   && 
-			   position.y().between(0, game.height() - 1)
+			   position.y().between(0, game.height() - 2)
 	}
 
 	method puedeIr(desde, dir) {

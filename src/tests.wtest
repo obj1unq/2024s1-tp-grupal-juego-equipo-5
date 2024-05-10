@@ -12,18 +12,18 @@ describe "Acciones de Pikachu" {
 	const banana  = new Banana()
 	const baya    = new Baya()
 	// PRISIONERO EJEMPLIFICADOR
-	const evee    = new Evee(position = game.at(2,3))
+	const evee = new PrisioneroEvee(position = game.at(2,2))
 	// OBSTACULOS
 	const pared   = new Pared(position = game.at(9,8))
 	
 	method initialize() {
 		game.clear()
 		config.dimensiones()
-		game.addVisual(pikachu)
 		game.addVisual(llave)
 		game.addVisual(pokebola)
 		game.addVisual(evee)
 		game.addVisual(pared)
+		game.addVisual(pikachu)
 	}
 	
 	test "PIKACHU y su ENERGIA al COMER FRUTAS...
@@ -86,7 +86,7 @@ describe "Acciones de Pikachu" {
 		assert.throwsException({ pikachu.mover(derecha) })
 	}
 	
-	test "PIKACHU encuentra la LLAVE, rescata al pokemon PRISIONERO y puede entrar a su POKEBOLA..." {
+	test "PIKACHU encuentra la LLAVE, rescata al pokemon PRISIONERO y puede entrar a su POKEBOLA." {
 		// Estado inicial, no pedido.
 		// Caso prueba:
 		assert.notThat(pikachu.tengoLlave())
@@ -98,7 +98,7 @@ describe "Acciones de Pikachu" {
 		assert.that(pokebola.esAtravesable())
 	}
 	
-	test "PIKACHU encuentra la LLAVE, SIN rescatar al pokemon PRISIONERO y NO puede entrar a su POKEBOLA..." {
+	test "PIKACHU encuentra la LLAVE, SIN rescatar al pokemon PRISIONERO y NO puede entrar a su POKEBOLA." {
 		// Estado inicial, no pedido.
 		// Caso prueba:
 		llave.colision(pikachu)
@@ -106,5 +106,6 @@ describe "Acciones de Pikachu" {
 		assert.notThat(pikachu.heRescatadoAlPrisionero())
 		assert.notThat(pokebola.esAtravesable())
 	}
+	
 }
 

@@ -9,29 +9,9 @@ object frutaManager {
 	const property frutas = []
 
 	method crearFruta() {
-		if (frutas.size() < 6) {
-			frutas.add([ manzanaFactory, bayaFactory, bananaFactory ].anyOne().crearFruta())
+		if (frutas.size() < 8) {
+			frutas.add([ bananaFactory, bayaFactory, bayaFactory, manzanaFactory].anyOne().crearFruta())
 		}
-	}
-
-}
-
-object manzanaFactory {
-
-	method crearFruta() {
-		const manzana = new Manzana()
-		game.addVisual(manzana)
-		return manzana
-	}
-
-}
-
-object bayaFactory {
-
-	method crearFruta() {
-		const baya = new Baya()
-		game.addVisual(baya)
-		return baya
 	}
 
 }
@@ -46,46 +26,22 @@ object bananaFactory {
 
 }
 
-class Manzana {
+object bayaFactory {
 
-	const property energia = 80
-	const property image = "f.manzana.png"
-	var property position = randomizer.emptyPosition()
-
-	method esAtravesable() {
-		return true
-	}
-
-	method colision(pokemon) {
-		pokemon.comerFruta(self)
-		frutaManager.frutas().remove(self)
-		game.removeVisual(self)
-	}
-
-	method text() {
-		return self.energia().toString()
+	method crearFruta() {
+		const baya = new Baya()
+		game.addVisual(baya)
+		return baya
 	}
 
 }
 
-class Baya {
+object manzanaFactory {
 
-	const property energia = -50
-	const property image = "f.baya.png"
-	var property position = randomizer.emptyPosition()
-
-	method esAtravesable() {
-		return true
-	}
-
-	method colision(pokemon) {
-		pokemon.comerFruta(self)
-		frutaManager.frutas().remove(self)
-		game.removeVisual(self)
-	}
-
-	method text() {
-		return self.energia().toString()
+	method crearFruta() {
+		const manzana = new Manzana()
+		game.addVisual(manzana)
+		return manzana
 	}
 
 }
@@ -102,13 +58,59 @@ class Banana {
 
 	method colision(pokemon) {
 		pokemon.comerFruta(self)
+		game.say(pokemon, "Qué rico!")
 		frutaManager.frutas().remove(self)
 		game.removeVisual(self)
 	}
 
 	method text() {
-		return self.energia().toString()
+		return self.energia()
 	}
 
 }
 
+class Baya {
+
+	const property energia = -50
+	const property image = "f.baya.png"
+	var property position = randomizer.emptyPosition()
+
+	method esAtravesable() {
+		return true
+	}
+
+	method colision(pokemon) {
+		pokemon.comerFruta(self)
+		game.say(pokemon, "Qué asco!")
+		frutaManager.frutas().remove(self)
+		game.removeVisual(self)
+	}
+
+	method text() {
+		return self.energia()
+	}
+
+}
+
+class Manzana {
+
+	const property energia = 80
+	const property image = "f.manzana.png"
+	var property position = randomizer.emptyPosition()
+
+	method esAtravesable() {
+		return true
+	}
+
+	method colision(pokemon) {
+		pokemon.comerFruta(self)
+		game.say(pokemon, "Qué sabroso!")
+		frutaManager.frutas().remove(self)
+		game.removeVisual(self)
+	}
+
+	method text() {
+		return self.energia()
+	}
+
+}
