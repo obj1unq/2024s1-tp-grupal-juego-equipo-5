@@ -1,5 +1,7 @@
 # DETECTIVE PIKACHU, al rescate
 
+![Descripción](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5\assets\portadaInicial.png)
+
 ## Equipo de desarrollo
 
 - Adrián Fermoselle
