@@ -63,10 +63,6 @@ class Banana {
 		game.removeVisual(self)
 	}
 
-	method text() {
-		return self.energia()
-	}
-
 }
 
 class Baya {
@@ -86,10 +82,6 @@ class Baya {
 		game.removeVisual(self)
 	}
 
-	method text() {
-		return self.energia()
-	}
-
 }
 
 class Manzana {
@@ -107,10 +99,6 @@ class Manzana {
 		game.say(pokemon, "Qué sabroso!")
 		frutaManager.frutas().remove(self)
 		game.removeVisual(self)
-	}
-
-	method text() {
-		return self.energia()
 	}
 
 }
