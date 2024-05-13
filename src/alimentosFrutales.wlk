@@ -8,40 +8,38 @@ object frutaManager {
 
 	const property frutas = []
 
-	method crearFruta() {
+	method nuevaFruta() {
+		const fruta = [ bananaFactory, bayaFactory, bayaFactory, manzanaFactory].anyOne().nuevaFruta()
 		if (frutas.size() < 8) {
-			frutas.add([ bananaFactory, bayaFactory, bayaFactory, manzanaFactory].anyOne().crearFruta())
+			frutas.add(fruta)
+			game.addVisual(fruta)
 		}
 	}
+	
+	
 
 }
 
 object bananaFactory {
 
-	method crearFruta() {
-		const banana = new Banana()
-		game.addVisual(banana)
-		return banana
+	method nuevaFruta() {
+		return new Banana()
 	}
 
 }
 
 object bayaFactory {
 
-	method crearFruta() {
-		const baya = new Baya()
-		game.addVisual(baya)
-		return baya
+	method nuevaFruta() {
+		return new Baya()
 	}
 
 }
 
 object manzanaFactory {
 
-	method crearFruta() {
-		const manzana = new Manzana()
-		game.addVisual(manzana)
-		return manzana
+	method nuevaFruta() {
+		return new Manzana()
 	}
 
 }
@@ -102,3 +100,4 @@ class Manzana {
 	}
 
 }
+

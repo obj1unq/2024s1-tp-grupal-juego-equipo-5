@@ -152,6 +152,7 @@ class Prisionero {
 	method colision(pokemon) {
 		pokemon.liberarPokemon()
 		self.liberar()
+		
 		game.say(self, "Gracias por liberarme!")
 		game.schedule(2000, { game.removeVisual(self) })
 	}
