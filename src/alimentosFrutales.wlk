@@ -16,8 +16,6 @@ object frutaManager {
 		}
 	}
 	
-	
-
 }
 
 object bananaFactory {

@@ -37,7 +37,12 @@ object pikachu {
 			self.estado(muerto)
 		}
 	}
-
+	
+	method recibirDanio(enemigo) {
+		energia -= enemigo.danio()
+		self.siEstaAgotadoMuere()
+	}
+	
 	method mover(dir) {
 		self.validarMover(dir)
 		position = dir.siguiente(position)
@@ -61,6 +66,8 @@ object pikachu {
 	method liberarPokemon() {
 		heRescatadoAlPrisionero = true
 	}
+	
+	method esAtravesable() = true
 
 }
 
@@ -134,6 +141,7 @@ object llave {
 	method colision(pokemon) {
 		pokemon.obtenerLlave()
 		game.removeVisual(self)
+		anotadorManager.guardarLlave(self)
 	}
 
 }
@@ -266,3 +274,75 @@ object newCharmander {
 	
 }
 
+/////EQUIPO ROCKET
+class EquipoRocket {
+	
+	const escenario = tablero
+	const property danio = 150
+	var property position
+	var property direccion	
+
+	method image()
+	
+	method colision(pokemon) {
+		pokemon.recibirDanio(self)
+	}
+	
+	method esAtravesable() {
+		return true
+	}
+	
+	method caminar() {
+		self.validarDireccion()
+		self.position(direccion.siguiente(self.position()))
+	}
+	
+	method validarDireccion(){
+		if(not self.puedeMover(direccion)){
+			direccion = direccion.opuesto()
+		}
+	}
+	
+	method puedeMover(dir) {
+		return escenario.puedeIr(self.position(), dir)
+	}
+}
+
+class Jessie inherits EquipoRocket{
+
+	override method direccion() = derecha
+
+	override method image() = "jessie-equipo-roquet-CHICA.png"
+}
+
+class James inherits EquipoRocket{
+
+	override method direccion() = arriba
+
+	override method image() = "james-equipo-roquet.png"
+
+}
+
+class Cofre {
+	
+	var property position = null
+	var property image = "cofre-cerrado.png"
+	
+	method colision(pokemon) {
+		self.apertura()
+	}
+	
+	method apertura() {
+		image = "cofre-abierto.png"
+	}	
+	
+	method esAtravesable() = true
+}
+
+
+class Puerta {
+	const property position 
+	method image() {return "puerta.png"}
+	method esAtravesable() {return true}
+	method colision(pokemon) {}
+}

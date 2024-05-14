@@ -1,4 +1,5 @@
 import alimentosFrutales.*
+import objects.*
 import posicionamiento.*
 import randomizer.*
 import wollok.game.*
@@ -167,3 +168,107 @@ object mapaDeParedesDelNivel5 inherits MapaDeParedesDelNivel {
 	
 }
 
+
+////ANOTADOR
+
+object iconPikachu {
+	var property position = game.at(0, game.height()-1)
+	method image () = "icon-Pikachu.png"
+}
+
+object anotadorManager {
+	
+	const property paredes = #{}
+	
+	method levantarAnotadorDe(longitud, posicionInicial, direccion) {
+		var posicionActual = posicionInicial
+		self.crearAnotador(posicionInicial)
+		(longitud - 1).times{ indice =>
+			posicionActual = direccion.siguiente(posicionActual)
+			self.crearAnotador(posicionActual)
+		}
+	}
+	
+	method crearAnotador(posicion) {
+		const anotadorNuevo = new FondoAnotador(position = posicion)
+		paredes.add(anotadorNuevo)
+	}	
+	
+	method agregarVisualFondos() {
+		paredes.forEach({ fondo => game.addVisual(fondo)})
+		game.addVisual(iconPikachu)
+		game.addVisual(iconCorazonPikachu)
+	}
+	method guardarLlave(unaLlave) {
+		game.addVisualIn(unaLlave, game.at(2,game.height()-1)) 
+	}
+}
+
+object iconCorazonPikachu {
+	var property position = game.at(1, game.height()-1)
+	
+	method image() = "corazon-"+self.promedioVidaPikachu()+".png"
+	
+	method promedioVidaPikachu(){
+		return if(pikachu.energia()==100){
+			"trescuartos"
+		}else if(pikachu.energia().between(50,90)){
+			"mitad"
+		}else if(pikachu.energia().between(10,40)){
+			"cuarto"
+		}else if(pikachu.energia().equals(0)){
+			"vacio"
+		}else{"lleno"}
+	}
+}
+
+class FondoAnotador inherits Pared {
+	override method image() = "fondoNegro.png"
+}
+
+//CASA PARA NIVEL 1 deberia ir en obstaculos?
+object cama {
+	const property position = game.at(13, 1)
+	method image() {return "cama.png"}
+	method esAtravesable() {return false}
+}
+object baniera {
+	const property position = game.at(7, 10)
+	method image() {return "baniera.png"}
+	method esAtravesable() {return false}
+}
+object inodoro {
+	const property position = game.at(9, 8)
+	method image() {return "inodoro.png"}
+	method esAtravesable() {return false}
+}
+object lavamanos {
+	const property position = game.at(5, 9)
+	method image() {return "lavamanos.png"}
+	method esAtravesable() {return false}
+}
+object ropero {
+	const property position = game.at(14, 3)
+	method image() {return "ropero.png"}
+	method esAtravesable() {return false}
+}
+object mesa {
+	const property position = game.at(6, 3)
+	method image() {return "mesa.png"}
+	method esAtravesable() {return false}
+}
+object silla {
+	const property position = game.at(7, 3)
+	method image() {return "silla.png"}
+	method esAtravesable() {return false}
+}
+object sofa {
+	const property position = game.at(13, 10)
+	method image() {return "sofa.png"}
+	method esAtravesable() {return false}
+}
+object sillon {
+	const property position = game.at(11, 9)
+	method image() {return "sillon.png"}
+	method esAtravesable() {return false}
+}

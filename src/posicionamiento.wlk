@@ -8,6 +8,10 @@ object arriba {
 	method siguiente(position) {
 		return position.up(1)
 	}
+	
+	method opuesto() {
+		return abajo
+	}
 
 }
 
@@ -15,6 +19,10 @@ object abajo {
 
 	method siguiente(position) {
 		return position.down(1)
+	}
+	
+	method opuesto() {
+		return arriba
 	}
 
 }
@@ -24,6 +32,10 @@ object izquierda {
 	method siguiente(position) {
 		return position.left(1)
 	}
+	
+	method opuesto() {
+		return derecha
+	}
 
 }
 
@@ -31,6 +43,10 @@ object derecha {
 
 	method siguiente(position) {
 		return position.right(1)
+	}
+	
+	method opuesto() {
+		return izquierda
 	}
 
 }
