@@ -1,8 +1,8 @@
+import ambiente.*
 import alimentosFrutales.*
 import config.*
 import posicionamiento.*
 import objects.*
-import obstaculos.*
 import wollok.game.*
 
 describe "Acciones de Pikachu" {
@@ -13,13 +13,14 @@ describe "Acciones de Pikachu" {
 	const baya    = new Baya()
 	// PRISIONERO EJEMPLIFICADOR
 	const evee = new PrisioneroEvee(position = game.at(2,2))
-	// OBSTACULOS
-	const pared   = new Pared(position = game.at(9,8))
+	// AMBIENTE
+	const pared         = new Pared(position = game.at(9,8))
+	const cofreConLlave = new CofreConLlave(position = game.at(7,7))
 	
 	method initialize() {
 		game.clear()
 		config.dimensiones()
-		game.addVisual(llave)
+		game.addVisual(cofreConLlave)
 		game.addVisual(pokebola)
 		game.addVisual(evee)
 		game.addVisual(pared)
@@ -91,7 +92,7 @@ describe "Acciones de Pikachu" {
 		// Caso prueba:
 		assert.notThat(pikachu.tengoLlave())
 		assert.notThat(pikachu.heRescatadoAlPrisionero())
-		llave.colision(pikachu)
+		cofreConLlave.colision(pikachu)
 		assert.that(pikachu.tengoLlave())
 		evee.colision(pikachu)
 		assert.that(pikachu.heRescatadoAlPrisionero())
@@ -101,7 +102,7 @@ describe "Acciones de Pikachu" {
 	test "PIKACHU encuentra la LLAVE, SIN rescatar al pokemon PRISIONERO y NO puede entrar a su POKEBOLA." {
 		// Estado inicial, no pedido.
 		// Caso prueba:
-		llave.colision(pikachu)
+		cofreConLlave.colision(pikachu)
 		assert.that(pikachu.tengoLlave())
 		assert.notThat(pikachu.heRescatadoAlPrisionero())
 		assert.notThat(pokebola.esAtravesable())

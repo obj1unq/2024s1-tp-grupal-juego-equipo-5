@@ -1,56 +1,81 @@
 import alimentosFrutales.*
+import ambiente.*
 import config.*
 import posicionamiento.*
 import objects.*
-import obstaculos.*
 import wollok.game.*
 
 program juego {
 	
-	const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
 	const james = new James(position=game.at(9,5), direccion=arriba)
+	const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
+	
 	const puerta1 = new Puerta(position=game.at(2,8))
 	const puerta2 = new Puerta(position=game.at(9,4))
 	const puerta3 = new Puerta(position=game.at(16,6))
 	const puerta4 = new Puerta(position=game.at(11,4))
-	const cofre = new Cofre(position=game.at(3,10))
+	const puerta5 = new Puerta(position=game.at(5,1))
+	const puerta6 = new Puerta(position=game.at(4,7))
+	
+	const cofre = new CofreConLlave(position=game.at(3,10))
+	
+	const pinche1 = new Pinche(position=game.at(8,3))
+	const pinche2 = new Pinche(position=game.at(16,9))
+	const pinche3 = new Pinche(position=game.at(3,9))
+	
+	const baniera = new Baniera(position = game.at(7, 10))
+	const cama = new Cama(position = game.at(13, 1))
+	const inodoro = new Inodoro(position = game.at(9, 8))
+	const lavamanos = new Lavamanos(position = game.at(5, 9))
+	const mesa = new Mesa(position = game.at(6, 3))
+	const ropero = new Ropero(position = game.at(14, 3))
+	const silla = new Silla(position = game.at(7, 3))
+	const sillon = new Sillon(position = game.at(11, 9))
+	const sofa = new Sofa(position = game.at(13, 10))
 	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	
-	game.ground("piso-liso-beige.png")
+	game.boardGround("fondo-nivel1.png")
 	
 	config.dimensiones()
 	
 	mapaDeParedesDelNivel1.agregar()
 	
-	anotadorManager.levantarAnotadorDe(game.width(), game.at(0, game.height()-1), derecha)
-	anotadorManager.agregarVisualFondos()
-	
 	game.addVisual(pikachu)
 	
-	game.addVisual(james)
-	game.addVisual(jessie)
-	game.onTick(500, "ACTUAR" + jessie.identity(), { jessie.caminar()})
-	game.onTick(500, "ACTUAR" + james.identity(), { james.caminar()})
-	
 	game.addVisual(pokebola)
-	game.addVisual(llave)
 	
-	///REFACTORIZAR//////////
-	game.addVisual(cofre)
-	game.addVisual(cama)
 	game.addVisual(baniera)
-	game.addVisual(ropero)
-	game.addVisual(mesa)
-	game.addVisual(silla)
+	game.addVisual(cama)
 	game.addVisual(inodoro)
 	game.addVisual(lavamanos)
-	game.addVisual(sofa)
+	game.addVisual(mesa)
+	game.addVisual(ropero)
+	game.addVisual(silla)
 	game.addVisual(sillon)
+	game.addVisual(sofa)
+	
+	game.addVisual(cofre)
+	
 	game.addVisual(puerta1)
 	game.addVisual(puerta2)
 	game.addVisual(puerta3)
 	game.addVisual(puerta4)
+	game.addVisual(puerta5)
+	game.addVisual(puerta6)
+	
+	game.addVisual(pinche1)
+	game.addVisual(pinche2)
+	game.addVisual(pinche3)
+	
+	game.addVisual(iconPikachu)
+	game.addVisual(iconCorazonPikachu)
+	
+	game.addVisual(james)
+	game.addVisual(jessie)
+	
+	game.onTick(500, "CUSTODIA 1", {james.caminar()} )
+	game.onTick(400, "CUSTODIA 2", {jessie.caminar()} )
 	
 	newEvee.crear()
 //	newCharmander.crear()
@@ -58,6 +83,7 @@ program juego {
 //	newSquirtle.crear()
 //	newVulpix.crear()
 //	
+
 	config.teclas()
 	config.colisiones()
 	config.frutas()

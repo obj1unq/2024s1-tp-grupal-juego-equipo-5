@@ -9,7 +9,7 @@ object frutaManager {
 	const property frutas = []
 
 	method nuevaFruta() {
-		const fruta = [ bananaFactory, bayaFactory, bayaFactory, manzanaFactory].anyOne().nuevaFruta()
+		const fruta = [ bananaFactory, bayaFactory, manzanaFactory].anyOne().nuevaFruta()
 		if (frutas.size() < 8) {
 			frutas.add(fruta)
 			game.addVisual(fruta)

@@ -5,13 +5,9 @@ import randomizer.*
 import wollok.game.*
 
 // PAREDES
-class Pared {
+class Pared inherits Articulo {
 
-	const property position
-
-	method image() = "pared-normal.png"
-
-	method esAtravesable() = false
+	override method image() = "pared.png"
 
 }
 
@@ -169,106 +165,179 @@ object mapaDeParedesDelNivel5 inherits MapaDeParedesDelNivel {
 }
 
 
-////ANOTADOR
+// VISOR
 
 object iconPikachu {
-	var property position = game.at(0, game.height()-1)
+	
+	const property position = game.at(0,12)
+	
 	method image () = "icon-Pikachu.png"
 }
 
-object anotadorManager {
-	
-	const property paredes = #{}
-	
-	method levantarAnotadorDe(longitud, posicionInicial, direccion) {
-		var posicionActual = posicionInicial
-		self.crearAnotador(posicionInicial)
-		(longitud - 1).times{ indice =>
-			posicionActual = direccion.siguiente(posicionActual)
-			self.crearAnotador(posicionActual)
-		}
-	}
-	
-	method crearAnotador(posicion) {
-		const anotadorNuevo = new FondoAnotador(position = posicion)
-		paredes.add(anotadorNuevo)
-	}	
-	
-	method agregarVisualFondos() {
-		paredes.forEach({ fondo => game.addVisual(fondo)})
-		game.addVisual(iconPikachu)
-		game.addVisual(iconCorazonPikachu)
-	}
-	method guardarLlave(unaLlave) {
-		game.addVisualIn(unaLlave, game.at(2,game.height()-1)) 
-	}
-}
-
 object iconCorazonPikachu {
-	var property position = game.at(1, game.height()-1)
 	
-	method image() = "corazon-"+self.promedioVidaPikachu()+".png"
+	const property position = game.at(1,12)
+	
+	method image() = "corazon-" + self.promedioVidaPikachu() + ".png"
 	
 	method promedioVidaPikachu(){
-		return if(pikachu.energia()==100){
+		return if(pikachu.energia() > 450) {
+			"lleno"
+		}else if(pikachu.energia().between(301,450)) {
 			"trescuartos"
-		}else if(pikachu.energia().between(50,90)){
-			"mitad"
-		}else if(pikachu.energia().between(10,40)){
+		}else if(pikachu.energia().between(151,300)) {
+			"medio"
+		}else if(pikachu.energia() >= 1) {
 			"cuarto"
-		}else if(pikachu.energia().equals(0)){
-			"vacio"
-		}else{"lleno"}
+		}else{"vacio"}
 	}
+	
 }
 
-class FondoAnotador inherits Pared {
-	override method image() = "fondoNegro.png"
+object iconLlave {
+	
+	const property position = game.at(2,12)
+	
+	method image() = "llave.png"
+	
+	method mostrar(){
+		game.addVisual(self)
+	}
+	
+	method ocultar() {
+		game.removeVisual(self)
+	}
+	
 }
 
-//CASA PARA NIVEL 1 deberia ir en obstaculos?
-object cama {
-	const property position = game.at(13, 1)
-	method image() {return "cama.png"}
-	method esAtravesable() {return false}
+// AMBIENTACION 
+
+class Articulo {
+	
+	const property position
+	
+	method esAtravesable() = false
+	
+	method image()
 }
-object baniera {
-	const property position = game.at(7, 10)
-	method image() {return "baniera.png"}
-	method esAtravesable() {return false}
+
+class Baniera inherits Articulo {
+	
+	override method image() = "baniera.png"
+
 }
-object inodoro {
-	const property position = game.at(9, 8)
-	method image() {return "inodoro.png"}
-	method esAtravesable() {return false}
+
+class Cama inherits Articulo {
+	
+	override method image() = "cama.png"
+
 }
-object lavamanos {
-	const property position = game.at(5, 9)
-	method image() {return "lavamanos.png"}
-	method esAtravesable() {return false}
+
+class Inodoro inherits Articulo {
+	
+	override method image() = "inodoro.png"
+
 }
-object ropero {
-	const property position = game.at(14, 3)
-	method image() {return "ropero.png"}
-	method esAtravesable() {return false}
+
+class Lavamanos inherits Articulo {
+	
+	override method image() = "lavamanos.png"
+
 }
-object mesa {
-	const property position = game.at(6, 3)
-	method image() {return "mesa.png"}
-	method esAtravesable() {return false}
+	
+class Mesa inherits Articulo {
+	
+	override method image() = "mesa.png"
+
 }
-object silla {
-	const property position = game.at(7, 3)
-	method image() {return "silla.png"}
-	method esAtravesable() {return false}
+
+class Ropero inherits Articulo {
+	
+	override method image() = "ropero.png"
+
 }
-object sofa {
-	const property position = game.at(13, 10)
-	method image() {return "sofa.png"}
-	method esAtravesable() {return false}
+
+class Silla inherits Articulo {
+	
+	override method image() = "silla.png"
+
 }
-object sillon {
-	const property position = game.at(11, 9)
-	method image() {return "sillon.png"}
-	method esAtravesable() {return false}
+
+class Sillon inherits Articulo {
+	
+	override method image() = "sillon.png"
+
 }
+
+class Sofa inherits Articulo {
+	
+	override method image() = "sofa.png"
+
+}
+
+// AMBIENTACION CON COLISIONES
+class Atravesable {
+	
+	var property position
+	
+	method colision(pokemon)
+	
+	method esAtravesable() = true
+	
+	method image()
+	
+}
+
+class Cofre inherits Atravesable {
+	
+	var property image = "cofre-cerrado.png"
+	
+	method apertura() {
+		image = "cofre-abierto.png"
+	}
+	
+	override method colision(pokemon) {
+		self.apertura()
+	}
+	
+}
+
+class CofreConLlave inherits Cofre {
+	
+	const llave = iconLlave
+	
+	override method colision(pokemon) {
+		super(pokemon)
+		pokemon.obtenerLlave(llave)
+	}
+	
+}
+
+class Puerta inherits Atravesable {	
+	
+	override method colision(pokemon) {}
+	
+	override method image() = "puerta.png"
+
+}
+
+class Trampa inherits Atravesable {
+	
+	method danio()
+	
+	override method image() = "trampa-"
+	
+}
+
+class Pinche inherits Trampa {
+	
+	override method colision(pokemon) {
+		pokemon.recibirDanio(self)
+		game.removeVisual(self)
+	}
+	override method danio() = 50
+	
+	override method image() = super() + "pinches.png"
+	
+}
+

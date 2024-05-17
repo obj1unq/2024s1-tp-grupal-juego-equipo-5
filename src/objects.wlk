@@ -1,5 +1,5 @@
 import alimentosFrutales.*
-import obstaculos.*
+import ambiente.*
 import posicionamiento.*
 import randomizer.*
 import wollok.game.*
@@ -59,12 +59,15 @@ object pikachu {
 		return estado.puedeMover() && escenario.puedeIr(self.position(), dir)
 	}
 
-	method obtenerLlave() {
+	method obtenerLlave(llave) {
 		tengoLlave = true
+		llave.mostrar()
 	}
 
-	method liberarPokemon() {
+	method liberarPokemon(llave) {
 		heRescatadoAlPrisionero = true
+		tengoLlave = false
+		llave.ocultar()
 	}
 	
 	method esAtravesable() = true
@@ -109,7 +112,7 @@ object muerto {
 
 	method activar() {
 		game.say(pikachu, "Perdí!")
-		game.schedule(2000, { game.stop()})
+		game.schedule(2000, {game.stop()} )
 	}
 
 }
@@ -125,23 +128,7 @@ object pokebola {
 
 	method colision(pokemon) {
 		pokemon.estado(ganador)
-		game.schedule(1000, { game.removeVisual(self)})
-	}
-
-}
-
-// LLAVE
-object llave {
-
-	var property position = game.at(3, 10)
-	var property image = "llave.png"
-
-	method esAtravesable() = true
-
-	method colision(pokemon) {
-		pokemon.obtenerLlave()
-		game.removeVisual(self)
-		anotadorManager.guardarLlave(self)
+		game.schedule(500, {game.removeVisual(self)} )
 	}
 
 }
@@ -149,6 +136,7 @@ object llave {
 // POKEMONS PRISIONEROS
 class Prisionero {
 
+	const llave = iconLlave
 	const property rescatador = pikachu
 
 	method position()
@@ -158,7 +146,7 @@ class Prisionero {
 	method esAtravesable() = rescatador.tengoLlave()
 
 	method colision(pokemon) {
-		pokemon.liberarPokemon()
+		pokemon.liberarPokemon(llave)
 		self.liberar()
 		
 		game.say(self, "Gracias por liberarme!")
@@ -282,7 +270,7 @@ class EquipoRocket {
 	var property position
 	var property direccion	
 
-	method image()
+	method image() = "equipo-rocket-"
 	
 	method colision(pokemon) {
 		pokemon.recibirDanio(self)
@@ -312,37 +300,13 @@ class Jessie inherits EquipoRocket{
 
 	override method direccion() = derecha
 
-	override method image() = "jessie-equipo-roquet-CHICA.png"
+	override method image() = super() + "jessie.png"
 }
 
 class James inherits EquipoRocket{
 
 	override method direccion() = arriba
 
-	override method image() = "james-equipo-roquet.png"
+	override method image() =  super() + "james.png"
 
-}
-
-class Cofre {
-	
-	var property position = null
-	var property image = "cofre-cerrado.png"
-	
-	method colision(pokemon) {
-		self.apertura()
-	}
-	
-	method apertura() {
-		image = "cofre-abierto.png"
-	}	
-	
-	method esAtravesable() = true
-}
-
-
-class Puerta {
-	const property position 
-	method image() {return "puerta.png"}
-	method esAtravesable() {return true}
-	method colision(pokemon) {}
 }
