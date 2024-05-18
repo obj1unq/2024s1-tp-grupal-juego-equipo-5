@@ -15,7 +15,7 @@ describe "Acciones de Pikachu" {
 	const evee = new PrisioneroEvee(position = game.at(2,2))
 	// AMBIENTE
 	const pared         = new Pared(position = game.at(9,8))
-	const cofreConLlave = new CofreConLlave(position = game.at(7,7))
+	const cofreConLlave = new Cofre(position = game.at(7,7))
 	
 	method initialize() {
 		game.clear()
@@ -90,10 +90,10 @@ describe "Acciones de Pikachu" {
 	test "PIKACHU encuentra la LLAVE, rescata al pokemon PRISIONERO y puede entrar a su POKEBOLA." {
 		// Estado inicial, no pedido.
 		// Caso prueba:
-		assert.notThat(pikachu.tengoLlave())
+		assert.notThat(pikachu.tieneLlave())
 		assert.notThat(pikachu.heRescatadoAlPrisionero())
 		cofreConLlave.colision(pikachu)
-		assert.that(pikachu.tengoLlave())
+		assert.that(pikachu.tieneLlave())
 		evee.colision(pikachu)
 		assert.that(pikachu.heRescatadoAlPrisionero())
 		assert.that(pokebola.esAtravesable())
@@ -103,7 +103,7 @@ describe "Acciones de Pikachu" {
 		// Estado inicial, no pedido.
 		// Caso prueba:
 		cofreConLlave.colision(pikachu)
-		assert.that(pikachu.tengoLlave())
+		assert.that(pikachu.tieneLlave())
 		assert.notThat(pikachu.heRescatadoAlPrisionero())
 		assert.notThat(pokebola.esAtravesable())
 	}
