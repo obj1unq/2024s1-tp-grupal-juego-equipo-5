@@ -277,16 +277,20 @@ class Atravesable {
 
 class Cofre inherits Articulo {
 	
-	var property estado= cofreCerrado
-	var property image=estado.image()
+	var property estaAbierto = false
+	var property image = "cofre-cerrado.png"
 	var property contenido = null
 	
 	method cambiarImagen(){
-		image=estado.image()
+		if (estaAbierto) {
+			image = "cofre-cerrado.png"
+		} else {
+			image =  "cofre-abierto.png"			
+		}
+		estaAbierto = !estaAbierto
 	}
 	
 	override method action() {
-		estado.action(self)
 		self.cambiarImagen()
 		if ( contenido != null){
 			game.addVisualIn(contenido,self.position())
@@ -294,23 +298,6 @@ class Cofre inherits Articulo {
 		}
 	}
 	
-	//pokemon.obtenerLlave(llave) usar
-}
-object cofreAbierto{ 
-	const property image = "cofre-abierto.png"
-
-	method action(cofre){
-		cofre.estado(cofreCerrado)
-
-	}
-}
-object cofreCerrado{
-	const property image="cofre-cerrado.png"
-	
-	method action(cofre){
-		cofre.estado(cofreAbierto)
-		
-	}
 }
 object llave {
 	var property position
