@@ -194,21 +194,7 @@ object iconCorazonPikachu {
 	
 }
 
-object iconLlave {
-	
-	const property position = game.at(2,12)
-	
-	method image() = "llave.png"
-	
-	method mostrar(){
-		game.addVisual(self)
-	}
-	
-	method ocultar() {
-		game.removeVisual(self)
-	}
-	
-}
+
 
 // AMBIENTACION 
 
@@ -219,6 +205,7 @@ class Articulo {
 	method esAtravesable() = false
 	
 	method image()
+	method action(){}
 }
 
 class Baniera inherits Articulo {
@@ -288,29 +275,52 @@ class Atravesable {
 	
 }
 
-class Cofre inherits Atravesable {
+class Cofre inherits Articulo {
 	
+	var property estaAbierto = false
 	var property image = "cofre-cerrado.png"
+	var property contenido = null
 	
-	method apertura() {
-		image = "cofre-abierto.png"
+	method cambiarImagen(){
+		if (estaAbierto) {
+			image = "cofre-cerrado.png"
+		} else {
+			image =  "cofre-abierto.png"			
+		}
+		estaAbierto = !estaAbierto
 	}
 	
-	override method colision(pokemon) {
-		self.apertura()
+	override method action() {
+		self.cambiarImagen()
+		if ( contenido != null){
+			game.addVisualIn(contenido,self.position())
+			contenido = null
+		}
 	}
 	
 }
-
-class CofreConLlave inherits Cofre {
-	
-	const llave = iconLlave
-	
-	override method colision(pokemon) {
-		super(pokemon)
-		pokemon.obtenerLlave(llave)
+object llave {
+	var property position
+	method image(){
+		return "llave.png"
 	}
-	
+	method colision(){}
+	method action(){
+		game.say(pikachu,"Si!, ayudemos a nuestro amigo")
+		self.cambiarVisual()
+		pikachu.obtenerLlave(self)
+	}
+	method cambiarVisual(){
+		self.ocultar()
+		position = game.at(2,12)
+		self.mostrar()
+	}
+	method mostrar(){
+		game.addVisual(self)
+	}
+	method ocultar(){
+		game.removeVisual(self)
+	}
 }
 
 class Puerta inherits Atravesable {	

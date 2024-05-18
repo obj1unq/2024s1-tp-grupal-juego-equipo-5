@@ -8,10 +8,11 @@ import wollok.game.*
 object pikachu {
 
 	var property estado = caminando
+	var property direccion = derecha
 	var property position = game.at(1, 1)
-	var property tengoLlave = false // HAY UNA SOLA LLAVE POR NIVEL
 	var property heRescatadoAlPrisionero = false // HAY UN SOLO PRISIONERO POR NIVEL
 	var property energia = 100
+	var property tieneLlave = false // HAY UNA SOLA LLAVE POR NIVEL
 	const escenario = tablero
 
 	method estado(estadoACambiar) {
@@ -60,18 +61,35 @@ object pikachu {
 	}
 
 	method obtenerLlave(llave) {
-		tengoLlave = true
-		llave.mostrar()
+		tieneLlave = true
 	}
 
-	method liberarPokemon(llave) {
+	method liberarPokemon() {
 		heRescatadoAlPrisionero = true
-		tengoLlave = false
-		llave.ocultar()
+		tieneLlave = false
+		
 	}
 	
 	method esAtravesable() = true
+		method cambiarDireccion(nuevaPosicion){
+		if ( nuevaPosicion == position.left(1)){
+			direccion = izquierda
+		}
+		else if ( nuevaPosicion == position.right(1)){
+			direccion = derecha
+		}
+	}
+	method interactuarConObjeto() {
 
+		var objetos = game.colliders(self)
+			objetos+=game.getObjectsIn(direccion.siguiente(self.position()))		
+		
+		if (objetos.isEmpty()) {
+			self.error("Aqui no hay nada")
+		}
+		 objetos.forEach({objeto=>objeto.action()})
+		 
+	}
 }
 
 // ESTADOS DEL DETECTIVE
@@ -136,19 +154,18 @@ object pokebola {
 // POKEMONS PRISIONEROS
 class Prisionero {
 
-	const llave = iconLlave
 	const property rescatador = pikachu
 
 	method position()
 
 	method image()
 
-	method esAtravesable() = rescatador.tengoLlave()
+	method esAtravesable() = rescatador.tieneLlave()
 
 	method colision(pokemon) {
-		pokemon.liberarPokemon(llave)
+		pokemon.liberarPokemon()
 		self.liberar()
-		
+		llave.ocultar()
 		game.say(self, "Gracias por liberarme!")
 		game.schedule(2000, { game.removeVisual(self) })
 	}
