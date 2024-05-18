@@ -154,7 +154,6 @@ object pokebola {
 // POKEMONS PRISIONEROS
 class Prisionero {
 
-	//const llave = iconLlave
 	const property rescatador = pikachu
 
 	method position()
@@ -164,7 +163,6 @@ class Prisionero {
 	method esAtravesable() = rescatador.tieneLlave()
 
 	method colision(pokemon) {
-		//pokemon.liberarPokemon(llave)
 		pokemon.liberarPokemon()
 		self.liberar()
 		llave.ocultar()

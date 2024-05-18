@@ -92,7 +92,9 @@ describe "Acciones de Pikachu" {
 		// Caso prueba:
 		assert.notThat(pikachu.tieneLlave())
 		assert.notThat(pikachu.heRescatadoAlPrisionero())
-		cofreConLlave.colision(pikachu)
+		cofreConLlave.contenido(llave)
+		cofreConLlave.action()
+		llave.action()
 		assert.that(pikachu.tieneLlave())
 		evee.colision(pikachu)
 		assert.that(pikachu.heRescatadoAlPrisionero())
@@ -102,7 +104,9 @@ describe "Acciones de Pikachu" {
 	test "PIKACHU encuentra la LLAVE, SIN rescatar al pokemon PRISIONERO y NO puede entrar a su POKEBOLA." {
 		// Estado inicial, no pedido.
 		// Caso prueba:
-		cofreConLlave.colision(pikachu)
+		cofreConLlave.contenido(llave)
+		cofreConLlave.action()
+		llave.action()
 		assert.that(pikachu.tieneLlave())
 		assert.notThat(pikachu.heRescatadoAlPrisionero())
 		assert.notThat(pokebola.esAtravesable())
