@@ -24,12 +24,12 @@ object pikachu {
 
 	method image() = estado.image()
 
-	method text() = energia.toString()
+	//method text() = energia.toString()
 
 	method textColor() = "FF00FF"
 
 	method comerFruta(fruta) {
-		energia += fruta.energia()
+		energia = (energia + fruta.energia()).min(600)
 		self.siEstaAgotadoMuere()
 	}
 

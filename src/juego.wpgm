@@ -43,8 +43,8 @@ program juego {
 	game.boardGround("fondo-nivel1.png")
 	
 	config.dimensiones()
-	
-	mapaDeParedesDelNivel1.agregar()
+	nivelManager.generarNivel()
+	//mapaDeParedesDelNivel1.agregar()
 	
 	game.addVisual(pikachu)
 	
@@ -72,9 +72,10 @@ program juego {
 	game.addVisual(pinche1)
 	game.addVisual(pinche2)
 	game.addVisual(pinche3)
-	
-	game.addVisual(iconPikachu)
-	game.addVisual(iconCorazonPikachu)
+	////////ANOTADOR<-----
+	anotador.generarVisuales()
+	/*game.addVisual(iconPikachu)
+	game.addVisual(iconCorazonPikachu)*/
 	
 	//game.addVisual(james)
 	game.addVisual(jessie)
