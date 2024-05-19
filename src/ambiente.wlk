@@ -164,9 +164,65 @@ object mapaDeParedesDelNivel5 inherits MapaDeParedesDelNivel {
 	
 }
 
+object nivelManager {
+
+	const niveles = [mapaDeParedesDelNivel1, 
+					mapaDeParedesDelNivel2, 
+					mapaDeParedesDelNivel3,
+					mapaDeParedesDelNivel4,
+					mapaDeParedesDelNivel5]
+	var nivelActual = 0
+
+	method numeroDeNivel() = nivelActual+1
+
+	method nivelActual() {
+		return niveles.get(nivelActual)
+	}
+
+	method aumentarNivelActual() {
+		self.validarQueExistenMasNiveles()
+		nivelActual++
+	}
+	
+	method validarQueExistenMasNiveles(){
+		if(niveles.size()-1 < nivelActual){
+			self.error("No existen más niveles")
+		}
+	}
+	method quedanNiveles() = nivelActual < niveles.size()-1
+	method reset() {
+		nivelActual = 0
+	}
+	
+	method generarNivel() {
+		if (self.quedanNiveles()) {
+			game.clear()
+			self.nivelActual().agregar()
+			/*mapa.generar(levelManager.nivelActual())
+			self.agregarJugador()
+			self.generarEnemigosYAumentarDificultad()
+			hud.add()*/
+		} else {
+			self.victoria()
+		}
+	}
+	method victoria() {
+		game.clear()
+		//game.addVisual(victoria)
+	}
+
+}
 
 // VISOR
-
+object anotador{
+	method generarVisuales(){
+		game.addVisual(iconPikachu)
+		game.addVisual(iconCorazonPikachu)
+	}
+	method guardarLlave(unaLlave) {
+		game.addVisualIn(unaLlave, game.at(2,game.height()-1)) 
+	}
+}
 object iconPikachu {
 	
 	const property position = game.at(0,12)
@@ -177,21 +233,39 @@ object iconPikachu {
 object iconCorazonPikachu {
 	
 	const property position = game.at(1,12)
+	const estados = #{vacio, cuarto, medio, trescuartos, lleno}
 	
-	method image() = "corazon-" + self.promedioVidaPikachu() + ".png"
+	method image() = "corazon-" + self.estadoActualDelCorazon().porcentaje() + ".png"
 	
-	method promedioVidaPikachu(){
-		return if(pikachu.energia() > 450) {
-			"lleno"
-		}else if(pikachu.energia().between(301,450)) {
-			"trescuartos"
-		}else if(pikachu.energia().between(151,300)) {
-			"medio"
-		}else if(pikachu.energia() >= 1) {
-			"cuarto"
-		}else{"vacio"}
+	method text() = pikachu.energia().toString()
+	
+	method estadoActualDelCorazon(){
+		return estados.find({estado => estado.estaEnPorcentaje(pikachu.energia())})
 	}
 	
+}
+
+// ESTADOS DEL CORAZON
+
+object vacio{
+	method estaEnPorcentaje(energia) = 0
+	method porcentaje()="vacio"
+}
+object cuarto{
+	method estaEnPorcentaje(energia) = energia.between(1, 150)
+	method porcentaje()="cuarto"
+}
+object medio{
+	method estaEnPorcentaje(energia) = energia.between(151, 300)
+	method porcentaje()="medio"
+}
+object trescuartos{
+	method estaEnPorcentaje(energia) = energia.between(301, 450)
+	method porcentaje()="trescuartos"
+}
+object lleno{
+	method estaEnPorcentaje(energia) = energia.between(451, 600)
+	method porcentaje()="lleno"
 }
 
 

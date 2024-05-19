@@ -140,5 +140,20 @@ describe "Acciones de Pikachu" {
 		assert.notThat(prisionero.esAtravesable())
 	}
 	
+	test "EL MAXIMO DE VIDA DE PIKACHU DEBE SER 600...
+		Pikachu teniendo 560 de energia, al comer una banana
+		no deberia superar los 600" {
+			pikachu.energia(560)
+			pikachu.comerFruta(banana)
+			assert.equals(600, pikachu.energia())
+		}
+	test "EL MAXIMO DE VIDA DE PIKACHU DEBE SER 600...
+		Pikachu teniendo 550 de energia, al comer una banana
+		no deberia superar los 600" {
+			pikachu.energia(550)
+			pikachu.comerFruta(banana)
+			assert.equals(600, pikachu.energia())
+		}
+	
 }
 
