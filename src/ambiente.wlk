@@ -308,7 +308,7 @@ object llave {
 	method action(){
 		game.say(pikachu,"Si!, ayudemos a nuestro amigo")
 		self.cambiarVisual()
-		pikachu.obtenerLlave(self)
+		pikachu.obtenerLlave()
 	}
 	method cambiarVisual(){
 		self.ocultar()

@@ -60,7 +60,7 @@ object pikachu {
 		return estado.puedeMover() && escenario.puedeIr(self.position(), dir)
 	}
 
-	method obtenerLlave(llave) {
+	method obtenerLlave() {
 		tieneLlave = true
 	}
 
