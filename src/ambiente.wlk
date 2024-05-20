@@ -252,40 +252,50 @@ object iconCorazonPikachu {
 // ESTADOS DEL CORAZON
 object vacio {
 
-	method estaEnPorcentaje(energia) = 0
-
+	method estaEnPorcentaje(energia) {
+		return 0
+	}
+	
 	method porcentaje() = "vacio"
 
 }
 
 object cuarto {
 
-	method estaEnPorcentaje(energia) = energia.between(1, 150)
-
+	method estaEnPorcentaje(energia) {
+		return energia.between(1, 150)
+	}
+	
 	method porcentaje() = "cuarto"
 
 }
 
 object medio {
 
-	method estaEnPorcentaje(energia) = energia.between(151, 300)
-
+	method estaEnPorcentaje(energia) {
+		return energia.between(151, 300)
+	}
+	
 	method porcentaje() = "medio"
 
 }
 
 object trescuartos {
 
-	method estaEnPorcentaje(energia) = energia.between(301, 450)
-
+	method estaEnPorcentaje(energia) {
+		return energia.between(301, 450)
+	}
+	
 	method porcentaje() = "trescuartos"
 
 }
 
 object lleno {
 
-	method estaEnPorcentaje(energia) = energia.between(451, 600)
-
+	method estaEnPorcentaje(energia) {
+		return energia.between(451, 600)
+	}
+	
 	method porcentaje() = "lleno"
 
 }
@@ -432,20 +442,50 @@ class Atravesable {
 
 class Trampa inherits Atravesable {
 
+	override method colision(pokemon) {
+		pokemon.recibirDanio(self)
+		game.say(pokemon, "Ay! me dolió")
+	}
+
 	method danio()
 
 	override method image() = "trampa-"
 
 }
 
-class Pinche inherits Trampa {
+class Daga inherits Trampa {
+	
+	const escenario = tablero
+	var property inicial = game.at(9,7)
+	
+	var property direccion
+	
+	override method danio()  = 30
 
-	override method colision(pokemon) {
-		pokemon.recibirDanio(self)
-		game.say(pokemon, "Ay! me dolió")
-		game.removeVisual(self)
+	override method image() = super() + "daga.png"
+
+	method mover() {
+		if (not self.puedeMover(direccion)) {
+			self.position(inicial)
+		} else {
+			self.position(direccion.siguiente(self.position()))		
+		}
 	}
 
+	method puedeMover(dir) {
+		return escenario.puedeIr(self.position(), dir)
+	}
+	
+}
+
+
+
+class Pinche inherits Trampa {
+
+	override method colision(pokemon){ 
+		super(pokemon) 
+		game.removeVisual(self)
+	}
 	override method danio() = 50
 
 	override method image() = super() + "pinches.png"

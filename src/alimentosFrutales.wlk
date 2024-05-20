@@ -43,7 +43,7 @@ object manzanaFactory {
 }
 
 class Banana inherits Fruta{
-	override method image() = "f.banana.png"
+	override method nombre() = "banana"
 	override method energia() = 50
 	override method mensaje(){
 		return "Qué rico!"
@@ -51,7 +51,7 @@ class Banana inherits Fruta{
 }
 
 class Baya inherits Fruta{
-	override method image() = "f.baya.png"
+	override method nombre() = "baya"
 	override method energia() = -50
 	override method mensaje(){
 		return "Qué asco!"
@@ -60,7 +60,7 @@ class Baya inherits Fruta{
 }
 
 class Manzana inherits Fruta{
-	override method image() = "f.manzana.png"
+	override method nombre() = "manzana" 
 	override method energia() = 80
 	override method mensaje(){
 		return "Qué sabroso!"
@@ -70,7 +70,8 @@ class Fruta {
 	var property position = randomizer.emptyPosition()
 	
 	method energia()
-	method image()
+	method nombre()
+	method image() = "f." + self.nombre() + ".png"
 	method esAtravesable() = true
 	method action(){}
 	method mensaje()
