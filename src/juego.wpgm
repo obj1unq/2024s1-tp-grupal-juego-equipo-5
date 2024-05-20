@@ -9,7 +9,7 @@ program juego {
 	
 	
 	// FALTA UN NIVEL MANAGER - (para encargarse de las constantes de cada nivel)
-	
+	 
 	const meowth = new Meowth(position=game.at(3,5), direccion=izquierda)
 	//const james  = new James(position=game.at(9,5), direccion=arriba)
 	//const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
