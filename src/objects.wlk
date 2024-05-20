@@ -171,20 +171,10 @@ class Prisionero {
 
 }
 
-class PrisioneroCharmander inherits Prisionero {
+// PRISIONERO: NIVEL 1
+object prisioneroEvee inherits Prisionero {
 
-	var property position
-	var property image = "preso-charmander.png"
-
-	override method liberar() {
-		image = "libre-charmander.png"
-	}
-
-}
-
-class PrisioneroEvee inherits Prisionero {
-
-	var property position
+	const property position = game.at(2, 2)
 	var property image = "preso-evee.png"
 
 	override method liberar() {
@@ -193,9 +183,10 @@ class PrisioneroEvee inherits Prisionero {
 
 }
 
-class PrisioneroPidgeot inherits Prisionero {
+// PRISIONERO: NIVEL 2
+object prisioneroPidgeot inherits Prisionero {
 
-	var property position
+	const property position = game.at(6, 4)
 	var property image = "preso-pidgeot.png"
 
 	override method liberar() {
@@ -204,20 +195,10 @@ class PrisioneroPidgeot inherits Prisionero {
 
 }
 
-class PrisioneroSquirtle inherits Prisionero {
+// PRISIONERO: NIVEL 3
+object prisioneroVulpix inherits Prisionero {
 
-	var property position
-	var property image = "preso-squirtle.png"
-
-	override method liberar() {
-		image = "libre-squirtle.png"
-	}
-
-}
-
-class PrisioneroVulpix inherits Prisionero {
-
-	var property position
+	const property position = game.at(11, 1)
 	var property image = "preso-vulpix.png"
 
 	override method liberar() {
@@ -226,52 +207,26 @@ class PrisioneroVulpix inherits Prisionero {
 
 }
 
-// PRISIONERO PARA EL NIVEL 1
-object newSquirtle {
+// PRISIONERO: NIVEL 4
+object prisioneroSquirtle inherits Prisionero {
 
-	method crear() {
-		const squirtle = new PrisioneroSquirtle(position = game.at(3, 3))
-		game.addVisual(squirtle)
+	const property position = game.at(16, 7)
+	var property image = "preso-squirtle.png"
+
+	override method liberar() {
+		image = "libre-squirtle.png"
 	}
 
 }
 
-// PRISIONERO PARA EL NIVEL 2
-object newEvee {
+// PRISIONERO: NIVEL 5
+object prisioneroCharmander inherits Prisionero {
 
-	method crear() {
-		const evee = new PrisioneroEvee(position = game.at(2, 2))
-		game.addVisual(evee)
-	}
+	const property position = game.at(4, 5)
+	var property image = "preso-charmander.png"
 
-}
-
-// PRISIONERO PARA EL NIVEL 3
-object newPidgeot {
-
-	method crear() {
-		const pidgeot = new PrisioneroPidgeot(position = game.at(2, 3))
-		game.addVisual(pidgeot)
-	}
-
-}
-
-// PRISIONERO PARA EL NIVEL 4
-object newVulpix {
-
-	method crear() {
-		const vulpix = new PrisioneroVulpix(position = game.at(1, 3))
-		game.addVisual(vulpix)
-	}
-
-}
-
-// PRISIONERO PARA EL NIVEL 5
-object newCharmander {
-
-	method crear() {
-		const charmander = new PrisioneroCharmander(position = game.at(1, 2))
-		game.addVisual(charmander)
+	override method liberar() {
+		image = "libre-charmander.png"
 	}
 
 }

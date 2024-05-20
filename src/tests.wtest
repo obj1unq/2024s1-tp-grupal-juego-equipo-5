@@ -13,8 +13,6 @@ describe "Acciones de Pikachu" {
 	const baya    = new Baya()
 	// ENEMIGO EJEMPLIFICADOR
 	const enemigo = new James(position = game.at(10,1), direccion = arriba)
-	// PRISIONERO EJEMPLIFICADOR
-	const prisionero = new PrisioneroEvee(position = game.at(2,2))
 	// AMBIENTE
 	const cofre = new Cofre(position = game.at(7,7))
 	const pared = new Pared(position = game.at(9,8))
@@ -26,7 +24,7 @@ describe "Acciones de Pikachu" {
 		game.addVisual(cofre)
 		game.addVisual(enemigo)
 		game.addVisual(pokebola)
-		game.addVisual(prisionero)
+		game.addVisual(prisioneroEvee)
 		game.addVisual(pared)
 		game.addVisual(trampaPinche)
 		game.addVisual(pikachu)
@@ -128,8 +126,8 @@ describe "Acciones de Pikachu" {
 		cofre.action()
 		llave.action()
 		assert.that(pikachu.tieneLlave())
-		assert.that(prisionero.esAtravesable())
-		prisionero.colision(pikachu)
+		assert.that(prisioneroEvee.esAtravesable())
+		prisioneroEvee.colision(pikachu)
 		assert.that(pikachu.heRescatadoAlPrisionero())
 		assert.that(pokebola.esAtravesable())
 	}
@@ -151,7 +149,7 @@ describe "Acciones de Pikachu" {
 		// Caso prueba:
 		cofre.action()
 		assert.notThat(pikachu.tieneLlave())
-		assert.notThat(prisionero.esAtravesable())
+		assert.notThat(prisioneroEvee.esAtravesable())
 	}
 	
 }
