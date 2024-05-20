@@ -24,8 +24,7 @@ object pikachu {
 
 	method image() = estado.image()
 
-	//method text() = energia.toString()
-
+	// method text() = energia.toString()
 	method textColor() = "FF00FF"
 
 	method comerFruta(fruta) {
@@ -38,12 +37,12 @@ object pikachu {
 			self.estado(muerto)
 		}
 	}
-	
+
 	method recibirDanio(enemigo) {
 		energia -= enemigo.danio()
 		self.siEstaAgotadoMuere()
 	}
-	
+
 	method mover(dir) {
 		self.validarMover(dir)
 		position = dir.siguiente(position)
@@ -67,29 +66,27 @@ object pikachu {
 	method liberarPokemon() {
 		heRescatadoAlPrisionero = true
 		tieneLlave = false
-		
 	}
-	
+
 	method esAtravesable() = true
-		method cambiarDireccion(nuevaPosicion){
-		if ( nuevaPosicion == position.left(1)){
+
+	method cambiarDireccion(nuevaPosicion) {
+		if (nuevaPosicion == position.left(1)) {
 			direccion = izquierda
-		}
-		else if ( nuevaPosicion == position.right(1)){
+		} else if (nuevaPosicion == position.right(1)) {
 			direccion = derecha
 		}
 	}
-	method interactuarConObjeto() {
 
+	method interactuarConObjeto() {
 		var objetos = game.colliders(self)
-			objetos+=game.getObjectsIn(direccion.siguiente(self.position()))		
-		
+		objetos += game.getObjectsIn(direccion.siguiente(self.position()))
 		if (objetos.isEmpty()) {
 			self.error("Aqui no hay nada")
 		}
-		 objetos.forEach({objeto=>objeto.action()})
-		 
+		objetos.forEach({ objeto => objeto.action()})
 	}
+
 }
 
 // ESTADOS DEL DETECTIVE
@@ -130,7 +127,7 @@ object muerto {
 
 	method activar() {
 		game.say(pikachu, "Perdí!")
-		game.schedule(2000, {game.stop()} )
+		game.schedule(3000, { game.stop()})
 	}
 
 }
@@ -146,7 +143,7 @@ object pokebola {
 
 	method colision(pokemon) {
 		pokemon.estado(ganador)
-		game.schedule(500, {game.removeVisual(self)} )
+		game.schedule(500, { game.removeVisual(self)})
 	}
 
 }
@@ -167,7 +164,7 @@ class Prisionero {
 		self.liberar()
 		llave.ocultar()
 		game.say(self, "Gracias por liberarme!")
-		game.schedule(2000, { game.removeVisual(self) })
+		game.schedule(2000, { game.removeVisual(self)})
 	}
 
 	method liberar()
@@ -231,99 +228,106 @@ class PrisioneroVulpix inherits Prisionero {
 
 // PRISIONERO PARA EL NIVEL 1
 object newSquirtle {
-	
+
 	method crear() {
-		const squirtle = new PrisioneroSquirtle(position = game.at(3,3))
+		const squirtle = new PrisioneroSquirtle(position = game.at(3, 3))
 		game.addVisual(squirtle)
 	}
-	
+
 }
 
 // PRISIONERO PARA EL NIVEL 2
 object newEvee {
-	
+
 	method crear() {
-		const evee = new PrisioneroEvee(position = game.at(2,2))
+		const evee = new PrisioneroEvee(position = game.at(2, 2))
 		game.addVisual(evee)
 	}
-	
+
 }
 
 // PRISIONERO PARA EL NIVEL 3
 object newPidgeot {
-	
+
 	method crear() {
-		const pidgeot = new PrisioneroPidgeot(position = game.at(2,3))
+		const pidgeot = new PrisioneroPidgeot(position = game.at(2, 3))
 		game.addVisual(pidgeot)
 	}
-	
+
 }
 
 // PRISIONERO PARA EL NIVEL 4
 object newVulpix {
-	
+
 	method crear() {
-		const vulpix = new PrisioneroVulpix(position = game.at(1,3))
+		const vulpix = new PrisioneroVulpix(position = game.at(1, 3))
 		game.addVisual(vulpix)
 	}
-	
+
 }
 
 // PRISIONERO PARA EL NIVEL 5
 object newCharmander {
-	
+
 	method crear() {
-		const charmander = new PrisioneroCharmander(position = game.at(1,2))
+		const charmander = new PrisioneroCharmander(position = game.at(1, 2))
 		game.addVisual(charmander)
 	}
-	
+
 }
 
 /////EQUIPO ROCKET
 class EquipoRocket {
-	
+
 	const escenario = tablero
 	const property danio = 150
 	var property position
-	var property direccion	
+	var property direccion
 
 	method image() = "equipo-rocket-"
-	
+
 	method colision(pokemon) {
 		pokemon.recibirDanio(self)
 	}
-	
+
 	method esAtravesable() {
 		return true
 	}
-	
+
 	method caminar() {
 		self.validarDireccion()
 		self.position(direccion.siguiente(self.position()))
 	}
-	
-	method validarDireccion(){
-		if(not self.puedeMover(direccion)){
+
+	method validarDireccion() {
+		if (not self.puedeMover(direccion)) {
 			direccion = direccion.opuesto()
 		}
 	}
-	
+
 	method puedeMover(dir) {
 		return escenario.puedeIr(self.position(), dir)
 	}
+
 }
 
-class Jessie inherits EquipoRocket{
-
-	override method direccion() = derecha
+class Jessie inherits EquipoRocket {
 
 	override method image() = super() + "jessie.png"
-}
-
-class James inherits EquipoRocket{
-
-	override method direccion() = arriba
-
-	override method image() =  super() + "james.png"
 
 }
+
+class James inherits EquipoRocket {
+
+	override method image() = super() + "james.png"
+
+}
+
+class Meowth inherits EquipoRocket {
+
+	override method danio() = 75
+
+	override method image() = super() + "meowth.png"
+
+}
+
