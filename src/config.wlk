@@ -27,5 +27,6 @@ object config {
 	method frutas() {
 		game.onTick(2000, "CREAR FRUTA", { frutaManager.nuevaFruta() })
 	}
+	
 }
 
