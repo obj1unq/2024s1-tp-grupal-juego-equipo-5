@@ -373,6 +373,7 @@ class Cofre inherits Articulo {
 	}
 	
 }
+
 object llave {
 	var property position
 	method image(){

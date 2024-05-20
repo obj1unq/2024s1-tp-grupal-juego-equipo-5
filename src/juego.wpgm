@@ -7,8 +7,9 @@ import wollok.game.*
 
 program juego {
 	
-	//const james = new James(position=game.at(9,5), direccion=arriba)
-	const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
+	//const james  = new James(position=game.at(9,5), direccion=arriba)
+	//const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
+	const meowth = new Meowth(position=game.at(3,5), direccion=izquierda)
 	
 	const puerta1 = new Puerta(position=game.at(2,8))
 	const puerta2 = new Puerta(position=game.at(9,4))
@@ -20,9 +21,8 @@ program juego {
 	const cofre1 = new Cofre(position=game.at(3,10), contenido = llave)
 	const cofre2 = new Cofre(position=game.at(16,3))
 	const cofre3 = new Cofre(position=game.at(9,10))
-	const cofre4 = new Cofre(position=game.at(13,11))
-	const cofresEscenario = [cofre1,cofre2,cofre3,cofre4]
-	cofresEscenario.forEach({cofre => game.addVisual(cofre)})
+	const cofresEscenario = [cofre1,cofre2,cofre3]
+	
 	
 	const pinche1 = new Pinche(position=game.at(8,3))
 	const pinche2 = new Pinche(position=game.at(16,9))
@@ -74,14 +74,18 @@ program juego {
 	game.addVisual(pinche3)
 	////////ANOTADOR<-----
 	anotador.generarVisuales()
-	/*game.addVisual(iconPikachu)
-	game.addVisual(iconCorazonPikachu)*/
+	//game.addVisual(iconPikachu)
+	//game.addVisual(iconCorazonPikachu)
+	
+	cofresEscenario.forEach({cofre => game.addVisual(cofre)})
 	
 	//game.addVisual(james)
-	game.addVisual(jessie)
+	//game.addVisual(jessie)
+	game.addVisual(meowth)
 	
-	//game.onTick(500, "CUSTODIA 1", {james.caminar()} )
-	game.onTick(400, "CUSTODIA 2", {jessie.caminar()} )
+	//game.onTick(200, "CUSTODIA 2", {james.caminar()}  )
+	//game.onTick(400, "CUSTODIA 3", {jessie.caminar()} )
+	game.onTick(300, "CUSTODIA 1", {meowth.caminar()} )
 	
 	newEvee.crear()
 //	newCharmander.crear()
