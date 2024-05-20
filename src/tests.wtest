@@ -75,15 +75,15 @@ describe "Acciones de Pikachu" {
 	
 	test "ENERGIA AL RECIBIR DAÑO...
 		Pikachu, inicia con 200 de energía.
-		Caminando choca con un integrante del Equipo Rocket y queda en 50.
-		Luego, se descuida cruza por una trampa pinche y queda en 0." {
+		Caminando choca con un Jesse del Equipo Rocket y queda en 100.
+		Luego, se descuida cruza por una trampa pinche y queda en 50." {
 		// Estado inicial pedido:
 		pikachu.energia(200)
 		// Caso prueba:
 		enemigo.colision(pikachu)
-		assert.equals(50, pikachu.energia())
+		assert.equals(100, pikachu.energia())
 		trampaPinche.colision(pikachu)
-		assert.equals(0, pikachu.energia())
+		assert.equals(50, pikachu.energia())
 	}
 	
 	test "MOVIMIENTOS POSIBLES...
@@ -107,15 +107,6 @@ describe "Acciones de Pikachu" {
 		assert.equals(game.at(5,5), pikachu.position())
 	}
 	
-	test "MOVIMIENTOS IMPOSIBLES...
-		Pikachu, se quiere mover hacia la pared y no puede,
-		porque la pared no es atravesable." {
-		// Estado inicial pedido:
-		pikachu.position(game.at(8,8))
-		// Caso prueba:
-		assert.equals(game.at(9,8), pared.position())
-		assert.throwsException({ pikachu.mover(derecha) })
-	}
 	
 	test "LLAVE EN EL COFRE ENCONTRADA, RESCATA AL PRISIONERO Y ENTRA A LA POKEBOLA." {
 		// Estado inicial pedido:

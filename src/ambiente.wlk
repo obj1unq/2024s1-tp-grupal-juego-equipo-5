@@ -396,7 +396,7 @@ object llave {
 	}
 
 	method action() {
-		game.say(pikachu, "Si!, ayudemos a nuestro amigo")
+		game.say(pikachu, "Si!, la encontramos")
 		self.cambiarVisual()
 		pikachu.obtenerLlave()
 	}
@@ -427,7 +427,7 @@ class Atravesable {
 	method esAtravesable() = true
 
 	method image()
-
+	method action(){}
 }
 
 class Trampa inherits Atravesable {
@@ -442,6 +442,7 @@ class Pinche inherits Trampa {
 
 	override method colision(pokemon) {
 		pokemon.recibirDanio(self)
+		game.say(pokemon, "Ay! me dolió")
 		game.removeVisual(self)
 	}
 

@@ -42,60 +42,42 @@ object manzanaFactory {
 
 }
 
-class Banana {
-
-	const property energia = 50
-	const property image = "f.banana.png"
-	var property position = randomizer.emptyPosition()
-
-	method esAtravesable() {
-		return true
+class Banana inherits Fruta{
+	override method image() = "f.banana.png"
+	override method energia() = 50
+	override method mensaje(){
+		return "Qué rico!"
 	}
+}
 
+class Baya inherits Fruta{
+	override method image() = "f.baya.png"
+	override method energia() = -50
+	override method mensaje(){
+		return "Qué asco!"
+	}
+	
+}
+
+class Manzana inherits Fruta{
+	override method image() = "f.manzana.png"
+	override method energia() = 80
+	override method mensaje(){
+		return "Qué sabroso!"
+	}
+}
+class Fruta {
+	var property position = randomizer.emptyPosition()
+	
+	method energia()
+	method image()
+	method esAtravesable() = true
+	method action(){}
+	method mensaje()
 	method colision(pokemon) {
 		pokemon.comerFruta(self)
-		game.say(pokemon, "Qué rico!")
+		game.say(pokemon, self.mensaje())
 		frutaManager.frutas().remove(self)
 		game.removeVisual(self)
 	}
-
 }
-
-class Baya {
-
-	const property energia = -50
-	const property image = "f.baya.png"
-	var property position = randomizer.emptyPosition()
-
-	method esAtravesable() {
-		return true
-	}
-
-	method colision(pokemon) {
-		pokemon.comerFruta(self)
-		game.say(pokemon, "Qué asco!")
-		frutaManager.frutas().remove(self)
-		game.removeVisual(self)
-	}
-
-}
-
-class Manzana {
-
-	const property energia = 80
-	const property image = "f.manzana.png"
-	var property position = randomizer.emptyPosition()
-
-	method esAtravesable() {
-		return true
-	}
-
-	method colision(pokemon) {
-		pokemon.comerFruta(self)
-		game.say(pokemon, "Qué sabroso!")
-		frutaManager.frutas().remove(self)
-		game.removeVisual(self)
-	}
-
-}
-

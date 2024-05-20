@@ -12,7 +12,12 @@ object arriba {
 	method opuesto() {
 		return abajo
 	}
-
+	method anterior(){
+		return derecha
+	}
+	method siguiente(){
+		return izquierda
+	}
 }
 
 object abajo {
@@ -24,7 +29,12 @@ object abajo {
 	method opuesto() {
 		return arriba
 	}
-
+	method anterior(){
+		return izquierda
+	}
+	method siguiente(){
+		return derecha
+	}
 }
 
 object izquierda {
@@ -36,7 +46,12 @@ object izquierda {
 	method opuesto() {
 		return derecha
 	}
-
+	method anterior(){
+		return abajo
+	}
+	method siguiente(){
+		return arriba
+	}
 }
 
 object derecha {
@@ -48,7 +63,12 @@ object derecha {
 	method opuesto() {
 		return izquierda
 	}
-
+	method anterior(){
+		return arriba
+	}
+	method siguiente(){
+		return abajo
+	}
 }
 
 // TABLERO

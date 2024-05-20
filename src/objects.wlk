@@ -44,15 +44,10 @@ object pikachu {
 	}
 
 	method mover(dir) {
-		self.validarMover(dir)
-		position = dir.siguiente(position)
-		self.estado().aspecto(dir.toString())
-	}
-
-	method validarMover(dir) {
-		if (not self.puedeMover(dir)) {
-			self.error("No puedo ir a " + dir)
+		if (self.puedeMover(dir)) {
+			position = dir.siguiente(position) 
 		}
+		self.estado().aspecto(dir.toString())
 	}
 
 	method puedeMover(dir) {
@@ -70,22 +65,21 @@ object pikachu {
 
 	method esAtravesable() = true
 
-	method cambiarDireccion(nuevaPosicion) {
-		if (nuevaPosicion == position.left(1)) {
-			direccion = izquierda
-		} else if (nuevaPosicion == position.right(1)) {
-			direccion = derecha
-		}
-	}
-
 	method interactuarConObjeto() {
-		var objetos = game.colliders(self)
-		objetos += game.getObjectsIn(direccion.siguiente(self.position()))
+		const posiciones = #{
+        direccion.siguiente(self.position()), direccion.opuesto().siguiente(self.position()), 
+       	direccion.anterior().siguiente(self.position()),
+       	direccion.siguiente().siguiente(self.position()) }
+    
+    	const objetos = posiciones.flatMap({pos => game.getObjectsIn(pos)})	
+		
 		if (objetos.isEmpty()) {
 			self.error("Aqui no hay nada")
 		}
-		objetos.forEach({ objeto => objeto.action()})
+		objetos.forEach({objeto=>objeto.action()})
+		 
 	}
+
 
 }
 
@@ -168,7 +162,7 @@ class Prisionero {
 	}
 
 	method liberar()
-
+	method action(){}
 }
 
 // PRISIONERO: NIVEL 1
@@ -235,9 +229,9 @@ object prisioneroCharmander inherits Prisionero {
 class EquipoRocket {
 
 	const escenario = tablero
-	const property danio = 150
-	var property position
 	var property direccion
+	var property position
+	method danio()  
 
 	method image() = "equipo-rocket-"
 
@@ -267,13 +261,13 @@ class EquipoRocket {
 }
 
 class Jessie inherits EquipoRocket {
-
+	override method danio() = 150
 	override method image() = super() + "jessie.png"
 
 }
 
 class James inherits EquipoRocket {
-
+	override method danio() = 100
 	override method image() = super() + "james.png"
 
 }
