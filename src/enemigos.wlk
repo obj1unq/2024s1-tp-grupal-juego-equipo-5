@@ -5,11 +5,13 @@ import randomizer.*
 import wollok.game.*
 
 // AMBIENTACION CON COLISIONES
-class Enemigo {
+class EquipoRocket {
 
-	const escenario = tablero
 	var property position
 
+	method action(){
+	}
+	
 	method colision(pokemon) {
 		pokemon.recibirDanio(self)
 	}
@@ -18,24 +20,19 @@ class Enemigo {
 	
 	method esAtravesable() = true
 
-	method image()
+	method image() = "equipo-rocket-" + self.nombre() + ".png"
 	
-	method mover() {}
-	
-	method action(){}
+	method nombre()
 	
 }
 
-
-
 /////EQUIPO ROCKET
-class EquipoRocket inherits Enemigo {
+class EquipoRocketConMovimiento inherits EquipoRocket {
 
+	const escenario = tablero
 	var property direccion
-	  
-	override method image() = "equipo-rocket-"
 
-	override method mover() {
+	method mover() {
 		self.validarDireccion()
 		self.position(direccion.siguiente(self.position()))
 	}
@@ -52,33 +49,37 @@ class EquipoRocket inherits Enemigo {
 	
 }
 
-class Jessie inherits EquipoRocket {
+class Jessie inherits EquipoRocketConMovimiento {
+	
 	override method danio() = 150
-	override method image() = super() + "jessie.png"
+	
+	override method nombre() = "jessie"
 
 }
 
-class James inherits EquipoRocket {
+class James inherits EquipoRocketConMovimiento {
+	
 	override method danio() = 100
-	override method image() = super() + "james.png"
+	
+	override method nombre() = "james"
 
 }
 
-class Meowth inherits EquipoRocket {
+class Meowth inherits EquipoRocketConMovimiento {
 
 	override method danio() = 75
 
-	override method image() = super() + "meowth.png"
+	override method nombre() = "meowth"
 
 }
 
-class Daga inherits EquipoRocket {
+class Daga inherits EquipoRocketConMovimiento {
 	
 	var property inicial = position
 		
 	override method danio()  = 30
 
-	override method image() = "trampa-daga.png"
+	override method nombre() = "daga"
 
 	override method mover() {
 		if (not self.puedeMover(direccion)) {
@@ -90,7 +91,7 @@ class Daga inherits EquipoRocket {
 	
 }
 
-class Pinche inherits Enemigo {
+class Pinche inherits EquipoRocket {
 
 	override method colision(pokemon){ 
 		super(pokemon) 
@@ -99,8 +100,7 @@ class Pinche inherits Enemigo {
 	
 	override method danio() = 50
 
-	override method image() = "trampa-pinches.png"
-
+	override method nombre() = "pinche"
+	
 }
-
 

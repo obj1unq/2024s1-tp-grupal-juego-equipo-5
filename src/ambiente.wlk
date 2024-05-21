@@ -1,5 +1,4 @@
 import alimentosFrutales.*
-import enemigos.*
 import objects.*
 import posicionamiento.*
 import randomizer.*
@@ -213,7 +212,7 @@ object nivelManager {
 
 }
 
-// VISOR
+// BARRA DE ESTADO ACTUAL DE PIKACHU
 object anotador {
 
 	method generarVisuales() {
@@ -240,7 +239,7 @@ object iconCorazonPikachu {
 	const property position = game.at(1, 12)
 	const estados = #{ vacio, cuarto, medio, trescuartos, lleno }
 
-	method image() = "corazon-" + self.estadoActualDelCorazon().porcentaje() + ".png"
+	method image() = "corazon-" + self.estadoActualDelCorazon().toString() + ".png"
 
 	method text() = pikachu.energia().toString()
 
@@ -250,14 +249,12 @@ object iconCorazonPikachu {
 
 }
 
-// ESTADOS DEL CORAZON
+// ESTADOS DEL CORAZON DE PIKACHU
 object vacio {
 
 	method estaEnPorcentaje(energia) {
-		return 0
+		return energia == 0
 	}
-	
-	method porcentaje() = "vacio"
 
 }
 
@@ -266,8 +263,6 @@ object cuarto {
 	method estaEnPorcentaje(energia) {
 		return energia.between(1, 150)
 	}
-	
-	method porcentaje() = "cuarto"
 
 }
 
@@ -276,8 +271,6 @@ object medio {
 	method estaEnPorcentaje(energia) {
 		return energia.between(151, 300)
 	}
-	
-	method porcentaje() = "medio"
 
 }
 
@@ -286,8 +279,6 @@ object trescuartos {
 	method estaEnPorcentaje(energia) {
 		return energia.between(301, 450)
 	}
-	
-	method porcentaje() = "trescuartos"
 
 }
 
@@ -296,8 +287,6 @@ object lleno {
 	method estaEnPorcentaje(energia) {
 		return energia.between(451, 600)
 	}
-	
-	method porcentaje() = "lleno"
 
 }
 
@@ -314,7 +303,6 @@ class Articulo {
 	}
 
 }
-
 
 // AMBIENTACION SIN COLISIONES PERO CON ACCION
 class Cofre inherits Articulo {
@@ -373,14 +361,13 @@ object llave {
 }
 
 // ARREGLAR, HAY QUE MODIFICAR QUE SEA ATRAVESABLE PORQUE VA A TENER UN INTERRUMPOR
-
 class Puerta inherits Articulo {
 
 	method colision(pokemon) {
 	}
-	
+
 	override method esAtravesable() = true
-	
+
 	override method image() = "puerta.png"
 
 }

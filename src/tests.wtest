@@ -9,15 +9,15 @@ import wollok.game.*
 describe "Acciones de Pikachu" {
 	
 	// FRUTAS
-	const manzana = new Manzana()
 	const banana  = new Banana()
-	const baya    = new Baya()
+	const manzana = new Manzana()
+	const uva    = new Uva()
 	// ENEMIGO EJEMPLIFICADOR
 	const enemigo = new James(position = game.at(10,1), direccion = arriba)
 	// AMBIENTE
 	const cofre = new Cofre(position = game.at(7,7))
 	const pared = new Pared(position = game.at(9,8))
-	const trampaPinche = new Pinche(position = game.at(9,1))
+	const pinche = new Pinche(position = game.at(9,1))
 	
 	method initialize() {
 		game.clear()
@@ -27,22 +27,22 @@ describe "Acciones de Pikachu" {
 		game.addVisual(pokebola)
 		game.addVisual(prisioneroEvee)
 		game.addVisual(pared)
-		game.addVisual(trampaPinche)
+		game.addVisual(pinche)
 		game.addVisual(pikachu)
 	}
 	
 	test "ENERGIA AL COMER FRUTAS...
 		Pikachu, inicia con 100 de energía.
-		Come un anana y adquiere su energía y queda en 180.
-		Come una baya y adquiere su energía negativa y queda en 130.
-		Come un platano y adquiere su energía y queda en 180." {
+		Come una manzana y adquiere su energía y queda en 180.
+		Come una uva y adquiere su energía negativa y queda en 130.
+		Come una banana y adquiere su energía y queda en 180." {
 		// Estado inicial pedido:
 		pikachu.energia(100)
 		// Caso prueba:
 		assert.equals(100, pikachu.energia())
 		pikachu.comerFruta(manzana)
 		assert.equals(180, pikachu.energia())
-		pikachu.comerFruta(baya)
+		pikachu.comerFruta(uva)
 		assert.equals(130, pikachu.energia())
 		pikachu.comerFruta(banana)
 		assert.equals(180, pikachu.energia())
@@ -65,11 +65,11 @@ describe "Acciones de Pikachu" {
 	
 	test "ENERGIA AL COMER FRUTAS PARA MORIR...
 		Pikachu, inicia con 0 de energía.
-		Caminando come una baya y queda en -50. Por esa razón, muere." {
+		Caminando come una uva y queda en -50. Por esa razón, muere." {
 		// Estado inicial pedido:
 		pikachu.energia(0)
 		// Caso prueba:
-		pikachu.comerFruta(baya)
+		pikachu.comerFruta(uva)
 		assert.equals(-50, pikachu.energia())
 		assert.equals(muerto, pikachu.estado())
 	}
@@ -83,7 +83,7 @@ describe "Acciones de Pikachu" {
 		// Caso prueba:
 		enemigo.colision(pikachu)
 		assert.equals(100, pikachu.energia())
-		trampaPinche.colision(pikachu)
+		pinche.colision(pikachu)
 		assert.equals(50, pikachu.energia())
 	}
 	
@@ -108,6 +108,16 @@ describe "Acciones de Pikachu" {
 		assert.equals(game.at(5,5), pikachu.position())
 	}
 	
+	test "MOVIMIENTOS IMPOSIBLES...
+		Pikachu, se quiere mover hacia la pared y no puede, se queda en su posicion actual
+		porque la pared no es atravesable." {
+		// Estado inicial pedido:
+		pikachu.position(game.at(8,8))
+		// Caso prueba:
+		assert.equals(game.at(9,8), pared.position())
+		pikachu.mover(derecha)
+		assert.equals(game.at(8,8), pikachu.position())
+	}
 	
 	test "LLAVE EN EL COFRE ENCONTRADA, RESCATA AL PRISIONERO Y ENTRA A LA POKEBOLA." {
 		// Estado inicial pedido:
