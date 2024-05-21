@@ -40,6 +40,7 @@ object pikachu {
 
 	method recibirDanio(enemigo) {
 		energia -= enemigo.danio()
+		game.say(self, "Ay! me dolió")
 		self.siEstaAgotadoMuere()
 	}
 

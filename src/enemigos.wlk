@@ -12,7 +12,6 @@ class Enemigo {
 
 	method colision(pokemon) {
 		pokemon.recibirDanio(self)
-		game.say(pokemon, "Ay! me dolió")
 	}
 	
 	method danio()
@@ -22,10 +21,6 @@ class Enemigo {
 	method image()
 	
 	method mover() {}
-	
-	method puedeMover(dir) {
-		return escenario.puedeIr(self.position(), dir)
-	}
 	
 	method action(){}
 	
@@ -51,6 +46,10 @@ class EquipoRocket inherits Enemigo {
 		}
 	}
 	
+	method puedeMover(dir) {
+		return escenario.puedeIr(self.position(), dir)
+	}
+	
 }
 
 class Jessie inherits EquipoRocket {
@@ -73,23 +72,13 @@ class Meowth inherits EquipoRocket {
 
 }
 
-class Trampa inherits Enemigo {
-
-	method nombre()
-	
-	override method image() = "trampa-" + self.nombre() +".png"
-
-}
-
-class Daga inherits Trampa {
+class Daga inherits EquipoRocket {
 	
 	var property inicial = position
-	
-	var property direccion
-	
+		
 	override method danio()  = 30
 
-	override method nombre() = "daga"
+	override method image() = "trampa-daga.png"
 
 	override method mover() {
 		if (not self.puedeMover(direccion)) {
@@ -101,7 +90,7 @@ class Daga inherits Trampa {
 	
 }
 
-class Pinche inherits Trampa {
+class Pinche inherits Enemigo {
 
 	override method colision(pokemon){ 
 		super(pokemon) 
@@ -110,7 +99,7 @@ class Pinche inherits Trampa {
 	
 	override method danio() = 50
 
-	override method nombre() = "pinches"
+	override method image() = "trampa-pinches.png"
 
 }
 
