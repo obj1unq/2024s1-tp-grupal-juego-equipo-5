@@ -14,11 +14,6 @@ program juego {
 	//const james  = new James(position=game.at(9,5), direccion=arriba)
 	//const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
 	
-	const cofre1 = new Cofre(position=game.at(3,10), contenido = llave)
-	const cofre2 = new Cofre(position=game.at(16,3))
-	const cofre3 = new Cofre(position=game.at(9,10))
-	const cofres = [cofre1, cofre2, cofre3]
-	
 	const pinche1 = new Pinche(position=game.at(8,3))
 	const pinche2 = new Pinche(position=game.at(16,9))
 	const pinche3 = new Pinche(position=game.at(3,9))
@@ -28,7 +23,12 @@ program juego {
 	
 	const daga = new Daga(position=game.at(9,7), direccion=izquierda)
 
-	const trampas = [pinche1, pinche2, pinche3, pinche4, pinche5, pinche6, daga]
+	const enemigos = [meowth, pinche1, pinche2, pinche3, pinche4, pinche5, pinche6, daga]
+	
+	const cofre1 = new Cofre(position=game.at(3,10), contenido = llave)
+	const cofre2 = new Cofre(position=game.at(16,3))
+	const cofre3 = new Cofre(position=game.at(9,10))
+	const cofres = [cofre1, cofre2, cofre3]
 	
 	const puerta1 = new Puerta(position=game.at(2,8))
 	const puerta2 = new Puerta(position=game.at(9,4))
@@ -47,10 +47,9 @@ program juego {
 	nivelManager.generarNivel()
 	//mapaDeParedesDelNivel1.agregar()
 	
+	game.addVisual(pikachu)
 	game.addVisual(prisioneroEvee)
 	game.addVisual(pokebola)
-	
-	game.addVisual(pikachu)
 	
 	// ANOTADOR
 	anotador.generarVisuales()
@@ -61,12 +60,8 @@ program juego {
 	// FALTA UN VISUALIZADOR MANAGER - (para sacar todas las visuales de cada nivel)
 	
 	cofres.forEach({cofre => game.addVisual(cofre)})
-	trampas.forEach({trampa => game.addVisual(trampa)})
+	enemigos.forEach({enemigo => game.addVisual(enemigo)})
 	puertas.forEach({puerta => game.addVisual(puerta)})
-	
-	game.addVisual(meowth)
-	//game.addVisual(james)
-	//game.addVisual(jessie)
 	
 	// FALTA UN CONFIG. CUSTODIA DEL EQUIPO ROCKET - (por cada nivel)
 	

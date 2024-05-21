@@ -24,7 +24,6 @@ object pikachu {
 
 	method image() = estado.image()
 
-	// method text() = energia.toString()
 	method textColor() = "FF00FF"
 
 	method comerFruta(fruta) {
@@ -85,45 +84,46 @@ object pikachu {
 }
 
 // ESTADOS DEL DETECTIVE
-object caminando {
 
-	var property aspecto = "derecha"
+class EstadoDetective {
+	
+	var property aspecto = ""
+	
+	method activar() {}
+	
+	method image()
+	
+	method puedeMover() = false
+	
+}
+object caminando inherits EstadoDetective {
 
-	method image() = "caminando-" + aspecto + ".png"
+	override method aspecto() = "derecha"
 
-	method puedeMover() = true
+	override method image() = "caminando-" + self.aspecto() + ".png"
 
-	method activar() {
-	}
+	override method puedeMover() = true
 
 }
 
-object ganador {
-
-	var property aspecto = ""
-
-	method image() = "ganador.png"
-
-	method puedeMover() = false
-
-	method activar() {
+object ganador inherits EstadoDetective {
+	
+	override method activar() {
 		game.say(pikachu, "Lo logré!")
 	}
+	
+	override method image() = "ganador.png"
 
 }
 
-object muerto {
+object muerto inherits EstadoDetective {
 
-	var property aspecto = ""
-
-	method image() = "muerto.png"
-
-	method puedeMover() = false
-
-	method activar() {
+	override method activar() {
 		game.say(pikachu, "Perdí!")
-		game.schedule(3000, { game.stop()})
+		game.schedule(3000, {game.stop()})
 	}
+	
+	override method image() = "muerto.png"
 
 }
 
@@ -147,12 +147,9 @@ object pokebola {
 class Prisionero {
 
 	const property rescatador = pikachu
-
-	method position()
-
-	method image()
-
-	method esAtravesable() = rescatador.tieneLlave()
+	var property preso = true
+	
+	method action(){}
 
 	method colision(pokemon) {
 		pokemon.liberarPokemon()
@@ -161,20 +158,33 @@ class Prisionero {
 		game.say(self, "Gracias por liberarme!")
 		game.schedule(2000, { game.removeVisual(self)})
 	}
+	
+	method esAtravesable() = rescatador.tieneLlave()
+	
+	method image() {
+		return if (not self.preso()) {
+			"libre-" + self.nombre() + ".png"
+		} else {
+			"preso-" + self.nombre() + ".png"
+		}
+	}  
 
-	method liberar()
-	method action(){}
+	method liberar() {
+		preso = false
+	}
+	
+	method nombre()
+	
+	method position()
+	
 }
 
 // PRISIONERO: NIVEL 1
 object prisioneroEvee inherits Prisionero {
 
 	const property position = game.at(2, 2)
-	var property image = "preso-evee.png"
-
-	override method liberar() {
-		image = "libre-evee.png"
-	}
+	
+	override method nombre() = "evee"
 
 }
 
@@ -182,23 +192,17 @@ object prisioneroEvee inherits Prisionero {
 object prisioneroPidgeot inherits Prisionero {
 
 	const property position = game.at(6, 4)
-	var property image = "preso-pidgeot.png"
-
-	override method liberar() {
-		image = "libre-pidgeot.png"
-	}
-
+	
+	override method nombre() = "pidgeot"
+	
 }
 
 // PRISIONERO: NIVEL 3
 object prisioneroVulpix inherits Prisionero {
 
 	const property position = game.at(11, 1)
-	var property image = "preso-vulpix.png"
-
-	override method liberar() {
-		image = "libre-vulpix.png"
-	}
+	
+	override method nombre() = "vulpix"
 
 }
 
@@ -206,11 +210,8 @@ object prisioneroVulpix inherits Prisionero {
 object prisioneroSquirtle inherits Prisionero {
 
 	const property position = game.at(16, 7)
-	var property image = "preso-squirtle.png"
-
-	override method liberar() {
-		image = "libre-squirtle.png"
-	}
+	
+	override method nombre() = "squirtle"
 
 }
 
@@ -218,11 +219,8 @@ object prisioneroSquirtle inherits Prisionero {
 object prisioneroCharmander inherits Prisionero {
 
 	const property position = game.at(4, 5)
-	var property image = "preso-charmander.png"
-
-	override method liberar() {
-		image = "libre-charmander.png"
-	}
+	
+	override method nombre() = "charmander"
 
 }
 
