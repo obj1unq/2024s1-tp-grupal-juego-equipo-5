@@ -1,6 +1,7 @@
 import alimentosFrutales.*
 import ambiente.*
 import config.*
+import enemigos.*
 import posicionamiento.*
 import objects.*
 import wollok.game.*
@@ -39,18 +40,6 @@ program juego {
 	const puerta6 = new Puerta(position=game.at(4,7))
 	const puertas = [puerta1, puerta2, puerta3, puerta4, puerta5, puerta6]
 	
-//	const baniera = new Baniera(position = game.at(7, 10))
-//	const cama = new Cama(position = game.at(13, 1))
-//	const inodoro = new Inodoro(position = game.at(9, 8))
-//	const lavamanos = new Lavamanos(position = game.at(5, 9))
-//	const mesa = new Mesa(position = game.at(6, 3))
-//	const ropero = new Ropero(position = game.at(14, 3))
-//	const silla = new Silla(position = game.at(7, 3))
-//	const sillon = new Sillon(position = game.at(11, 9))
-//	const sofa = new Sofa(position = game.at(13, 10))
-//	// const ambiente = [baniera, cama, inodoro, lavamanos, mesa, ropero, silla, sillon, sofa]
-	
-	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	
 	game.boardGround("fondo-nivel1.png")
@@ -76,17 +65,15 @@ program juego {
 	cofres.forEach({cofre => game.addVisual(cofre)})
 	trampas.forEach({trampa => game.addVisual(trampa)})
 	puertas.forEach({puerta => game.addVisual(puerta)})
-	//ambiente.forEach({articulo => game.addVisual(articulo)})
 	
 	game.addVisual(meowth)
 	//game.addVisual(james)
 	//game.addVisual(jessie)
 	
-	//game.addVisual(daga)
 	// FALTA UN CONFIG. CUSTODIA DEL EQUIPO ROCKET - (por cada nivel)
 	
-	game.onTick(300, "CUSTODIA 1", {meowth.caminar()} ) 
-	game.onTick(600, "TRAMPA DAGA", {daga.mover()})
+	game.onTick(300, "CUSTODIA 1", {meowth.mover()} ) 
+	game.onTick(200, "TRAMPA DAGA", {daga.mover()})
 	//game.onTick(200, "CUSTODIA 2", {james.caminar()}  )
 	//game.onTick(400, "CUSTODIA 3", {jessie.caminar()} )
 	

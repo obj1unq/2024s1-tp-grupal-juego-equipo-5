@@ -1,4 +1,5 @@
 import alimentosFrutales.*
+import enemigos.*
 import objects.*
 import posicionamiento.*
 import randomizer.*
@@ -314,59 +315,6 @@ class Articulo {
 
 }
 
-class Baniera inherits Articulo {
-
-	override method image() = "baniera.png"
-
-}
-
-class Cama inherits Articulo {
-
-	override method image() = "cama.png"
-
-}
-
-class Inodoro inherits Articulo {
-
-	override method image() = "inodoro.png"
-
-}
-
-class Lavamanos inherits Articulo {
-
-	override method image() = "lavamanos.png"
-
-}
-
-class Mesa inherits Articulo {
-
-	override method image() = "mesa.png"
-
-}
-
-class Ropero inherits Articulo {
-
-	override method image() = "ropero.png"
-
-}
-
-class Silla inherits Articulo {
-
-	override method image() = "silla.png"
-
-}
-
-class Sillon inherits Articulo {
-
-	override method image() = "sillon.png"
-
-}
-
-class Sofa inherits Articulo {
-
-	override method image() = "sofa.png"
-
-}
 
 // AMBIENTACION SIN COLISIONES PERO CON ACCION
 class Cofre inherits Articulo {
@@ -402,9 +350,6 @@ object llave {
 		return "llave.png"
 	}
 
-	method colision() {
-	}
-
 	method action() {
 		game.say(pikachu, "Si!, la encontramos")
 		self.cambiarVisual()
@@ -427,76 +372,15 @@ object llave {
 
 }
 
-// AMBIENTACION CON COLISIONES
-class Atravesable {
+// ARREGLAR, HAY QUE MODIFICAR QUE SEA ATRAVESABLE PORQUE VA A TENER UN INTERRUMPOR
 
-	var property position
+class Puerta inherits Articulo {
 
-	method colision(pokemon)
-
-	method esAtravesable() = true
-
-	method image()
-	method action(){}
-}
-
-class Trampa inherits Atravesable {
-
-	override method colision(pokemon) {
-		pokemon.recibirDanio(self)
-		game.say(pokemon, "Ay! me dolió")
-	}
-
-	method danio()
-
-	override method image() = "trampa-"
-
-}
-
-class Daga inherits Trampa {
-	
-	const escenario = tablero
-	var property inicial = game.at(9,7)
-	
-	var property direccion
-	
-	override method danio()  = 30
-
-	override method image() = super() + "daga.png"
-
-	method mover() {
-		if (not self.puedeMover(direccion)) {
-			self.position(inicial)
-		} else {
-			self.position(direccion.siguiente(self.position()))		
-		}
-	}
-
-	method puedeMover(dir) {
-		return escenario.puedeIr(self.position(), dir)
+	method colision(pokemon) {
 	}
 	
-}
-
-
-
-class Pinche inherits Trampa {
-
-	override method colision(pokemon){ 
-		super(pokemon) 
-		game.removeVisual(self)
-	}
-	override method danio() = 50
-
-	override method image() = super() + "pinches.png"
-
-}
-
-class Puerta inherits Atravesable {
-
-	override method colision(pokemon) {
-	}
-
+	override method esAtravesable() = true
+	
 	override method image() = "puerta.png"
 
 }

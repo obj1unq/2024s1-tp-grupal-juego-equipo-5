@@ -1,6 +1,7 @@
 import ambiente.*
 import alimentosFrutales.*
 import config.*
+import enemigos.*
 import posicionamiento.*
 import objects.*
 import wollok.game.*
