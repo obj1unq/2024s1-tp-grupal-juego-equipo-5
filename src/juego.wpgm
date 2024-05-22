@@ -45,7 +45,6 @@ program juego {
 	config.dimensiones()
 	
 	nivelManager.generarNivel()
-	//mapaDeParedesDelNivel1.agregar()
 	
 	game.addVisual(pikachu)
 	game.addVisual(prisioneroEvee)
@@ -66,8 +65,6 @@ program juego {
 	// FALTA UN CONFIG. CUSTODIA DEL EQUIPO ROCKET - (por cada nivel)
 	
 	game.onTick(300, "CUSTODIA 1", {meowth.mover()} ) 
-	//game.onTick(200, "CUSTODIA 2", {james.caminar()}  )
-	//game.onTick(400, "CUSTODIA 3", {jessie.caminar()} )
 	game.onTick(200, "DAGA", {daga.mover()})
 	
 	config.teclas()
