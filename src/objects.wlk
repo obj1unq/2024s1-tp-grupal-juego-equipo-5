@@ -18,13 +18,11 @@ object pikachu {
 	method estado(estadoACambiar) {
 		if (estado != estadoACambiar) {
 			estado = estadoACambiar
-			estado.activar()
+			estado.activar(self)
 		}
 	}
 
 	method image() = estado.image()
-
-	method textColor() = "FF00FF"
 
 	method comerFruta(fruta) {
 		energia = (energia + fruta.energia()).min(600)
@@ -85,7 +83,7 @@ object caminando {
 
 	method puedeMover() = true
 
-	method activar() {
+	method activar(pokemon) {
 	}
 
 }
@@ -98,8 +96,8 @@ object ganador {
 
 	method puedeMover() = false
 
-	method activar() {
-		game.say(pikachu, "Lo logré!")
+	method activar(pokemon) {
+		game.say(pokemon, "Lo logré!")
 	}
 
 }
@@ -112,9 +110,9 @@ object muerto {
 
 	method puedeMover() = false
 
-	method activar() {
-		game.say(pikachu, "Perdí!")
-		game.schedule(3000, { game.stop()})
+	method activar(pokemon) {
+		game.say(pokemon, "Perdí!")
+		game.schedule(1000, { game.stop() })
 	}
 
 }

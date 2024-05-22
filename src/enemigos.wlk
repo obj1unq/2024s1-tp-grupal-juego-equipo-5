@@ -33,14 +33,10 @@ class EquipoRocketConMovimiento inherits EquipoRocket {
 	var property direccion
 
 	method mover() {
-		self.validarDireccion()
-		self.position(direccion.siguiente(self.position()))
-	}
-
-	method validarDireccion() {
 		if (not self.puedeMover(direccion)) {
 			direccion = direccion.opuesto()
 		}
+		self.position(direccion.siguiente(self.position()))
 	}
 	
 	method puedeMover(dir) {

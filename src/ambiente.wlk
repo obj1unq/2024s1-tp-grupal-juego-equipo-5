@@ -1,4 +1,5 @@
 import alimentosFrutales.*
+import enemigos.*
 import objects.*
 import posicionamiento.*
 import randomizer.*

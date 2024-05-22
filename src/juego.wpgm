@@ -11,8 +11,6 @@ program juego {
 	// FALTA UN NIVEL MANAGER - (para encargarse de las constantes de cada nivel)
 	 
 	const meowth = new Meowth(position=game.at(3,5), direccion=izquierda)
-	//const james  = new James(position=game.at(9,5), direccion=arriba)
-	//const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
 	
 	const pinche1 = new Pinche(position=game.at(8,3))
 	const pinche2 = new Pinche(position=game.at(16,9))
@@ -52,9 +50,6 @@ program juego {
 	
 	// ANOTADOR
 	anotador.generarVisuales()
-	//game.addVisual(iconPikachu)
-	//game.addVisual(iconCorazonPikachu)
-	
 	
 	// FALTA UN VISUALIZADOR MANAGER - (para sacar todas las visuales de cada nivel)
 	
@@ -64,8 +59,8 @@ program juego {
 	
 	// FALTA UN CONFIG. CUSTODIA DEL EQUIPO ROCKET - (por cada nivel)
 	
-	game.onTick(300, "CUSTODIA 1", {meowth.mover()} ) 
-	game.onTick(200, "DAGA", {daga.mover()})
+	game.onTick(400, "CUSTODIA 1", {meowth.mover()} ) 
+	game.onTick(300, "DAGA", {daga.mover()})
 	
 	config.teclas()
 	config.colisiones()
