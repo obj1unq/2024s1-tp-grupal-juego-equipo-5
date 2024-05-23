@@ -1,5 +1,5 @@
 import posicionamiento.*
-import objects.*
+import pokemons.*
 import randomizer.*
 import wollok.game.*
 

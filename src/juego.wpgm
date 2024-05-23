@@ -2,39 +2,34 @@ import alimentosFrutales.*
 import ambiente.*
 import config.*
 import enemigos.*
+import pokemons.*
 import posicionamiento.*
-import objects.*
+import transiciones.*
 import wollok.game.*
 
 program juego {
 	
-	// FALTA UN NIVEL MANAGER - (para encargarse de las constantes de cada nivel)
-	 
+	// Enemigos
 	const meowth = new Meowth(position=game.at(3,5), direccion=izquierda)
-	
 	const pinche1 = new Pinche(position=game.at(8,3))
 	const pinche2 = new Pinche(position=game.at(16,9))
 	const pinche3 = new Pinche(position=game.at(3,9))
 	const pinche4 = new Pinche(position=game.at(8,1))
 	const pinche5 = new Pinche(position=game.at(3,1))
 	const pinche6 = new Pinche(position=game.at(14,3))
-	
 	const daga = new Daga(position=game.at(9,7), direccion=izquierda)
-
 	const enemigos = [meowth, pinche1, pinche2, pinche3, pinche4, pinche5, pinche6, daga]
-	
+	// Ambiente
 	const cofre1 = new Cofre(position=game.at(3,10), contenido = llave)
 	const cofre2 = new Cofre(position=game.at(16,3))
 	const cofre3 = new Cofre(position=game.at(9,10))
-	const cofres = [cofre1, cofre2, cofre3]
-	
 	const puerta1 = new Puerta(position=game.at(2,8))
 	const puerta2 = new Puerta(position=game.at(9,4))
 	const puerta3 = new Puerta(position=game.at(16,6))
 	const puerta4 = new Puerta(position=game.at(11,4))
 	const puerta5 = new Puerta(position=game.at(5,1))
 	const puerta6 = new Puerta(position=game.at(4,7))
-	const puertas = [puerta1, puerta2, puerta3, puerta4, puerta5, puerta6]
+	const ambiente = [cofre1, cofre2, cofre3, puerta1, puerta2, puerta3, puerta4, puerta5, puerta6]
 	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	
@@ -53,9 +48,8 @@ program juego {
 	
 	// FALTA UN VISUALIZADOR MANAGER - (para sacar todas las visuales de cada nivel)
 	
-	cofres.forEach({cofre => game.addVisual(cofre)})
 	enemigos.forEach({enemigo => game.addVisual(enemigo)})
-	puertas.forEach({puerta => game.addVisual(puerta)})
+	ambiente.forEach({articulo => game.addVisual(articulo)})
 	
 	// FALTA UN CONFIG. CUSTODIA DEL EQUIPO ROCKET - (por cada nivel)
 	
@@ -67,4 +61,5 @@ program juego {
 	config.frutas()
 	
 	game.start()
+	
 }

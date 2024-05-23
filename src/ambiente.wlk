@@ -1,6 +1,6 @@
 import alimentosFrutales.*
 import enemigos.*
-import objects.*
+import pokemons.*
 import posicionamiento.*
 import randomizer.*
 import wollok.game.*
@@ -165,54 +165,6 @@ object mapaDeParedesDelNivel5 inherits MapaDeParedesDelNivel {
 
 }
 
-object nivelManager {
-
-	const niveles = [ mapaDeParedesDelNivel1, mapaDeParedesDelNivel2, mapaDeParedesDelNivel3, mapaDeParedesDelNivel4, mapaDeParedesDelNivel5 ]
-	var nivelActual = 0
-
-	method numeroDeNivel() = nivelActual + 1
-
-	method nivelActual() {
-		return niveles.get(nivelActual)
-	}
-
-	method aumentarNivelActual() {
-		self.validarQueExistenMasNiveles()
-		nivelActual++
-	}
-
-	method validarQueExistenMasNiveles() {
-		if (niveles.size() - 1 < nivelActual) {
-			self.error("No existen más niveles")
-		}
-	}
-
-	method quedanNiveles() = nivelActual < niveles.size() - 1
-
-	method reset() {
-		nivelActual = 0
-	}
-
-	method generarNivel() {
-		if (self.quedanNiveles()) {
-			game.clear()
-			self.nivelActual().agregar()
-		/*mapa.generar(levelManager.nivelActual())
-		 * self.agregarJugador()
-		 * self.generarEnemigosYAumentarDificultad()
-		 hud.add()*/
-		} else {
-			self.victoria()
-		}
-	}
-
-	method victoria() {
-		game.clear()
-	// game.addVisual(victoria)
-	}
-
-}
-
 // BARRA DE ESTADO ACTUAL DE PIKACHU
 object anotador {
 
@@ -229,7 +181,7 @@ object anotador {
 
 object iconPikachu {
 
-	const property position = game.at(0, 12)
+	const property position = game.at(0, game.height() - 1)
 
 	method image() = "icon-Pikachu.png"
 
@@ -237,7 +189,7 @@ object iconPikachu {
 
 object iconCorazonPikachu {
 
-	const property position = game.at(1, 12)
+	const property position = game.at(1, game.height() - 1)
 	const estados = #{ vacio, cuarto, medio, trescuartos, lleno }
 
 	method image() = "corazon-" + self.estadoActualDelCorazon().toString() + ".png"
@@ -254,7 +206,7 @@ object iconCorazonPikachu {
 object vacio {
 
 	method estaEnPorcentaje(energia) {
-		return energia == 0
+		return energia <= 0
 	}
 
 }
@@ -347,7 +299,7 @@ object llave {
 
 	method cambiarVisual() {
 		self.ocultar()
-		position = game.at(2, 12)
+		position = game.at(2, game.height() - 1)
 		self.mostrar()
 	}
 
@@ -369,7 +321,7 @@ class Puerta inherits Articulo {
 
 	override method esAtravesable() = true
 
-	override method image() = "puerta.png"
+	override method image() = "puerta-abierta.png"
 
 }
 
