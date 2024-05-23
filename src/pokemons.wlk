@@ -18,14 +18,11 @@ object pikachu {
 	method estado(estadoACambiar) {
 		if (estado != estadoACambiar) {
 			estado = estadoACambiar
-			estado.activar()
+			estado.activar(self)
 		}
 	}
 
 	method image() = estado.image()
-
-	// method text() = energia.toString()
-	method textColor() = "FF00FF"
 
 	method comerFruta(fruta) {
 		energia = (energia + fruta.energia()).min(600)
@@ -40,12 +37,13 @@ object pikachu {
 
 	method recibirDanio(enemigo) {
 		energia -= enemigo.danio()
+		game.say(self, "Ay! me dolió")
 		self.siEstaAgotadoMuere()
 	}
 
 	method mover(dir) {
 		if (self.puedeMover(dir)) {
-			position = dir.siguiente(position) 
+			position = dir.siguiente(position)
 		}
 		self.estado().aspecto(dir.toString())
 	}
@@ -66,20 +64,13 @@ object pikachu {
 	method esAtravesable() = true
 
 	method interactuarConObjeto() {
-		const posiciones = #{
-        direccion.siguiente(self.position()), direccion.opuesto().siguiente(self.position()), 
-       	direccion.anterior().siguiente(self.position()),
-       	direccion.siguiente().siguiente(self.position()) }
-    
-    	const objetos = posiciones.flatMap({pos => game.getObjectsIn(pos)})	
-		
+		const posiciones = #{ direccion.siguiente(self.position()), direccion.opuesto().siguiente(self.position()), direccion.anterior().siguiente(self.position()), direccion.siguiente().siguiente(self.position()) }
+		const objetos = posiciones.flatMap({ pos => game.getObjectsIn(pos) })
 		if (objetos.isEmpty()) {
 			self.error("Aqui no hay nada")
 		}
-		objetos.forEach({objeto=>objeto.action()})
-		 
+		objetos.forEach({ objeto => objeto.action()})
 	}
-
 
 }
 
@@ -92,7 +83,7 @@ object caminando {
 
 	method puedeMover() = true
 
-	method activar() {
+	method activar(pokemon) {
 	}
 
 }
@@ -105,8 +96,8 @@ object ganador {
 
 	method puedeMover() = false
 
-	method activar() {
-		game.say(pikachu, "Lo logré!")
+	method activar(pokemon) {
+		game.say(pokemon, "Lo logré!")
 	}
 
 }
@@ -119,9 +110,9 @@ object muerto {
 
 	method puedeMover() = false
 
-	method activar() {
-		game.say(pikachu, "Perdí!")
-		game.schedule(3000, { game.stop()})
+	method activar(pokemon) {
+		game.say(pokemon, "Perdí!")
+		game.schedule(1000, { game.stop() })
 	}
 
 }
@@ -146,12 +137,10 @@ object pokebola {
 class Prisionero {
 
 	const property rescatador = pikachu
+	var property preso = true
 
-	method position()
-
-	method image()
-
-	method esAtravesable() = rescatador.tieneLlave()
+	method action() {
+	}
 
 	method colision(pokemon) {
 		pokemon.liberarPokemon()
@@ -161,19 +150,32 @@ class Prisionero {
 		game.schedule(2000, { game.removeVisual(self)})
 	}
 
-	method liberar()
-	method action(){}
+	method esAtravesable() = rescatador.tieneLlave()
+
+	method image() {
+		return if (not self.preso()) {
+			"libre-" + self.nombre() + ".png"
+		} else {
+			"preso-" + self.nombre() + ".png"
+		}
+	}
+
+	method liberar() {
+		preso = false
+	}
+
+	method nombre()
+
+	method position()
+
 }
 
 // PRISIONERO: NIVEL 1
 object prisioneroEvee inherits Prisionero {
 
 	const property position = game.at(2, 2)
-	var property image = "preso-evee.png"
 
-	override method liberar() {
-		image = "libre-evee.png"
-	}
+	override method nombre() = "evee"
 
 }
 
@@ -181,11 +183,8 @@ object prisioneroEvee inherits Prisionero {
 object prisioneroPidgeot inherits Prisionero {
 
 	const property position = game.at(6, 4)
-	var property image = "preso-pidgeot.png"
 
-	override method liberar() {
-		image = "libre-pidgeot.png"
-	}
+	override method nombre() = "pidgeot"
 
 }
 
@@ -193,11 +192,8 @@ object prisioneroPidgeot inherits Prisionero {
 object prisioneroVulpix inherits Prisionero {
 
 	const property position = game.at(11, 1)
-	var property image = "preso-vulpix.png"
 
-	override method liberar() {
-		image = "libre-vulpix.png"
-	}
+	override method nombre() = "vulpix"
 
 }
 
@@ -205,11 +201,8 @@ object prisioneroVulpix inherits Prisionero {
 object prisioneroSquirtle inherits Prisionero {
 
 	const property position = game.at(16, 7)
-	var property image = "preso-squirtle.png"
 
-	override method liberar() {
-		image = "libre-squirtle.png"
-	}
+	override method nombre() = "squirtle"
 
 }
 
@@ -217,66 +210,8 @@ object prisioneroSquirtle inherits Prisionero {
 object prisioneroCharmander inherits Prisionero {
 
 	const property position = game.at(4, 5)
-	var property image = "preso-charmander.png"
 
-	override method liberar() {
-		image = "libre-charmander.png"
-	}
-
-}
-
-/////EQUIPO ROCKET
-class EquipoRocket {
-
-	const escenario = tablero
-	var property direccion
-	var property position
-	method danio()  
-
-	method image() = "equipo-rocket-"
-
-	method colision(pokemon) {
-		pokemon.recibirDanio(self)
-	}
-
-	method esAtravesable() {
-		return true
-	}
-
-	method caminar() {
-		self.validarDireccion()
-		self.position(direccion.siguiente(self.position()))
-	}
-
-	method validarDireccion() {
-		if (not self.puedeMover(direccion)) {
-			direccion = direccion.opuesto()
-		}
-	}
-
-	method puedeMover(dir) {
-		return escenario.puedeIr(self.position(), dir)
-	}
-
-}
-
-class Jessie inherits EquipoRocket {
-	override method danio() = 150
-	override method image() = super() + "jessie.png"
-
-}
-
-class James inherits EquipoRocket {
-	override method danio() = 100
-	override method image() = super() + "james.png"
-
-}
-
-class Meowth inherits EquipoRocket {
-
-	override method danio() = 75
-
-	override method image() = super() + "meowth.png"
+	override method nombre() = "charmander"
 
 }
 

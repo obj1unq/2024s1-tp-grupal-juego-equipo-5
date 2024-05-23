@@ -1,55 +1,35 @@
 import alimentosFrutales.*
 import ambiente.*
 import config.*
+import enemigos.*
+import pokemons.*
 import posicionamiento.*
-import objects.*
+import transiciones.*
 import wollok.game.*
 
 program juego {
 	
-	
-	// FALTA UN NIVEL MANAGER - (para encargarse de las constantes de cada nivel)
-	 
+	// Enemigos
 	const meowth = new Meowth(position=game.at(3,5), direccion=izquierda)
-	//const james  = new James(position=game.at(9,5), direccion=arriba)
-	//const jessie = new Jessie(position=game.at(3,5), direccion=derecha)
-	
-	const cofre1 = new Cofre(position=game.at(3,10), contenido = llave)
-	const cofre2 = new Cofre(position=game.at(16,3))
-	const cofre3 = new Cofre(position=game.at(9,10))
-	const cofres = [cofre1, cofre2, cofre3]
-	
 	const pinche1 = new Pinche(position=game.at(8,3))
 	const pinche2 = new Pinche(position=game.at(16,9))
 	const pinche3 = new Pinche(position=game.at(3,9))
 	const pinche4 = new Pinche(position=game.at(8,1))
 	const pinche5 = new Pinche(position=game.at(3,1))
 	const pinche6 = new Pinche(position=game.at(14,3))
-	
 	const daga = new Daga(position=game.at(9,7), direccion=izquierda)
-
-	const trampas = [pinche1, pinche2, pinche3, pinche4, pinche5, pinche6, daga]
-	
-	
+	const enemigos = [meowth, pinche1, pinche2, pinche3, pinche4, pinche5, pinche6, daga]
+	// Ambiente
+	const cofre1 = new Cofre(position=game.at(3,10), contenido = llave)
+	const cofre2 = new Cofre(position=game.at(16,3))
+	const cofre3 = new Cofre(position=game.at(9,10))
 	const puerta1 = new Puerta(position=game.at(2,8))
 	const puerta2 = new Puerta(position=game.at(9,4))
 	const puerta3 = new Puerta(position=game.at(16,6))
 	const puerta4 = new Puerta(position=game.at(11,4))
 	const puerta5 = new Puerta(position=game.at(5,1))
 	const puerta6 = new Puerta(position=game.at(4,7))
-	const puertas = [puerta1, puerta2, puerta3, puerta4, puerta5, puerta6]
-	
-//	const baniera = new Baniera(position = game.at(7, 10))
-//	const cama = new Cama(position = game.at(13, 1))
-//	const inodoro = new Inodoro(position = game.at(9, 8))
-//	const lavamanos = new Lavamanos(position = game.at(5, 9))
-//	const mesa = new Mesa(position = game.at(6, 3))
-//	const ropero = new Ropero(position = game.at(14, 3))
-//	const silla = new Silla(position = game.at(7, 3))
-//	const sillon = new Sillon(position = game.at(11, 9))
-//	const sofa = new Sofa(position = game.at(13, 10))
-//	// const ambiente = [baniera, cama, inodoro, lavamanos, mesa, ropero, silla, sillon, sofa]
-	
+	const ambiente = [cofre1, cofre2, cofre3, puerta1, puerta2, puerta3, puerta4, puerta5, puerta6]
 	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	
@@ -58,42 +38,28 @@ program juego {
 	config.dimensiones()
 	
 	nivelManager.generarNivel()
-	//mapaDeParedesDelNivel1.agregar()
 	
+	game.addVisual(pikachu)
 	game.addVisual(prisioneroEvee)
 	game.addVisual(pokebola)
 	
-	game.addVisual(pikachu)
-	
 	// ANOTADOR
 	anotador.generarVisuales()
-	//game.addVisual(iconPikachu)
-	//game.addVisual(iconCorazonPikachu)
-	
 	
 	// FALTA UN VISUALIZADOR MANAGER - (para sacar todas las visuales de cada nivel)
 	
-	cofres.forEach({cofre => game.addVisual(cofre)})
-	trampas.forEach({trampa => game.addVisual(trampa)})
-	puertas.forEach({puerta => game.addVisual(puerta)})
-	//ambiente.forEach({articulo => game.addVisual(articulo)})
+	enemigos.forEach({enemigo => game.addVisual(enemigo)})
+	ambiente.forEach({articulo => game.addVisual(articulo)})
 	
-	game.addVisual(meowth)
-	//game.addVisual(james)
-	//game.addVisual(jessie)
-	
-	//game.addVisual(daga)
 	// FALTA UN CONFIG. CUSTODIA DEL EQUIPO ROCKET - (por cada nivel)
 	
-	game.onTick(300, "CUSTODIA 1", {meowth.caminar()} ) 
-	game.onTick(600, "TRAMPA DAGA", {daga.mover()})
-	//game.onTick(200, "CUSTODIA 2", {james.caminar()}  )
-	//game.onTick(400, "CUSTODIA 3", {jessie.caminar()} )
-	
+	game.onTick(400, "CUSTODIA 1", {meowth.mover()} ) 
+	game.onTick(300, "DAGA", {daga.mover()})
 	
 	config.teclas()
 	config.colisiones()
 	config.frutas()
 	
 	game.start()
+	
 }

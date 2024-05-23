@@ -1,5 +1,6 @@
 import alimentosFrutales.*
-import objects.*
+import enemigos.*
+import pokemons.*
 import posicionamiento.*
 import randomizer.*
 import wollok.game.*
@@ -164,55 +165,7 @@ object mapaDeParedesDelNivel5 inherits MapaDeParedesDelNivel {
 
 }
 
-object nivelManager {
-
-	const niveles = [ mapaDeParedesDelNivel1, mapaDeParedesDelNivel2, mapaDeParedesDelNivel3, mapaDeParedesDelNivel4, mapaDeParedesDelNivel5 ]
-	var nivelActual = 0
-
-	method numeroDeNivel() = nivelActual + 1
-
-	method nivelActual() {
-		return niveles.get(nivelActual)
-	}
-
-	method aumentarNivelActual() {
-		self.validarQueExistenMasNiveles()
-		nivelActual++
-	}
-
-	method validarQueExistenMasNiveles() {
-		if (niveles.size() - 1 < nivelActual) {
-			self.error("No existen más niveles")
-		}
-	}
-
-	method quedanNiveles() = nivelActual < niveles.size() - 1
-
-	method reset() {
-		nivelActual = 0
-	}
-
-	method generarNivel() {
-		if (self.quedanNiveles()) {
-			game.clear()
-			self.nivelActual().agregar()
-		/*mapa.generar(levelManager.nivelActual())
-		 * self.agregarJugador()
-		 * self.generarEnemigosYAumentarDificultad()
-		 hud.add()*/
-		} else {
-			self.victoria()
-		}
-	}
-
-	method victoria() {
-		game.clear()
-	// game.addVisual(victoria)
-	}
-
-}
-
-// VISOR
+// BARRA DE ESTADO ACTUAL DE PIKACHU
 object anotador {
 
 	method generarVisuales() {
@@ -228,7 +181,7 @@ object anotador {
 
 object iconPikachu {
 
-	const property position = game.at(0, 12)
+	const property position = game.at(0, game.height() - 1)
 
 	method image() = "icon-Pikachu.png"
 
@@ -236,10 +189,10 @@ object iconPikachu {
 
 object iconCorazonPikachu {
 
-	const property position = game.at(1, 12)
+	const property position = game.at(1, game.height() - 1)
 	const estados = #{ vacio, cuarto, medio, trescuartos, lleno }
 
-	method image() = "corazon-" + self.estadoActualDelCorazon().porcentaje() + ".png"
+	method image() = "corazon-" + self.estadoActualDelCorazon().toString() + ".png"
 
 	method text() = pikachu.energia().toString()
 
@@ -249,14 +202,12 @@ object iconCorazonPikachu {
 
 }
 
-// ESTADOS DEL CORAZON
+// ESTADOS DEL CORAZON DE PIKACHU
 object vacio {
 
 	method estaEnPorcentaje(energia) {
-		return 0
+		return energia <= 0
 	}
-	
-	method porcentaje() = "vacio"
 
 }
 
@@ -265,8 +216,6 @@ object cuarto {
 	method estaEnPorcentaje(energia) {
 		return energia.between(1, 150)
 	}
-	
-	method porcentaje() = "cuarto"
 
 }
 
@@ -275,8 +224,6 @@ object medio {
 	method estaEnPorcentaje(energia) {
 		return energia.between(151, 300)
 	}
-	
-	method porcentaje() = "medio"
 
 }
 
@@ -285,8 +232,6 @@ object trescuartos {
 	method estaEnPorcentaje(energia) {
 		return energia.between(301, 450)
 	}
-	
-	method porcentaje() = "trescuartos"
 
 }
 
@@ -295,8 +240,6 @@ object lleno {
 	method estaEnPorcentaje(energia) {
 		return energia.between(451, 600)
 	}
-	
-	method porcentaje() = "lleno"
 
 }
 
@@ -311,60 +254,6 @@ class Articulo {
 
 	method action() {
 	}
-
-}
-
-class Baniera inherits Articulo {
-
-	override method image() = "baniera.png"
-
-}
-
-class Cama inherits Articulo {
-
-	override method image() = "cama.png"
-
-}
-
-class Inodoro inherits Articulo {
-
-	override method image() = "inodoro.png"
-
-}
-
-class Lavamanos inherits Articulo {
-
-	override method image() = "lavamanos.png"
-
-}
-
-class Mesa inherits Articulo {
-
-	override method image() = "mesa.png"
-
-}
-
-class Ropero inherits Articulo {
-
-	override method image() = "ropero.png"
-
-}
-
-class Silla inherits Articulo {
-
-	override method image() = "silla.png"
-
-}
-
-class Sillon inherits Articulo {
-
-	override method image() = "sillon.png"
-
-}
-
-class Sofa inherits Articulo {
-
-	override method image() = "sofa.png"
 
 }
 
@@ -402,9 +291,6 @@ object llave {
 		return "llave.png"
 	}
 
-	method colision() {
-	}
-
 	method action() {
 		game.say(pikachu, "Si!, la encontramos")
 		self.cambiarVisual()
@@ -413,7 +299,7 @@ object llave {
 
 	method cambiarVisual() {
 		self.ocultar()
-		position = game.at(2, 12)
+		position = game.at(2, game.height() - 1)
 		self.mostrar()
 	}
 
@@ -427,77 +313,15 @@ object llave {
 
 }
 
-// AMBIENTACION CON COLISIONES
-class Atravesable {
+// ARREGLAR, HAY QUE MODIFICAR QUE SEA ATRAVESABLE PORQUE VA A TENER UN INTERRUMPOR
+class Puerta inherits Articulo {
 
-	var property position
-
-	method colision(pokemon)
-
-	method esAtravesable() = true
-
-	method image()
-	method action(){}
-}
-
-class Trampa inherits Atravesable {
-
-	override method colision(pokemon) {
-		pokemon.recibirDanio(self)
-		game.say(pokemon, "Ay! me dolió")
+	method colision(pokemon) {
 	}
 
-	method danio()
+	override method esAtravesable() = true
 
-	override method image() = "trampa-"
-
-}
-
-class Daga inherits Trampa {
-	
-	const escenario = tablero
-	var property inicial = game.at(9,7)
-	
-	var property direccion
-	
-	override method danio()  = 30
-
-	override method image() = super() + "daga.png"
-
-	method mover() {
-		if (not self.puedeMover(direccion)) {
-			self.position(inicial)
-		} else {
-			self.position(direccion.siguiente(self.position()))		
-		}
-	}
-
-	method puedeMover(dir) {
-		return escenario.puedeIr(self.position(), dir)
-	}
-	
-}
-
-
-
-class Pinche inherits Trampa {
-
-	override method colision(pokemon){ 
-		super(pokemon) 
-		game.removeVisual(self)
-	}
-	override method danio() = 50
-
-	override method image() = super() + "pinches.png"
-
-}
-
-class Puerta inherits Atravesable {
-
-	override method colision(pokemon) {
-	}
-
-	override method image() = "puerta.png"
+	override method image() = "puerta-abierta.png"
 
 }
 
