@@ -9,57 +9,9 @@ import wollok.game.*
 
 program juego {
 	
-	// Enemigos
-	const meowth = new Meowth(position=game.at(3,5), direccion=izquierda)
-	const pinche1 = new Pinche(position=game.at(8,3))
-	const pinche2 = new Pinche(position=game.at(16,9))
-	const pinche3 = new Pinche(position=game.at(3,9))
-	const pinche4 = new Pinche(position=game.at(8,1))
-	const pinche5 = new Pinche(position=game.at(3,1))
-	const pinche6 = new Pinche(position=game.at(14,3))
-	const daga = new Daga(position=game.at(9,7), direccion=izquierda)
-	const enemigos = [meowth, pinche1, pinche2, pinche3, pinche4, pinche5, pinche6, daga]
-	// Ambiente
-	const cofre1 = new Cofre(position=game.at(3,10), contenido = llave)
-	const cofre2 = new Cofre(position=game.at(16,3))
-	const cofre3 = new Cofre(position=game.at(9,10))
-	const puerta1 = new Puerta(position=game.at(2,8))
-	const puerta2 = new Puerta(position=game.at(9,4))
-	const puerta3 = new Puerta(position=game.at(16,6))
-	const puerta4 = new Puerta(position=game.at(11,4))
-	const puerta5 = new Puerta(position=game.at(5,1))
-	const puerta6 = new Puerta(position=game.at(4,7))
-	const ambiente = [cofre1, cofre2, cofre3, puerta1, puerta2, puerta3, puerta4, puerta5, puerta6]
-	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
-	
-	game.boardGround("fondo-nivel1.png")
-	
 	config.dimensiones()
-	
-	nivelManager.generarNivel()
-	
-	game.addVisual(pikachu)
-	game.addVisual(prisioneroEvee)
-	game.addVisual(pokebola)
-	
-	// ANOTADOR
-	anotador.generarVisuales()
-	
-	// FALTA UN VISUALIZADOR MANAGER - (para sacar todas las visuales de cada nivel)
-	
-	enemigos.forEach({enemigo => game.addVisual(enemigo)})
-	ambiente.forEach({articulo => game.addVisual(articulo)})
-	
-	// FALTA UN CONFIG. CUSTODIA DEL EQUIPO ROCKET - (por cada nivel)
-	
-	game.onTick(400, "CUSTODIA 1", {meowth.mover()} ) 
-	game.onTick(300, "DAGA", {daga.mover()})
-	
-	config.teclas()
-	config.colisiones()
-	config.frutas()
-	
+	gameManager.generar()
 	game.start()
 	
 }

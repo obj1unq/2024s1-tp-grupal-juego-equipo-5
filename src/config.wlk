@@ -1,6 +1,7 @@
 import alimentosFrutales.*
 import posicionamiento.*
 import pokemons.*
+import transiciones.*
 import wollok.game.*
 
 object config {
@@ -18,6 +19,7 @@ object config {
 		keyboard.right().onPressDo({ pikachu.mover(derecha)})
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu")})
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto()})
+		keyboard.r().onPressDo({ gameManager.reset()})
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
