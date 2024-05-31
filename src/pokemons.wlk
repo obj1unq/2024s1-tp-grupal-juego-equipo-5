@@ -65,7 +65,10 @@ object pikachu {
 	method esAtravesable() = true
 
 	method interactuarConObjeto() {
-		const posiciones = #{ direccion.siguiente(self.position()), direccion.opuesto().siguiente(self.position()), direccion.anterior().siguiente(self.position()), direccion.siguiente().siguiente(self.position()) }
+		const posiciones = #{ direccion.siguiente(self.position()), 
+							  direccion.opuesto().siguiente(self.position()), 
+							  direccion.anterior().siguiente(self.position()), 
+							  direccion.siguiente().siguiente(self.position()) }
 		const objetos = posiciones.flatMap({ pos => game.getObjectsIn(pos) })
 		if (objetos.isEmpty()) {
 			self.error("Aqui no hay nada")
@@ -74,11 +77,12 @@ object pikachu {
 	}
 	
 	method resetear() {
-		estado = caminando
-		energia = 100
-		position = game.at(1,1)
-		heRescatadoAlPrisionero = false
-		tieneLlave = false
+		self.energia(100) 
+		self.tieneLlave(false)
+		self.heRescatadoAlPrisionero(false)
+		self.position(game.at(1,1))
+		self.estado(caminando)
+		
 	}
 
 }
