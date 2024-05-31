@@ -22,15 +22,7 @@ program juego {
 /* FALTA:
  
   
- 		 1* HACER DAGA MEJORADA:
-		   		
-		   		OPCION 1: Modificar el código de la DAGA para que tenga imagen hacia la DERECHA, así tenemos la posibilidad de tirarla para el otro lado.
-		   		OPCION 2: O, en su defecto, otra trampa del Equipo Rocket que vaya hacia la derecha y se mueva.
-		 
-		 ----------------- ESTO HAY QUE HACERLO EN ENEMIGOS.* 
-		 
- 
-		 2* HACER QUE LA PUERTA SE ABRA Y SE CIERRE:
+ 		1* HACER QUE LA PUERTA SE ABRA Y SE CIERRE:
 		 		
 		 		OPCION 1: Buscar imagen de la puerta cerrada.
 		 		OPCION 2: O, buscar, la imagen de una puerta nueva para mostrarla abierta y cerrada.
@@ -38,7 +30,7 @@ program juego {
 		 ----------------- ESTO HAY QUE HACERLO EN AMBIENTE.*
 		 
  	 
-		 3* HACER EL INTERRUPTOR DE PUERTAS:
+		 2* HACER EL INTERRUPTOR DE PUERTAS:
 		 		* Tiene que cambiar el estado de la puerta, abierta por cerrada o viceversa.
 		 		----------------- ESTO HAY QUE HACERLO EN AMBIENTE.*
 		 		* EXTRA: Cuando pase eso, hay que crear una versión de puerta abierta (u) y cerrada (otra letra) para poner en los mapas de los niveles.  
@@ -47,7 +39,7 @@ program juego {
 		 ----------------- ESTO HAY QUE HACERLO EN AMBIENTE.* Y TRANSICIONES.*
 		 
  	 
-		 4* Sobre el mapa de los niveles (2, 3, 4 y 5), colocar:
+		 3* Sobre el mapa de los niveles (2, 3, 4 y 5), colocar:
 		   	
 		   	* enemigos
 		   	* prisionero 
@@ -55,11 +47,12 @@ program juego {
 		   	* cofres vacios
 		   	* cofre con llave
 		   	* pokebola
+		   	* puertas cerradas (las abiertas son "u")
 		 
 		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
 		 
  
-		 5* En nivel manager:
+		 4* En nivel manager:
 		   	
 		   	* agregar extras por nivel: (pero no en generar nivel)
 		       
@@ -68,13 +61,13 @@ program juego {
 		 ----------------- ESTO HAY QUE HACERLO EN CONFIF.* Y TRANSICIONES.*
 		 
 		 
-		 6* En las transiciones:
+		 5* En las transiciones:
 		   	
 		   	* colocar la presentación y las imagenes de información entre niveles.
 		 
 		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
 		 
-		 7* HACER LOS TESTS: FALTAN MUCHOS...
+		 6* HACER LOS TESTS: FALTAN MUCHOS...
 		 	* PENSARLOS POR INTERACCION ENTRE OBJETOS
 		 	* QUE SEAN CORRECTAS LAS TRANSICIONES
 		 	* PIKACHU PASANDO DE NIVEL
