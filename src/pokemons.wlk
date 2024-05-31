@@ -2,6 +2,7 @@ import alimentosFrutales.*
 import ambiente.*
 import posicionamiento.*
 import randomizer.*
+import transiciones.*
 import wollok.game.*
 
 // DETECTIVE
@@ -9,11 +10,11 @@ object pikachu {
 
 	var property estado = caminando
 	var property direccion = derecha
-	var property position = game.at(1, 1)
+	var property position = game.at(1,1)
 	var property heRescatadoAlPrisionero = false // HAY UN SOLO PRISIONERO POR NIVEL
 	var property energia = 100
 	var property tieneLlave = false // HAY UNA SOLA LLAVE POR NIVEL
-	const escenario = tablero
+	const miEscenario = tablero
 
 	method estado(estadoACambiar) {
 		if (estado != estadoACambiar) {
@@ -49,7 +50,7 @@ object pikachu {
 	}
 
 	method puedeMover(dir) {
-		return estado.puedeMover() && escenario.puedeIr(self.position(), dir)
+		return estado.puedeMover() && miEscenario.puedeIr(self.position(), dir)
 	}
 
 	method obtenerLlave() {
@@ -70,6 +71,14 @@ object pikachu {
 			self.error("Aqui no hay nada")
 		}
 		objetos.forEach({ objeto => objeto.action()})
+	}
+	
+	method resetear() {
+		estado = caminando
+		energia = 100
+		position = game.at(1,1)
+		heRescatadoAlPrisionero = false
+		tieneLlave = false
 	}
 
 }
@@ -98,6 +107,7 @@ object ganador {
 
 	method activar(pokemon) {
 		game.say(pokemon, "Lo logré!")
+		gameManager.victoriaParcial()
 	}
 
 }
@@ -112,16 +122,16 @@ object muerto {
 
 	method activar(pokemon) {
 		game.say(pokemon, "Perdí!")
-		game.schedule(1000, { game.stop() })
+		game.schedule(1000, { gameManager.derrota() })
 	}
 
 }
 
 // POKEBOLA
-object pokebola {
+class Pokebola {
 
-	var property position = game.at(16, 10)
-	var property miPokemon = pikachu
+	var property position
+	const miPokemon = pikachu
 	const property image = "pokebola.png"
 
 	method esAtravesable() = miPokemon.heRescatadoAlPrisionero()
@@ -136,7 +146,7 @@ object pokebola {
 // POKEMONS PRISIONEROS
 class Prisionero {
 
-	const property rescatador = pikachu
+	const rescatador = pikachu
 	var property preso = true
 
 	method action() {
@@ -166,15 +176,13 @@ class Prisionero {
 
 	method nombre()
 
-	method position()
-
 }
 
 // PRISIONERO: NIVEL 1
 object prisioneroEvee inherits Prisionero {
 
-	const property position = game.at(2, 2)
-
+	var property position = game.at(2, 2)
+	
 	override method nombre() = "evee"
 
 }
@@ -182,7 +190,7 @@ object prisioneroEvee inherits Prisionero {
 // PRISIONERO: NIVEL 2
 object prisioneroPidgeot inherits Prisionero {
 
-	const property position = game.at(6, 4)
+	var property position = game.at(6, 4)
 
 	override method nombre() = "pidgeot"
 
@@ -191,7 +199,7 @@ object prisioneroPidgeot inherits Prisionero {
 // PRISIONERO: NIVEL 3
 object prisioneroVulpix inherits Prisionero {
 
-	const property position = game.at(11, 1)
+	var property position = game.at(11, 1)
 
 	override method nombre() = "vulpix"
 
@@ -200,7 +208,7 @@ object prisioneroVulpix inherits Prisionero {
 // PRISIONERO: NIVEL 4
 object prisioneroSquirtle inherits Prisionero {
 
-	const property position = game.at(16, 7)
+	var property position = game.at(16, 7)
 
 	override method nombre() = "squirtle"
 
@@ -209,7 +217,7 @@ object prisioneroSquirtle inherits Prisionero {
 // PRISIONERO: NIVEL 5
 object prisioneroCharmander inherits Prisionero {
 
-	const property position = game.at(4, 5)
+	var property position = game.at(4, 5)
 
 	override method nombre() = "charmander"
 
