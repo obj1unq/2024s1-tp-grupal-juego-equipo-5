@@ -75,7 +75,7 @@ class Daga inherits EquipoRocketConMovimiento {
 		
 	override method danio()  = 30
 
-	override method nombre() = "daga"
+	override method nombre() = "daga-va-para-" + direccion.toString()
 
 	override method mover() {
 		if (not self.puedeMover(direccion)) {

@@ -78,12 +78,37 @@ object c {
 			
 }
 
-// EQUIPO ROCKET: DAGA / JAMES / JESSIE / MEOWTH / PINCHE
+// EQUIPO ROCKET: DAGA (ABAJO, ARRIBA, DERECHA, IZQUIERDA) / JAMES / JESSIE / MEOWTH / PINCHE
+
+object w {
+	method generar(posicion) {
+		const daga = new Daga(position = posicion, direccion = abajo)
+		game.addVisual(daga)
+		game.onTick(300,"Custodia 0",{daga.mover()}) // PONER EN EXTRAS DEL NIVEL
+	}		
+}
+
+object y {
+	method generar(posicion) {
+		const daga = new Daga(position = posicion, direccion = arriba)
+		game.addVisual(daga)
+		game.onTick(300,"Custodia 0",{daga.mover()}) // PONER EN EXTRAS DEL NIVEL
+	}		
+}
+
 object d {
+	method generar(posicion) {
+		const daga = new Daga(position = posicion, direccion = derecha)
+		game.addVisual(daga)
+		game.onTick(300,"Custodia 0",{daga.mover()}) // PONER EN EXTRAS DEL NIVEL
+	}		
+}
+
+object b {
 	method generar(posicion) {
 		const daga = new Daga(position = posicion, direccion = izquierda)
 		game.addVisual(daga)
-		game.onTick(300,"Custodia 0",{daga.mover()})
+		game.onTick(300,"Custodia 0",{daga.mover()}) // PONER EN EXTRAS DEL NIVEL
 	}		
 }
 
@@ -91,7 +116,7 @@ object a {
 	method generar(posicion) {
 		const james = new James(position = posicion, direccion = arriba)
 		game.addVisual(james)
-		game.onTick(300,"Custodia 2",{james.mover()})
+		game.onTick(300,"Custodia 2",{james.mover()}) // PONER EN EXTRAS DEL NIVEL
 	}		
 }
 
@@ -99,7 +124,7 @@ object j {
 	method generar(posicion) {
 		const jessie = new Jessie(position = posicion, direccion = derecha)
 		game.addVisual(jessie)
-		game.onTick(200,"Custodia 3",{jessie.mover()})
+		game.onTick(200,"Custodia 3",{jessie.mover()}) // PONER EN EXTRAS DEL NIVEL
 	}		
 }
 
@@ -107,7 +132,7 @@ object m {
 	method generar(posicion) {
 		const meowth = new Meowth(position = posicion, direccion = derecha)
 		game.addVisual(meowth)
-		game.onTick(300,"Custodia 1",{meowth.mover()})
+		game.onTick(300,"Custodia 1",{meowth.mover()}) // PONER EN EXTRAS DEL NIVEL
 	}		
 }
 
@@ -117,7 +142,7 @@ object i {
 	}		
 }
 
-// AMBIENTE: COFRE CON LLAVE / COFRE VACIO / PARED / PUERTA
+// AMBIENTE: COFRE (CON LLAVE, VACIO) / PARED / PUERTA (ABIERTA, CERRADA)
 object l {
 	method generar(posicion) {
 		game.addVisual(new Cofre(position = posicion, contenido = llave))
@@ -171,15 +196,15 @@ object escenario {
 	method nivel1() = [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,l,x,_,_,_,_,o,x,_,_,_,_,_,k,x],
+		[x,_,_,l,x,_,_,_,_,o,x,_,_,w,_,_,k,x],
 		[x,_,_,i,x,_,_,_,i,_,x,_,_,_,_,_,i,x],
-		[x,x,u,x,x,_,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,u,_,_,_,_,d,x,o,_,_,_,_,_,x],
+		[x,x,u,x,x,d,_,_,_,_,x,d,_,_,_,_,_,x],
+		[x,_,_,_,u,_,_,_,_,b,x,o,_,_,_,_,_,x],
 		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,x,u,x],
 		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,m,x],
 		[x,x,x,x,x,x,x,x,x,u,x,u,x,x,x,x,x,x],
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
-		[x,_,e,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
+		[x,_,e,_,_,x,_,_,_,_,x,_,_,_,_,_,b,x],
 		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
 	].reverse()
