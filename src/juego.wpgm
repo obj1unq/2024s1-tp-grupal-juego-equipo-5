@@ -11,7 +11,80 @@ program juego {
 	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	config.dimensiones()
+	// USAR PARA VISUALIZAR LOS NIVELES game.boardGround("fondo-1.png") DE 0 A 4, están los niveles del 1 a 5.
 	gameManager.generar()
 	game.start()
 	
 }
+
+// Buenas, soy Adri. Pongo lo que creo yo que falta hacer (agreguen si faltan cosas).
+
+/* FALTA:
+ 
+  
+ 		 1* HACER DAGA MEJORADA:
+		   		
+		   		OPCION 1: Modificar el código de la DAGA para que tenga imagen hacia la DERECHA, así tenemos la posibilidad de tirarla para el otro lado.
+		   		OPCION 2: O, en su defecto, otra trampa del Equipo Rocket que vaya hacia la derecha y se mueva.
+		 
+		 ----------------- ESTO HAY QUE HACERLO EN ENEMIGOS.* 
+		 
+ 
+		 2* HACER QUE LA PUERTA SE ABRA Y SE CIERRE:
+		 		
+		 		OPCION 1: Buscar imagen de la puerta cerrada.
+		 		OPCION 2: O, buscar, la imagen de una puerta nueva para mostrarla abierta y cerrada.
+		 
+		 ----------------- ESTO HAY QUE HACERLO EN AMBIENTE.*
+		 
+ 	 
+		 3* HACER EL INTERRUPTOR DE PUERTAS:
+		 		* Tiene que cambiar el estado de la puerta, abierta por cerrada o viceversa.
+		 		----------------- ESTO HAY QUE HACERLO EN AMBIENTE.*
+		 		* EXTRA: Cuando pase eso, hay que crear una versión de puerta abierta (u) y cerrada (otra letra) para poner en los mapas de los niveles.  
+		        ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
+		 
+		 ----------------- ESTO HAY QUE HACERLO EN AMBIENTE.* Y TRANSICIONES.*
+		 
+ 	 
+		 4* Sobre el mapa de los niveles (2, 3, 4 y 5), colocar:
+		   	
+		   	* enemigos
+		   	* prisionero 
+		   	* trampas 
+		   	* cofres vacios
+		   	* cofre con llave
+		   	* pokebola
+		 
+		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
+		 
+ 
+		 5* En nivel manager:
+		   	
+		   	* agregar extras por nivel: (pero no en generar nivel)
+		       
+		       ejemplo: onTick de enemigos con movimiento (para cambiar velocidades por niveles).
+		  
+		 ----------------- ESTO HAY QUE HACERLO EN CONFIF.* Y TRANSICIONES.*
+		 
+		 
+		 6* En las transiciones:
+		   	
+		   	* colocar la presentación y las imagenes de información entre niveles.
+		 
+		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
+		 
+		 7* HACER LOS TESTS: FALTAN MUCHOS...
+		 	* PENSARLOS POR INTERACCION ENTRE OBJETOS
+		 	* QUE SEAN CORRECTAS LAS TRANSICIONES
+		 	* PIKACHU PASANDO DE NIVEL
+		 	* Y LO QUE HAGA FALTA...
+		 
+		 ----------------- ESTO HAY QUE HACERLO EN TESTS.*
+		 
+		 
+		 
+		 
+		 ----------------- AGREGUEN LO QUE QUIERAN, pienso que lo de arriba es prioridad.
+		 
+*/

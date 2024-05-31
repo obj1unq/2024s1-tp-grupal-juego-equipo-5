@@ -142,6 +142,8 @@ object u {
 	}		
 }
 
+// falta puerta cerrada, la de arriba hacer que sea abierta.
+
 // MAPAS DE NIVEL
 object mapa {
 	 
@@ -149,10 +151,12 @@ object mapa {
 		(0 .. game.width() - 1).forEach({ x => (0 .. game.height() - 1).forEach({ y => self.generarCelda(x, y, nivel)})})
 		game.boardGround("fondo.png")
 		game.addVisual(pikachu)
+		// REVISAR SI ESTO DEBE IR ACÁ O EN NIVEL MANAGER
 		anotador.generarVisuales()
 		config.teclas()
 		config.colisiones()
 		config.frutas()
+		// ---------------------------------------------- 
 	}
 
 	method generarCelda(x, y, nivel) {
@@ -199,50 +203,50 @@ object escenario {
 	method nivel3() = [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,u,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,u,x,x,x,x,x,x,x,x,x,u,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,u,x,x,x,x,x,x,x,u,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,u,_,_,_,_,_,_,x],
-		[x,p,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
+		[x,_,_,_,_,x,_,x,x,x,x,x,_,x,_,_,_,x],
+		[x,_,_,_,_,x,_,x,_,_,_,u,_,x,_,_,_,x],
+		[x,u,x,x,u,x,_,x,_,_,_,x,_,x,u,x,x,x],
+		[x,_,_,x,_,x,_,x,_,_,_,x,_,x,_,_,_,x],
+		[x,_,_,x,_,x,u,x,_,_,_,x,_,x,_,_,_,x],
+		[x,_,_,x,_,_,_,u,_,_,_,x,_,u,_,_,_,x],
+		[x,x,x,x,x,x,x,x,x,u,x,x,x,x,x,x,u,x],
+		[x,_,_,_,_,_,_,_,x,_,x,_,_,_,u,_,_,x],
+		[x,_,_,_,_,_,_,_,x,_,x,_,_,_,x,_,_,x],
+		[x,p,_,_,_,_,_,_,u,_,x,_,_,_,x,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
-	].reverse() // HACER
+	].reverse() // COMPLETAR RESTO
 	
 	method nivel4()= [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,u,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,u,x,x,x,x,x,x,x,x,x,u,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,u,x,x,x,x,x,x,x,u,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,u,_,_,_,_,_,_,x],
-		[x,p,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,_,_,x,_,_,_,_,x,_,_,_,x],
+		[x,u,x,x,x,x,u,x,x,_,x,x,_,u,_,_,_,x],
+		[x,_,_,_,_,u,_,x,_,_,u,x,x,x,x,x,x,x],
+		[x,x,x,x,x,x,_,x,_,x,_,_,_,x,_,_,_,x],
+		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
+		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
+		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
+		[x,_,_,_,_,u,_,_,_,x,_,_,_,x,_,_,x,x],
+		[x,x,x,x,x,x,x,x,u,x,x,x,x,x,u,x,x,x],
+		[x,p,_,_,_,_,_,_,_,_,_,_,_,_,_,_,x,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
-	].reverse() // HACER
+	].reverse() // COMPLETAR RESTO
 	
 	method nivel5()= [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,u,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,u,x,x,x,x,x,x,x,x,x,u,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,u,x,x,x,x,x,x,x,u,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,u,_,_,_,_,_,_,x],
-		[x,p,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
+		[x,_,_,u,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
+		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,u,x,x,x],
+		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
+		[x,_,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
+		[x,x,_,x,_,_,_,x,x,x,x,x,_,u,_,_,x,x],
+		[x,x,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
+		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
+		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,u,x],
+		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
+		[x,p,_,x,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
-	].reverse() // HACER
+	].reverse() // COMPLETAR RESTO
 	
 	method niveles() {
 		return [
@@ -302,7 +306,8 @@ object gameManager {
 	method reset() {
 		pikachu.resetear()
 		nivelManager.resetear()
-		self.generar()
+		// PONER UN IR A INICIO PARA INICIAR LA PRESENTACION...
+		self.generar() // SACAR cuando el inicio este listo, meterlo ahí...
 	}
 	
 	method resetTemporal() {
@@ -317,6 +322,7 @@ object gameManager {
 	method victoriaParcial() {
 		nivelManager.aumentarNivelActual()
 		transicion.nivel(nivelManager.numeroDeNivel())
+		self.resetTemporal()
 		game.schedule(100, { self.generar() })
 	}
 
@@ -325,7 +331,7 @@ object gameManager {
 		game.addVisual(derrota)
 		game.schedule(4000, { self.reset() })
 	}
-
+		// MUCHO CÓDIGO REPETIDO, FUNCIONA PERO OJO AL PONER CAMBIOS POR LAS TRANSICIONES 
 }
 
 object victoria {
