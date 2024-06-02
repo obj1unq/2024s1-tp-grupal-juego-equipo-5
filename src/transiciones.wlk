@@ -167,6 +167,11 @@ object u {
 	}		
 }
 
+object f {
+	method generar(posicion) {
+		game.addVisual(info)
+	}
+}
 // falta puerta cerrada, la de arriba hacer que sea abierta.
 
 // MAPAS DE NIVEL
@@ -341,7 +346,7 @@ object gameManager {
 
 	method victoria() {
 		game.clear()
-		game.addVisual(victoria)
+		portadaManager.presentarVictoria()
 	}
 	
 	method victoriaParcial() {
@@ -353,7 +358,7 @@ object gameManager {
 
 	method derrota() {
 		game.clear()
-		game.addVisual(derrota)
+		portadaManager.presentarDerrota()
 		game.schedule(4000, { self.reset() })
 	}
 		// MUCHO CÓDIGO REPETIDO, FUNCIONA PERO OJO AL PONER CAMBIOS POR LAS TRANSICIONES 
@@ -379,5 +384,62 @@ object transicion {
 	}
 }
 
+object inicioDelJuego {
+	const property position = game.at(0, 0)
+	const property image = "menu-inicial.png"
+}
+
+object inicioNivel1 {
+	const property image = "instrucciones-nivel-1.png"
+	const property position = game.at(0,0)
+}
+
+object infoJugabilidad {
+	const property image = "infoJugabilidad.png"
+	const property position = game.at(0,0)
+}
+
 // FALTA LA PRESENTACION Y DESPUES LA INFORMACION DE CADA NIVEL, DAR AMBIENTE DE JUEGO
 
+object portadaManager {
+	const property position = game.at(0,0)
+	var property image = "menu-inicial.png"
+	
+	
+	method presentarMenuInicio(){
+		game.addVisual(inicioDelJuego)
+		keyboard.enter().onPressDo{self.presentarNivel1()}
+	}
+	
+	method presentarNivel1() {
+		game.clear()
+		game.addVisual(inicioNivel1)
+		keyboard.enter().onPressDo{gameManager.generar()}
+	}
+	method removerVisual() {
+		game.removeVisual(self)
+	}
+	method presentarDerrota() {
+		game.addVisual(derrota)
+	}
+	method presentarVictoria() {
+		game.addVisual(victoria) 
+	}
+	method presentarInfo() {
+		game.addVisual(infoJugabilidad)
+		keyboard.enter().onPressDo{
+			game.removeVisual(infoJugabilidad)
+			game.start()
+		}
+	}
+}
+
+object info {
+	const property position = game.at(game.width()-1,0)
+	var property image = "info.png"
+	
+	method mostrarInfo(){
+		game.stop()
+		portadaManager.presentarInfo()
+	}
+}

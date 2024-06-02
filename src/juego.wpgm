@@ -12,7 +12,8 @@ program juego {
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	config.dimensiones()
 	// USAR PARA VISUALIZAR LOS NIVELES game.boardGround("fondo-1.png") DE 0 A 4, están los niveles del 1 a 5.
-	gameManager.generar()
+	portadaManager.presentarMenuInicio()
+	//gameManager.generar()
 	game.start()
 	
 }
