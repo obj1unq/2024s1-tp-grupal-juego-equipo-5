@@ -167,6 +167,11 @@ object u {
 	}		
 }
 
+object f {
+	method generar(posicion) {
+		game.addVisual(info)
+	}
+}
 // falta puerta cerrada, la de arriba hacer que sea abierta.
 
 // MAPAS DE NIVEL
@@ -206,7 +211,7 @@ object escenario {
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
 		[x,_,e,_,_,x,_,_,_,_,x,_,_,_,_,_,b,x],
 		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse()
 	
 	method nivel2() = [
@@ -332,7 +337,8 @@ object gameManager {
 		pikachu.resetear()
 		nivelManager.resetear()
 		// PONER UN IR A INICIO PARA INICIAR LA PRESENTACION...
-		self.generar() // SACAR cuando el inicio este listo, meterlo ahí...
+		portadaManager.presentarMenuInicio()
+		//self.generar() // SACAR cuando el inicio este listo, meterlo ahí...
 	}
 	
 	method resetTemporal() {
@@ -341,7 +347,7 @@ object gameManager {
 
 	method victoria() {
 		game.clear()
-		game.addVisual(victoria)
+		portadaManager.presentarVictoria()
 	}
 	
 	method victoriaParcial() {
@@ -353,7 +359,7 @@ object gameManager {
 
 	method derrota() {
 		game.clear()
-		game.addVisual(derrota)
+		portadaManager.presentarDerrota()
 		game.schedule(4000, { self.reset() })
 	}
 		// MUCHO CÓDIGO REPETIDO, FUNCIONA PERO OJO AL PONER CAMBIOS POR LAS TRANSICIONES 
@@ -379,5 +385,63 @@ object transicion {
 	}
 }
 
+object inicioDelJuego {
+	const property position = game.at(0, 0)
+	const property image = "menu-inicial.png"
+}
+
+object inicioNivel {
+	const property image = "instrucciones-nivel-" + (nivelManager.numeroDeNivel()+1) + ".png"
+	const property position = game.at(0,0)
+}
+
+object infoJugabilidad {
+	const property image = "infoJugabilidad.png"
+	const property position = game.at(0,0)
+}
+
 // FALTA LA PRESENTACION Y DESPUES LA INFORMACION DE CADA NIVEL, DAR AMBIENTE DE JUEGO
 
+object portadaManager {
+	const property position = game.at(0,0)
+	var property image = "menu-inicial.png"
+	
+	
+	method presentarMenuInicio(){
+		game.addVisual(inicioDelJuego)
+		keyboard.enter().onPressDo{self.presentarNivel()}
+	}
+	
+	method presentarNivel() {
+		game.clear()
+		game.addVisual(inicioNivel)
+		keyboard.enter().onPressDo{gameManager.generar()}
+	}
+	
+	method removerVisual() {
+		game.removeVisual(self)
+	}
+	method presentarDerrota() {
+		game.addVisual(derrota)
+	}
+	method presentarVictoria() {
+		game.addVisual(victoria) 
+	}
+	method presentarInfo() {
+		game.addVisual(infoJugabilidad)
+		keyboard.enter().onPressDo{
+			game.removeVisual(infoJugabilidad)
+			//game.start()
+		}
+	}
+}
+
+object info {
+	const property position = game.at(game.width()-1,0)
+	var property image = "info.png"
+	
+	method mostrarInfo(){
+		//game.stop()
+		portadaManager.presentarInfo()
+	}
+}
