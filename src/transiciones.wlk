@@ -211,7 +211,7 @@ object escenario {
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
 		[x,_,e,_,_,x,_,_,_,_,x,_,_,_,_,_,b,x],
 		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse()
 	
 	method nivel2() = [
@@ -429,7 +429,7 @@ object portadaManager {
 		game.addVisual(infoJugabilidad)
 		keyboard.enter().onPressDo{
 			game.removeVisual(infoJugabilidad)
-			game.start()
+			//game.start()
 		}
 	}
 }
@@ -439,7 +439,7 @@ object info {
 	var property image = "info.png"
 	
 	method mostrarInfo(){
-		game.stop()
+		//game.stop()
 		portadaManager.presentarInfo()
 	}
 }
