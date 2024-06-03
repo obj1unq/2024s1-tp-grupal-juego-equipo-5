@@ -337,7 +337,8 @@ object gameManager {
 		pikachu.resetear()
 		nivelManager.resetear()
 		// PONER UN IR A INICIO PARA INICIAR LA PRESENTACION...
-		self.generar() // SACAR cuando el inicio este listo, meterlo ahí...
+		portadaManager.presentarMenuInicio()
+		//self.generar() // SACAR cuando el inicio este listo, meterlo ahí...
 	}
 	
 	method resetTemporal() {
@@ -389,8 +390,8 @@ object inicioDelJuego {
 	const property image = "menu-inicial.png"
 }
 
-object inicioNivel1 {
-	const property image = "instrucciones-nivel-1.png"
+object inicioNivel {
+	const property image = "instrucciones-nivel-" + (nivelManager.numeroDeNivel()+1) + ".png"
 	const property position = game.at(0,0)
 }
 
@@ -408,14 +409,15 @@ object portadaManager {
 	
 	method presentarMenuInicio(){
 		game.addVisual(inicioDelJuego)
-		keyboard.enter().onPressDo{self.presentarNivel1()}
+		keyboard.enter().onPressDo{self.presentarNivel()}
 	}
 	
-	method presentarNivel1() {
+	method presentarNivel() {
 		game.clear()
-		game.addVisual(inicioNivel1)
+		game.addVisual(inicioNivel)
 		keyboard.enter().onPressDo{gameManager.generar()}
 	}
+	
 	method removerVisual() {
 		game.removeVisual(self)
 	}
