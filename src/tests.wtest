@@ -1,9 +1,10 @@
-import ambiente.*
 import alimentosFrutales.*
+import ambiente.*
 import config.*
 import enemigos.*
-import posicionamiento.*
 import pokemons.*
+import posicionamiento.*
+import transiciones.*
 import wollok.game.*
 
 describe "DETECTIVE" {
@@ -74,7 +75,7 @@ describe "DETECTIVE" {
 	
 	test "ENERGIA AL RECIBIR DAÑO...
 		Pikachu, inicia con 200 de energía.
-		Caminando choca con un Jesse del Equipo Rocket y queda en 100.
+		Caminando choca con James del Equipo Rocket y queda en 100.
 		Luego, se descuida cruza por una trampa pinche y queda en 50." {
 		// Estado inicial pedido:
 		pikachu.energia(200)
@@ -212,4 +213,30 @@ describe "EQUIPO ROCKET" {
 		assert.equals(game.at(2,3), jessie.position()) // POSICION OPUESTA
 	}
 	
+}
+
+describe "FRUTAS" {
+	
+	test "CREAR UNA NUEVA FRUTA, ES POSIBLE..." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		frutaManager.nuevaFruta()
+		assert.equals(1, frutaManager.frutas().size())
+	}
+	
+	test "CREAR UNA NUEVA FRUTA, NO ES POSIBLE...
+		Si ya tenemos 7 frutas creadas, no es posible porque el límite es de 7." {
+		// Estado inicial, pedido:
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		// Caso prueba:
+		assert.equals(7, frutaManager.frutas().size())
+		assert.throwsException({ frutaManager.nuevaFruta() })
+		assert.equals(7, frutaManager.frutas().size())
+	}
 }
