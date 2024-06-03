@@ -130,7 +130,7 @@ class Cofre inherits Articulo {
 	}
 
 }
-/*PREGUNTAR
+
 object cofresManager {
 	const cofres = []
 	
@@ -141,7 +141,7 @@ object cofresManager {
 		const cofreConLLave = cofres.anyOne()
 		cofreConLLave.contenido(llave)
 	}
-}*/
+}
 object llave {
 
 	var property position

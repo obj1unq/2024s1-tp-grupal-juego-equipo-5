@@ -102,6 +102,7 @@ class Pinche inherits EquipoRocket {
 }
 object desactivado{
 	method danio()  = 0
+	method colision(pokemon) {}
 	method image() = "pinches-desactivado.png"
 	method cambiar(pinche){
 		pinche.estado(activado)
@@ -109,6 +110,9 @@ object desactivado{
 }
 object activado{
 	method danio()  = 50
+	method colision(pokemon) {
+		pokemon.recibirDanio(self)
+	}
 	method image() = "pinches-activado.png"
 	method cambiar(pinche){
 		pinche.estado(desactivado)
