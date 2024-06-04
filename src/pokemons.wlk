@@ -76,11 +76,11 @@ object pikachu {
 		objetos.forEach({ objeto => objeto.action()})
 	}
 	
-	method resetear() {
-		self.energia(100) 
+	method resetear(energiaReset) {
+		self.energia(energiaReset) 
 		self.tieneLlave(false)
 		self.heRescatadoAlPrisionero(false)
-		self.position(game.at(1,1))
+		//self.position(game.at(1,1))
 		self.estado(caminando)
 		
 	}

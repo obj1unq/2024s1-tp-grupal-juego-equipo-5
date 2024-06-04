@@ -144,13 +144,13 @@ object i {
 	}		
 }
 
-// AMBIENTE: COFRE (CON LLAVE, VACIO) / PARED / PUERTA (ABIERTA, CERRADA)
-
-
+// AMBIENTE: COFRE (CON LLAVE, VACIO) / PARED / PUERTA (ABIERTA, CERRADA) / BOTON
 
 object o {
 	method generar(posicion) {
-		cofresManager.crearCofre(posicion)
+		const cofre = new Cofre(position = posicion)
+		cofresManager.agregarCofre(cofre)
+		game.addVisual(cofre)
 	}	
 }
 
@@ -159,12 +159,14 @@ object x {
 		game.addVisual(new Pared(position = posicion))
 	}		
 }
-object u1 {
+
+object u {
 	method generar(posicion) {
 		puertasManager.crearPuerta(abierta,posicion)
 	}		
 }
-object u2 {
+
+object n {
 	method generar(posicion) {
 		puertasManager.crearPuerta(cerrada,posicion)
 	}		
@@ -175,6 +177,9 @@ object t {
 		game.addVisual(new Boton(position = posicion))
 		}
 }
+
+// INFORMACIÓN
+
 object f {
 	method generar(posicion) {
 		game.addVisual(info)
@@ -186,14 +191,12 @@ object mapa {
 	 
 	method generar(nivel) {
 		(0 .. game.width() - 1).forEach({ x => (0 .. game.height() - 1).forEach({ y => self.generarCelda(x, y, nivel)})})
+		cofresManager.colocarLLave() 
 		game.addVisual(pikachu)
-		// REVISAR SI ESTO DEBE IR ACÁ O EN NIVEL MANAGER
 		anotador.generarVisuales()
 		config.teclas()
 		config.colisiones()
 		config.frutas()
-		cofresManager.colocarLLave()
-		// ---------------------------------------------- 
 	}
 
 	method generarCelda(x, y, nivel) {
@@ -209,13 +212,13 @@ object escenario {
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 		[x,_,_,_,_,_,x,_,_,_,x,_,_,_,_,_,k,x],
 		[x,_,_,o,_,_,x,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,_,x,_,_,_,u2,_,_,_,_,_,i,x],
-		[x,x,u2,x,x,x,x,_,_,_,x,x,x,x,x,x,x,x],
+		[x,_,_,_,_,_,x,_,_,_,n,_,_,_,_,_,i,x],
+		[x,x,n,x,x,x,x,_,_,_,x,x,x,x,x,x,x,x],
 		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,x],
 		[x,_,_,_,_,_,_,_,p,_,_,_,_,_,_,_,_,x],
-		[x,x,x,x,u1,x,_,_,_,_,_,_,x,x,x,x,x,x],
+		[x,x,x,x,u,x,_,_,_,_,_,_,x,x,x,x,x,x],
 		[x,_,_,i,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,i,_,_,_,u1,_,_,i,o,x],
+		[x,_,_,_,_,x,_,_,i,_,_,_,u,_,_,i,o,x],
 		[x,_,e,_,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
 		[x,_,_,i,_,x,_,i,_,t,_,_,x,_,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
@@ -225,13 +228,13 @@ object escenario {
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 		[x,_,_,_,x,_,_,_,w,_,_,x,_,_,_,_,_,x],
 		[x,_,_,o,x,_,_,_,_,_,_,x,_,_,p,_,_,x],
-		[x,_,_,_,x,_,_,_,_,_,_,u1,_,_,_,_,i,x],
-		[x,x,u2,x,x,_,_,t,_,_,_,x,x,x,x,x,x,x],
+		[x,_,_,_,x,_,_,_,_,_,_,u,_,_,_,_,i,x],
+		[x,x,n,x,x,_,_,t,_,_,_,x,x,x,x,x,x,x],
 		[x,d,_,_,_,_,_,x,x,x,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,_,_,x,_,_,u2,_,_,_,_,_,_,x],
-		[x,x,u1,x,x,x,_,x,o,_,x,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,_,x,_,_,n,_,_,_,_,_,_,x],
+		[x,x,u,x,x,x,_,x,o,_,x,_,_,_,_,_,_,x],
 		[x,_,_,i,_,x,_,x,x,x,x,_,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,i,_,_,_,u2,_,_,i,g,x],
+		[x,_,_,_,_,x,_,_,i,_,_,_,n,_,_,i,g,x],
 		[x,_,o,_,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
 		[x,_,_,i,_,x,_,i,_,k,_,_,x,_,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
@@ -242,29 +245,29 @@ object escenario {
 		[x,_,_,o,x,_,_,_,i,_,x,_,_,_,_,_,k,x],
 		[x,_,_,i,x,_,_,_,_,o,x,_,_,_,_,_,_,x],
 		[x,_,_,_,x,_,_,_,i,_,x,_,_,_,_,_,i,x],
-		[x,x,u2,x,x,_,_,_,_,_,x,d,_,_,_,_,_,x],
-		[x,_,_,_,u1,_,_,_,_,_,x,o,_,_,_,_,_,x],
-		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,u2,x,x],
+		[x,x,n,x,x,_,_,_,_,_,x,d,_,_,_,_,_,x],
+		[x,_,_,_,u,_,_,_,_,_,x,o,_,_,_,_,_,x],
+		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,n,x,x],
 		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,m,t,x],
-		[x,x,x,x,x,x,x,x,x,u1,x,u2,x,x,x,x,x,x],
+		[x,x,x,x,x,x,x,x,x,u,x,n,x,x,x,x,x,x],
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
-		[x,_,e,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,p,_,i,_,u1,_,i,_,_,x,_,_,_,_,_,_,x],
+		[x,_,v,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
+		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse() // COMPLETAR RESTO
 	
 	method nivel4()= [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,_,_,_,x,_,_,_,_,x,_,_,_,x],
-		[x,u2,x,x,x,x,u1,x,x,_,x,x,_,u1,_,_,_,x],
-		[x,_,_,_,_,u1,_,x,_,_,u2,x,x,x,x,x,x,x],
+		[x,_,_,_,_,_,_,_,x,_,_,_,_,x,_,_,s,x],
+		[x,n,x,x,x,x,u,x,x,_,x,x,_,u,_,_,_,x],
+		[x,_,_,_,_,u,_,x,_,_,n,x,x,x,x,x,x,x],
 		[x,x,x,x,x,x,_,x,_,x,_,_,_,x,_,_,_,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
-		[x,_,_,_,_,u1,_,_,_,x,_,_,_,x,_,_,x,x],
-		[x,x,x,x,x,x,x,x,u2,x,x,x,x,x,u1,x,x,x],
+		[x,_,_,_,_,u,_,_,_,x,_,_,_,x,_,_,x,x],
+		[x,x,x,x,x,x,x,x,n,x,x,x,x,x,u,x,x,x],
 		[x,p,_,_,_,_,_,_,_,_,_,_,_,_,_,_,x,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse() // COMPLETAR RESTO
@@ -272,14 +275,14 @@ object escenario {
 	method nivel5()= [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,u1,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,u1,x,x,x],
+		[x,_,_,u,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
+		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,u,x,x,x],
 		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,u1,_,_,_,x,_,x,_,_,x,x],
-		[x,x,_,x,_,_,_,x,x,x,x,x,_,u1,_,_,x,x],
-		[x,x,_,x,_,_,_,u1,_,_,_,x,_,x,_,_,x,x],
+		[x,_,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
+		[x,x,_,x,c,_,_,x,x,x,x,x,_,u,_,_,x,x],
+		[x,x,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
 		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,u1,x],
+		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,u,x],
 		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
 		[x,p,_,x,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
@@ -331,6 +334,10 @@ object nivelManager {
 
 object gameManager {
 
+	method iniciar() {
+		portadaManager.presentarMenuInicio()
+	}
+	
 	method generar() {
 		if (nivelManager.quedanNiveles()) {
 			game.clear()
@@ -341,15 +348,13 @@ object gameManager {
 	}
 
 	method reset() {
-		pikachu.resetear()
+		pikachu.resetear(100)
 		nivelManager.resetear()
-		// PONER UN IR A INICIO PARA INICIAR LA PRESENTACION...
-		portadaManager.presentarMenuInicio()
-		//self.generar() // SACAR cuando el inicio este listo, meterlo ahí...
+		self.iniciar()
 	}
 	
-	method resetTemporal() {
-		pikachu.resetear()
+	method resetTemporal(energiaActual) {
+		pikachu.resetear(energiaActual)
 	}
 
 	method victoria() {
@@ -359,8 +364,7 @@ object gameManager {
 	
 	method victoriaParcial() {
 		nivelManager.aumentarNivelActual()
-		transicion.nivel(nivelManager.numeroDeNivel())
-		self.resetTemporal()
+		self.resetTemporal(pikachu.energia())
 		game.schedule(100, { self.generar() })
 	}
 
@@ -369,7 +373,7 @@ object gameManager {
 		portadaManager.presentarDerrota()
 		game.schedule(4000, { self.reset() })
 	}
-		// MUCHO CÓDIGO REPETIDO, FUNCIONA PERO OJO AL PONER CAMBIOS POR LAS TRANSICIONES 
+
 }
 
 object victoria {
@@ -386,19 +390,13 @@ object derrota {
 
 }
 
-object transicion {
-	method nivel(num) {
-		// IMAGEN DE TRANSICION SEGUN EL NIVEL
-	}
-}
-
 object inicioDelJuego {
 	const property position = game.at(0, 0)
 	const property image = "menu-inicial.png"
 }
 
 object inicioNivel {
-	const property image = "instrucciones-nivel-" + (nivelManager.numeroDeNivel()+1) + ".png"
+	const property image = "instrucciones-nivel-" + (nivelManager.numeroDeNivel()+1).toString() + ".png"
 	const property position = game.at(0,0)
 }
 
@@ -407,14 +405,11 @@ object infoJugabilidad {
 	const property position = game.at(0,0)
 }
 
-// FALTA LA PRESENTACION Y DESPUES LA INFORMACION DE CADA NIVEL, DAR AMBIENTE DE JUEGO
-
 object portadaManager {
 	const property position = game.at(0,0)
 	var property image = "menu-inicial.png"
 	
-	
-	method presentarMenuInicio(){
+	method presentarMenuInicio() {
 		game.addVisual(inicioDelJuego)
 		keyboard.enter().onPressDo{self.presentarNivel()}
 	}
@@ -428,12 +423,15 @@ object portadaManager {
 	method removerVisual() {
 		game.removeVisual(self)
 	}
+	
 	method presentarDerrota() {
 		game.addVisual(derrota)
 	}
+	
 	method presentarVictoria() {
 		game.addVisual(victoria) 
 	}
+	
 	method presentarInfo() {
 		game.addVisual(infoJugabilidad)
 		keyboard.enter().onPressDo{
