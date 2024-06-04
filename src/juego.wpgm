@@ -12,7 +12,8 @@ program juego {
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	config.dimensiones()
 	// USAR PARA VISUALIZAR LOS NIVELES game.boardGround("fondo-1.png") DE 0 A 4, están los niveles del 1 a 5.
-	gameManager.generar()
+	portadaManager.presentarMenuInicio()
+	//gameManager.generar()
 	game.start()
 	
 }
@@ -20,23 +21,6 @@ program juego {
 // Buenas, soy Adri. Pongo lo que creo yo que falta hacer (agreguen si faltan cosas).
 
 /* FALTA:
- 
-  
- 		1* HACER QUE LA PUERTA SE ABRA Y SE CIERRE:
-		 		
-		 		OPCION 1: Buscar imagen de la puerta cerrada.
-		 		OPCION 2: O, buscar, la imagen de una puerta nueva para mostrarla abierta y cerrada.
-		 
-		 ----------------- ESTO HAY QUE HACERLO EN AMBIENTE.*
-		 
- 	 
-		 2* HACER EL INTERRUPTOR DE PUERTAS:
-		 		* Tiene que cambiar el estado de la puerta, abierta por cerrada o viceversa.
-		 		----------------- ESTO HAY QUE HACERLO EN AMBIENTE.*
-		 		* EXTRA: Cuando pase eso, hay que crear una versión de puerta abierta (u) y cerrada (otra letra) para poner en los mapas de los niveles.  
-		        ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
-		 
-		 ----------------- ESTO HAY QUE HACERLO EN AMBIENTE.* Y TRANSICIONES.*
 		 
  	 
 		 3* Sobre el mapa de los niveles (2, 3, 4 y 5), colocar:

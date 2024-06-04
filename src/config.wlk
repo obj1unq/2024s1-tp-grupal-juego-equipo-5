@@ -20,6 +20,7 @@ object config {
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu")})
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto()})
 		keyboard.r().onPressDo({ gameManager.reset()})
+		keyboard.i().onPressDo({ info.mostrarInfo()})
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
