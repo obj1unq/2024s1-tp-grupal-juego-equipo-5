@@ -116,7 +116,7 @@ object a {
 	method generar(posicion) {
 		const james = new James(position = posicion, direccion = arriba)
 		game.addVisual(james)
-		game.onTick(300,"Custodia 2",{james.mover()}) // PONER EN EXTRAS DEL NIVEL
+		game.onTick(400,"Custodia 2",{james.mover()}) // PONER EN EXTRAS DEL NIVEL
 	}		
 }
 
@@ -124,7 +124,7 @@ object j {
 	method generar(posicion) {
 		const jessie = new Jessie(position = posicion, direccion = derecha)
 		game.addVisual(jessie)
-		game.onTick(200,"Custodia 3",{jessie.mover()}) // PONER EN EXTRAS DEL NIVEL
+		game.onTick(400,"Custodia 3",{jessie.mover()}) // PONER EN EXTRAS DEL NIVEL
 	}		
 }
 
@@ -259,16 +259,16 @@ object escenario {
 	method nivel4()= [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,_,_,_,x,_,_,_,_,x,_,_,s,x],
-		[x,n,x,x,x,x,u,x,x,_,x,x,_,u,_,_,_,x],
-		[x,_,_,_,_,u,_,x,_,_,n,x,x,x,x,x,x,x],
+		[x,_,_,o,_,_,_,_,_,_,_,_,b,x,_,_,s,x],
+		[x,n,x,x,x,x,u,x,x,_,x,x,_,n,_,_,_,x],
+		[x,_,_,k,_,n,_,x,_,_,n,x,x,x,x,x,x,x],
 		[x,x,x,x,x,x,_,x,_,x,_,_,_,x,_,_,_,x],
-		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
-		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
-		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
-		[x,_,_,_,_,u,_,_,_,x,_,_,_,x,_,_,x,x],
+		[x,_,_,_,_,x,_,x,_,x,_,o,_,x,_,_,_,x],
+		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,_,x],
+		[x,_,o,_,_,x,_,x,_,x,_,j,_,x,o,_,_,x],
+		[x,_,_,a,_,u,_,_,_,x,_,_,_,x,_,_,_,x],
 		[x,x,x,x,x,x,x,x,n,x,x,x,x,x,u,x,x,x],
-		[x,p,_,_,_,_,_,_,_,_,_,_,_,_,_,_,x,x],
+		[x,p,_,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse() // COMPLETAR RESTO
 	
