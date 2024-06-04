@@ -9,7 +9,7 @@ import wollok.game.*
 // PAREDES
 class Pared inherits Articulo {
 
-	override method image() = "pared-nueva.png"
+	override method image() = "pared.png"
 
 }
 
@@ -132,21 +132,26 @@ class Cofre inherits Articulo {
 }
 
 object cofresManager {
+
 	const cofres = []
-	
-	method agregarCofre(cofre){
+
+	method agregarCofre(cofre) {
 		cofres.add(cofre)
 	}
-	method colocarLLave(){
+
+	method colocarLLave() {
 		const cofreConLLave = cofres.anyOne()
 		cofreConLLave.contenido(llave)
 	}
-	method crearCofre(posicion){
+
+	method crearCofre(posicion) {
 		const cofre = new Cofre(position = posicion)
 		self.agregarCofre(cofre)
 		game.addVisual(cofre)
 	}
+
 }
+
 object llave {
 
 	var property position
@@ -177,38 +182,61 @@ object llave {
 
 }
 
-class Puerta  {
+class Puerta {
+
 	var property position
-	var property estado 
-	
-	method colision(pokemon) {}
-	method action(){}
-	method cambiarEstado(){
+	var property estado
+
+	method colision(pokemon) {
+	}
+
+	method action() {
+	}
+
+	method cambiarEstado() {
 		estado.cambiar(self)
 	}
+
 	method esAtravesable() = estado.esAtravesable()
 
 	method image() = estado.image()
 
 }
+
 object cerrada {
+
 	method esAtravesable() = false
+
 	method image() = "puertaCerrada.png"
-	method cambiar(puerta){	puerta.estado(abierta) }
+
+	method cambiar(puerta) {
+		puerta.estado(abierta)
+	}
+
 }
-object abierta{
+
+object abierta {
+
 	method esAtravesable() = true
+
 	method image() = "puertaAbierta.png"
-	method cambiar(puerta){	puerta.estado(cerrada) }
+
+	method cambiar(puerta) {
+		puerta.estado(cerrada)
+	}
+
 }
-class Boton inherits Articulo{
+
+class Boton inherits Articulo {
+
 	var property image = "botonSinPresion.png"
 	var estaPresionado = false
-	
-	override method action(){
+
+	override method action() {
 		puertasManager.cambiarEstadoPuertas()
 		self.cambiarImagen()
 	}
+
 	method cambiarImagen() {
 		if (estaPresionado) {
 			image = "botonSinPresion.png"
@@ -217,20 +245,26 @@ class Boton inherits Articulo{
 		}
 		estaPresionado = !estaPresionado
 	}
-	
+
 }
+
 object puertasManager {
+
 	const puertas = []
-	
+
 	method cambiarEstadoPuertas() {
-		puertas.forEach({puerta => puerta.cambiarEstado()})
+		puertas.forEach({ puerta => puerta.cambiarEstado()})
 	}
-	method agregarPuerta(puerta){
+
+	method agregarPuerta(puerta) {
 		puertas.add(puerta)
 	}
-	method crearPuerta(estado,posicion){
-		const puerta = new Puerta(position = posicion,estado=estado)
+
+	method crearPuerta(estado, posicion) {
+		const puerta = new Puerta(position = posicion, estado = estado)
 		self.agregarPuerta(puerta)
 		game.addVisual(puerta)
 	}
+
 }
+
