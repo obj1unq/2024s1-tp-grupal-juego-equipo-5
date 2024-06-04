@@ -8,59 +8,55 @@ import transiciones.*
 import wollok.game.*
 
 program juego {
-	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
-	config.dimensiones()
-	game.ground("piso.png")
+	config.ambienteBasico()
 	gameManager.iniciar()
 	game.start()
-	
 }
 
-
 /* FALTA:
-		 
- 	 
-		 3* Sobre el mapa de los niveles (3, 4 y 5), colocar:
-		   	
-		   	* enemigos
-		   	* prisionero 
-		   	* trampas 
-		   	* cofres vacios
-		   	* cofre con llave
-		   	* pokebola
-		   	* puertas cerradas ("n")
-		   	* puertas abiertas ("u")
-		 
-		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
-		 
- 
-		 4* En nivel manager:
-		   	
-		   	* agregar extras por nivel: (pero no en generar nivel)
-		       
-		       ejemplo: onTick de enemigos con movimiento (para cambiar velocidades por niveles).
-		  
-		 ----------------- ESTO HAY QUE HACERLO EN CONFIF.* Y TRANSICIONES.*
-		 
-		 
-		 5* En las transiciones:
-		   	
-		   	* colocar la presentación y las imagenes de información entre niveles.
-		 
-		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
-		 
-		 6* HACER LOS TESTS: FALTAN MUCHOS...
-		 	* PENSARLOS POR INTERACCION ENTRE OBJETOS
-		 	* QUE SEAN CORRECTAS LAS TRANSICIONES
-		 	* PIKACHU PASANDO DE NIVEL
-		 	* Y LO QUE HAGA FALTA...
-		 
-		 ----------------- ESTO HAY QUE HACERLO EN TESTS.*
-		 
-		 
-		 
-		 
-		 ----------------- AGREGUEN LO QUE QUIERAN, pienso que lo de arriba es prioridad.
-		 
-*/
+ * 		 
+ *  	 
+ * 		 3* Sobre el mapa de los niveles (3, 4 y 5), colocar:
+ * 		   	
+ * 			enemigos
+ * 			prisionero 
+ * 			trampas 
+ * 			cofres vacios
+ * 			cofre con llave
+ * 			pokebola
+ * 			puertas cerradas ("n")
+ * 			puertas abiertas ("u")
+ * 		 
+ * 		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
+ * 		 
+ *  
+ * 		 4* En nivel manager:
+ * 		   	
+ * 			agregar extras por nivel: (pero no en generar nivel)
+ * 		       
+ * 		    ejemplo: onTick de enemigos con movimiento (para cambiar velocidades por niveles).
+ * 		  
+ * 		 ----------------- ESTO HAY QUE HACERLO EN CONFIF.* Y TRANSICIONES.*
+ * 		 
+ * 		 
+ * 		 5* En las transiciones:
+ * 		   	
+ * 			colocar la presentación y las imagenes de información entre niveles.
+ * 		 
+ * 		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
+ * 		 
+ * 
+ * 		 6* HACER LOS TESTS: FALTAN MUCHOS...
+ *
+ * 			PENSARLOS POR INTERACCION ENTRE OBJETOS
+ * 			QUE SEAN CORRECTAS LAS TRANSICIONES
+ * 			PIKACHU PASANDO DE NIVEL
+ * 			Y LO QUE HAGA FALTA...
+ * 		 
+ * 		 ----------------- ESTO HAY QUE HACERLO EN TESTS.*
+ * 		 
+ * 		 
+ * 		 ----------------- AGREGUEN LO QUE QUIERAN, pienso que lo de arriba es prioridad.
+ * 		 
+ */
