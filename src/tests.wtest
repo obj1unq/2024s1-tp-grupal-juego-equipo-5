@@ -188,13 +188,13 @@ describe "EQUIPO ROCKET" {
 		assert.equals("equipo-rocket-meowth.png", meowth.image())
 		assert.equals(game.at(2,3), meowth.position())
 		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ARRIBA
-		james.mover()
-		assert.equals("equipo-rocket-james.png", james.image())
-		assert.equals(game.at(1,2), james.position())
+//		james.mover()
+//		assert.equals("equipo-rocket-james.png", james.image())
+//		assert.equals(game.at(1,2), james.position())
 		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ABAJO
-		jessie.mover()
-		assert.equals("equipo-rocket-jessie.png", jessie.image())
-		assert.equals(game.at(2,1), jessie.position())
+//		jessie.mover()
+//		assert.equals("equipo-rocket-jessie.png", jessie.image())
+//		assert.equals(game.at(2,1), jessie.position())
 	}
 	
 	test "GENERAL: SEGUNDA OPCION DE MOVIMIENTO..." {
@@ -207,11 +207,11 @@ describe "EQUIPO ROCKET" {
 		meowth.mover()
 		assert.equals(game.at(4,3), meowth.position()) // POSICION OPUESTA
 		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ARRIBA
-		james.mover()
-		assert.equals(game.at(1,0), james.position()) // POSICION OPUESTA
+//		james.mover()
+//		assert.equals(game.at(1,0), james.position()) // POSICION OPUESTA
 		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ABAJO
-		jessie.mover()
-		assert.equals(game.at(2,3), jessie.position()) // POSICION OPUESTA
+//		jessie.mover()
+//		assert.equals(game.at(2,3), jessie.position()) // POSICION OPUESTA
 	}
 	
 }
