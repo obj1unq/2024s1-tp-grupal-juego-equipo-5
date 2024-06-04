@@ -11,6 +11,7 @@ program juego {
 	
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	config.dimensiones()
+	game.ground("piso.png")
 	// USAR PARA VISUALIZAR LOS NIVELES game.boardGround("fondo-1.png") DE 0 A 4, están los niveles del 1 a 5.
 	portadaManager.presentarMenuInicio()
 	//gameManager.generar()
@@ -18,12 +19,11 @@ program juego {
 	
 }
 
-// Buenas, soy Adri. Pongo lo que creo yo que falta hacer (agreguen si faltan cosas).
 
 /* FALTA:
 		 
  	 
-		 3* Sobre el mapa de los niveles (2, 3, 4 y 5), colocar:
+		 3* Sobre el mapa de los niveles (3, 4 y 5), colocar:
 		   	
 		   	* enemigos
 		   	* prisionero 
@@ -31,7 +31,8 @@ program juego {
 		   	* cofres vacios
 		   	* cofre con llave
 		   	* pokebola
-		   	* puertas cerradas (las abiertas son "u")
+		   	* puertas cerradas ("u2")
+		   	* puertas abiertas ("u1")
 		 
 		 ----------------- ESTO HAY QUE HACERLO EN TRANSICIONES.*
 		 

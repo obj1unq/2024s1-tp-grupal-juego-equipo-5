@@ -186,7 +186,6 @@ object mapa {
 	 
 	method generar(nivel) {
 		(0 .. game.width() - 1).forEach({ x => (0 .. game.height() - 1).forEach({ y => self.generarCelda(x, y, nivel)})})
-		game.ground("piso.png")
 		game.addVisual(pikachu)
 		// REVISAR SI ESTO DEBE IR ACÁ O EN NIVEL MANAGER
 		anotador.generarVisuales()
