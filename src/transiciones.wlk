@@ -138,20 +138,21 @@ object m {
 
 object i {
 	method generar(posicion) {
-		game.addVisual(new Pinche(position = posicion))
+		const pinche =new Pinche(position = posicion)
+		game.addVisual(pinche)
+		game.onTick(800,"Pinche",{pinche.cambiarEstado()})
 	}		
 }
 
 // AMBIENTE: COFRE (CON LLAVE, VACIO) / PARED / PUERTA (ABIERTA, CERRADA)
-object l {
-	method generar(posicion) {
-		game.addVisual(new Cofre(position = posicion, contenido = llave))
-	}	
-}
+
+
 
 object o {
 	method generar(posicion) {
-		game.addVisual(new Cofre(position = posicion))
+		const cofre = new Cofre(position = posicion)
+		cofresManager.agregarCofre(cofre)
+		game.addVisual(cofre)
 	}	
 }
 
@@ -160,13 +161,24 @@ object x {
 		game.addVisual(new Pared(position = posicion))
 	}		
 }
-
-object u {
+//puerta abierta
+object u1 {
 	method generar(posicion) {
-		game.addVisual(new Puerta(position = posicion))
+		puertasManager.crearPuerta(abierta,posicion)
+	}		
+}
+//puerta cerrada
+object u2 {
+	method generar(posicion) {
+		puertasManager.crearPuerta(cerrada,posicion)
 	}		
 }
 
+object t {
+	method generar(posicion) {
+		game.addVisual(new Boton(position = posicion))
+		}
+}
 object f {
 	method generar(posicion) {
 		game.addVisual(info)
@@ -179,13 +191,14 @@ object mapa {
 	 
 	method generar(nivel) {
 		(0 .. game.width() - 1).forEach({ x => (0 .. game.height() - 1).forEach({ y => self.generarCelda(x, y, nivel)})})
-		game.boardGround("fondo.png")
+		game.ground("piso.png")
 		game.addVisual(pikachu)
 		// REVISAR SI ESTO DEBE IR ACÁ O EN NIVEL MANAGER
 		anotador.generarVisuales()
 		config.teclas()
 		config.colisiones()
 		config.frutas()
+		cofresManager.colocarLLave()
 		// ---------------------------------------------- 
 	}
 
@@ -198,51 +211,51 @@ object mapa {
 
 object escenario {
 
-	method nivel1() = [
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+	method nivel1() = [ 
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,l,x,_,_,_,_,o,x,_,_,w,_,_,k,x],
-		[x,_,_,i,x,_,_,_,i,_,x,_,_,_,_,_,i,x],
-		[x,x,u,x,x,d,_,_,_,_,x,d,_,_,_,_,_,x],
-		[x,_,_,_,u,_,_,_,_,b,x,o,_,_,_,_,_,x],
-		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,x,u,x],
-		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,m,x],
-		[x,x,x,x,x,x,x,x,x,u,x,u,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
-		[x,_,e,_,_,x,_,_,_,_,x,_,_,_,_,_,b,x],
-		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,x,_,_,_,x,_,_,_,_,_,k,x],
+		[x,_,_,o,_,_,x,_,_,_,x,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,x,_,_,_,u2,_,_,_,_,_,i,x],
+		[x,x,u2,x,x,x,x,_,_,_,x,x,x,x,x,x,x,x],
+		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,_,_,p,_,_,_,_,_,_,_,_,x],
+		[x,x,x,x,u1,x,_,_,_,_,_,_,x,x,x,x,x,x],
+		[x,_,_,i,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
+		[x,_,_,_,_,x,_,_,i,_,_,_,u1,_,_,i,o,x],
+		[x,_,e,_,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
+		[x,_,_,i,_,x,_,i,_,t,_,_,x,_,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse()
 	
-	method nivel2() = [
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
+	method nivel2() = [ 
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,u,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,u,x,x,x,x,x,x,x,x,x,u,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,u,x,x,x,x,x,x,x,u,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,_,_,u,_,_,_,_,_,_,x],
-		[x,p,_,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
+		[x,_,_,_,x,_,_,_,w,_,_,x,_,_,_,_,_,x],
+		[x,_,_,o,x,_,_,_,_,_,_,x,_,_,p,_,_,x],
+		[x,_,_,_,x,_,_,_,_,_,_,u1,_,_,_,_,i,x],
+		[x,x,u2,x,x,_,_,t,_,_,_,x,x,x,x,x,x,x],
+		[x,d,_,_,_,_,_,x,x,x,x,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,_,x,_,_,u2,_,_,_,_,_,_,x],
+		[x,x,u1,x,x,x,_,x,o,_,x,_,_,_,_,_,_,x],
+		[x,_,_,i,_,x,_,x,x,x,x,_,x,x,x,x,x,x],
+		[x,_,_,_,_,x,_,_,i,_,_,_,u2,_,_,i,g,x],
+		[x,_,o,_,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
+		[x,_,_,i,_,x,_,i,_,k,_,_,x,_,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
 	].reverse() // COMPLETAR RESTO 
 	
 	method nivel3() = [
-		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,x,x,x,x,x,_,x,_,_,_,x],
-		[x,_,_,_,_,x,_,x,_,_,_,u,_,x,_,_,_,x],
-		[x,u,x,x,u,x,_,x,_,_,_,x,_,x,u,x,x,x],
-		[x,_,_,x,_,x,_,x,_,_,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,x,u,x,_,_,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,u,_,_,_,x,_,u,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,u,x,x,x,x,x,x,u,x],
-		[x,_,_,_,_,_,_,_,x,_,x,_,_,_,u,_,_,x],
-		[x,_,_,_,_,_,_,_,x,_,x,_,_,_,x,_,_,x],
-		[x,p,_,_,_,_,_,_,u,_,x,_,_,_,x,_,_,x],
+		[x,_,_,o,x,_,_,_,i,_,x,_,_,_,_,_,k,x],
+		[x,_,_,i,x,_,_,_,_,o,x,_,_,_,_,_,_,x],
+		[x,_,_,_,x,_,_,_,i,_,x,_,_,_,_,_,i,x],
+		[x,x,u2,x,x,_,_,_,_,_,x,d,_,_,_,_,_,x],
+		[x,_,_,_,u1,_,_,_,_,_,x,o,_,_,_,_,_,x],
+		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,u2,x,x],
+		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,m,t,x],
+		[x,x,x,x,x,x,x,x,x,u1,x,u2,x,x,x,x,x,x],
+		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
+		[x,_,e,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
+		[x,p,_,i,_,u1,_,i,_,_,x,_,_,_,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse() // COMPLETAR RESTO
 	
@@ -250,14 +263,14 @@ object escenario {
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 		[x,_,_,_,_,_,_,_,x,_,_,_,_,x,_,_,_,x],
-		[x,u,x,x,x,x,u,x,x,_,x,x,_,u,_,_,_,x],
-		[x,_,_,_,_,u,_,x,_,_,u,x,x,x,x,x,x,x],
+		[x,u2,x,x,x,x,u1,x,x,_,x,x,_,u1,_,_,_,x],
+		[x,_,_,_,_,u1,_,x,_,_,u2,x,x,x,x,x,x,x],
 		[x,x,x,x,x,x,_,x,_,x,_,_,_,x,_,_,_,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,x,x],
-		[x,_,_,_,_,u,_,_,_,x,_,_,_,x,_,_,x,x],
-		[x,x,x,x,x,x,x,x,u,x,x,x,x,x,u,x,x,x],
+		[x,_,_,_,_,u1,_,_,_,x,_,_,_,x,_,_,x,x],
+		[x,x,x,x,x,x,x,x,u2,x,x,x,x,x,u1,x,x,x],
 		[x,p,_,_,_,_,_,_,_,_,_,_,_,_,_,_,x,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse() // COMPLETAR RESTO
@@ -265,14 +278,14 @@ object escenario {
 	method nivel5()= [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,u,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,u,x,x,x],
+		[x,_,_,u1,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
+		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,u1,x,x,x],
 		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
-		[x,x,_,x,_,_,_,x,x,x,x,x,_,u,_,_,x,x],
-		[x,x,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
+		[x,_,_,x,_,_,_,u1,_,_,_,x,_,x,_,_,x,x],
+		[x,x,_,x,_,_,_,x,x,x,x,x,_,u1,_,_,x,x],
+		[x,x,_,x,_,_,_,u1,_,_,_,x,_,x,_,_,x,x],
 		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,u,x],
+		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,u1,x],
 		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
 		[x,p,_,x,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]

@@ -9,7 +9,7 @@ import wollok.game.*
 // PAREDES
 class Pared inherits Articulo {
 
-	override method image() = "pared.png"
+	override method image() = "pared-nueva.png"
 
 }
 
@@ -131,6 +131,17 @@ class Cofre inherits Articulo {
 
 }
 
+object cofresManager {
+	const cofres = []
+	
+	method agregarCofre(cofre){
+		cofres.add(cofre)
+	}
+	method colocarLLave(){
+		const cofreConLLave = cofres.anyOne()
+		cofreConLLave.contenido(llave)
+	}
+}
 object llave {
 
 	var property position
@@ -161,15 +172,60 @@ object llave {
 
 }
 
-// ARREGLAR, HAY QUE MODIFICAR QUE SEA ATRAVESABLE PORQUE VA A TENER UN INTERRUMPOR
-class Puerta inherits Articulo {
-
-	method colision(pokemon) {
+class Puerta  {
+	var property position
+	var property estado 
+	
+	method colision(pokemon) {}
+	method action(){}
+	method cambiarEstado(){
+		estado.cambiar(self)
 	}
+	method esAtravesable() = estado.esAtravesable()
 
-	override method esAtravesable() = true
-
-	override method image() = "puerta-abierta.png"
+	method image() = estado.image()
 
 }
-
+object cerrada {
+	method esAtravesable() = false
+	method image() = "puertaCerrada.png"
+	method cambiar(puerta){	puerta.estado(abierta) }
+}
+object abierta{
+	method esAtravesable() = true
+	method image() = "puertaAbierta.png"
+	method cambiar(puerta){	puerta.estado(cerrada) }
+}
+class Boton inherits Articulo{
+	var property image = "botonSinPresion.png"
+	var estaPresionado = false
+	
+	override method action(){
+		puertasManager.cambiarEstadoPuertas()
+		self.cambiarImagen()
+	}
+	method cambiarImagen() {
+		if (estaPresionado) {
+			image = "botonSinPresion.png"
+		} else {
+			image = "botonConPresion.png"
+		}
+		estaPresionado = !estaPresionado
+	}
+	
+}
+object puertasManager {
+	const puertas = []
+	
+	method cambiarEstadoPuertas() {
+		puertas.forEach({puerta => puerta.cambiarEstado()})
+	}
+	method agregarPuerta(puerta){
+		puertas.add(puerta)
+	}
+	method crearPuerta(estado,posicion){
+		const puerta = new Puerta(position = posicion,estado=estado)
+		self.agregarPuerta(puerta)
+		game.addVisual(puerta)
+	}
+}

@@ -82,6 +82,7 @@ describe "DETECTIVE" {
 		// Caso prueba:
 		james.colision(pikachu)
 		assert.equals(100, pikachu.energia())
+		pinche.estado(activado)
 		pinche.colision(pikachu)
 		assert.equals(50, pikachu.energia())
 	}
