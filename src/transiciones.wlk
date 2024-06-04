@@ -150,9 +150,7 @@ object i {
 
 object o {
 	method generar(posicion) {
-		const cofre = new Cofre(position = posicion)
-		cofresManager.agregarCofre(cofre)
-		game.addVisual(cofre)
+		cofresManager.crearCofre(posicion)
 	}	
 }
 
@@ -161,13 +159,11 @@ object x {
 		game.addVisual(new Pared(position = posicion))
 	}		
 }
-//puerta abierta
 object u1 {
 	method generar(posicion) {
 		puertasManager.crearPuerta(abierta,posicion)
 	}		
 }
-//puerta cerrada
 object u2 {
 	method generar(posicion) {
 		puertasManager.crearPuerta(cerrada,posicion)
@@ -184,7 +180,6 @@ object f {
 		game.addVisual(info)
 	}
 }
-// falta puerta cerrada, la de arriba hacer que sea abierta.
 
 // MAPAS DE NIVEL
 object mapa {

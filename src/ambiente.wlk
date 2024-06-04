@@ -141,6 +141,11 @@ object cofresManager {
 		const cofreConLLave = cofres.anyOne()
 		cofreConLLave.contenido(llave)
 	}
+	method crearCofre(posicion){
+		const cofre = new Cofre(position = posicion)
+		self.agregarCofre(cofre)
+		game.addVisual(cofre)
+	}
 }
 object llave {
 
