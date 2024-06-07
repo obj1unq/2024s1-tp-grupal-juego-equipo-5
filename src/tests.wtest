@@ -26,7 +26,7 @@ describe "DETECTIVE" {
 	
 	method initialize() {
 		game.clear()
-		config.dimensiones()
+		config.ambienteBasico()
 		objetos.forEach({obj => game.addVisual(obj)})
 	}
 	
@@ -79,10 +79,10 @@ describe "DETECTIVE" {
 		Luego, se descuida cruza por una trampa pinche y queda en 50." {
 		// Estado inicial pedido:
 		pikachu.energia(200)
+		pinche.cambiarEstado()
 		// Caso prueba:
 		james.colision(pikachu)
 		assert.equals(100, pikachu.energia())
-		pinche.estado(activado)
 		pinche.colision(pikachu)
 		assert.equals(50, pikachu.energia())
 	}
@@ -173,7 +173,7 @@ describe "EQUIPO ROCKET" {
 
 	method initialize() {
 		game.clear()
-		config.dimensiones()
+		config.ambienteBasico()
 		enemigos.forEach({enemigo => game.addVisual(enemigo)})
 	}
 	

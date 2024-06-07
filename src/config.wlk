@@ -5,11 +5,12 @@ import transiciones.*
 import wollok.game.*
 
 object config {
-	// CONFIG. DIMENSIONES DEL ESCENARIO
-	method dimensiones() {
+	// CONFIG. AMBIENTE BÁSICO: DIMENSIONES Y PISO DEL ESCENARIO
+	method ambienteBasico() {
 		game.cellSize(50)
 		game.width(18)
 		game.height(13)
+		game.ground("piso.png")
 	}
 	// CONFIG. DE TECLAS DE PIKACHU
 	method teclas() {
