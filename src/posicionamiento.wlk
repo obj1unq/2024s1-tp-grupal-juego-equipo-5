@@ -13,10 +13,12 @@ object arriba {
 		return abajo
 	}
 	method anterior(){
-		return derecha
+		//return derecha
+		return izquierda
 	}
 	method siguiente(){
-		return izquierda
+		//return izquierda
+		return derecha
 	}
 }
 
@@ -30,10 +32,12 @@ object abajo {
 		return arriba
 	}
 	method anterior(){
-		return izquierda
+		//return izquierda
+		return derecha
 	}
 	method siguiente(){
-		return derecha
+		//return derecha
+		return izquierda
 	}
 }
 

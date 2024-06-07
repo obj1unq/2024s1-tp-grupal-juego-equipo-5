@@ -46,15 +46,24 @@ class EquipoRocketConMovimiento inherits EquipoRocket {
 }
 
 class Jessie inherits EquipoRocketConMovimiento {
-
+  const property direcciones = [arriba,derecha,abajo,izquierda]
+	
 	override method danio() = 150
 
 	override method nombre() = "jessie"
+	
+	override method mover() {
+		self.position(self.direccionesPosibles().anyOne().siguiente(self.position()))
+	}
+	
+	method direccionesPosibles(){
+		return self.direcciones().filter( { direccion => self.puedeMover(direccion)})
+	}
 
 }
 
-class James inherits EquipoRocketConMovimiento {
 
+class James inherits Jessie {
 	override method danio() = 100
 
 	override method nombre() = "james"
