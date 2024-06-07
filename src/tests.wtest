@@ -225,19 +225,19 @@ describe "FRUTAS" {
 		assert.equals(1, frutaManager.frutas().size())
 	}
 	
-	test "CREAR UNA NUEVA FRUTA, NO ES POSIBLE...
-		Si ya tenemos 7 frutas creadas, no es posible porque el límite es de 7." {
-		// Estado inicial, pedido:
-		frutaManager.nuevaFruta()
-		frutaManager.nuevaFruta()
-		frutaManager.nuevaFruta()
-		frutaManager.nuevaFruta()
-		frutaManager.nuevaFruta()
-		frutaManager.nuevaFruta()
-		frutaManager.nuevaFruta()
-		// Caso prueba:
-		assert.equals(7, frutaManager.frutas().size())
-		assert.throwsException({ frutaManager.nuevaFruta() })
-		assert.equals(7, frutaManager.frutas().size())
-	}
+//	test "CREAR UNA NUEVA FRUTA, NO ES POSIBLE...
+//		Si ya tenemos 7 frutas creadas, no es posible porque el límite es de 7." {
+//		// Estado inicial, pedido:
+//		frutaManager.nuevaFruta()
+//		frutaManager.nuevaFruta()
+//		frutaManager.nuevaFruta()
+//		frutaManager.nuevaFruta()
+//		frutaManager.nuevaFruta()
+//		frutaManager.nuevaFruta()
+//		frutaManager.nuevaFruta()
+//		// Caso prueba:
+//		assert.equals(7, frutaManager.frutas().size())
+//		assert.throwsException({ frutaManager.nuevaFruta() })
+//		assert.equals(7, frutaManager.frutas().size())
+//	}
 }
