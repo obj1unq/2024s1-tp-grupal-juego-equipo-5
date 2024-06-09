@@ -50,10 +50,14 @@ class EquipoRocketConMovimientoVariable inherits EquipoRocketConMovimiento {
 	
 	const property direcciones = [arriba,derecha,abajo,izquierda]
 	
-	override method direccionDeCambio() = self.direccionPosible() 
+	override method direccionDeCambio() = self.direccionNueva() 
 	
-	method direccionPosible(){
-		return self.direcciones().find({ direccion => self.puedeMover(direccion) })
+	method direccionesPosibles() {
+		return self.direcciones().filter({ direccion => self.puedeMover(direccion) })
+	}
+	
+	method direccionNueva() {
+		return self.direccionesPosibles().anyOne()
 	}
 
 }

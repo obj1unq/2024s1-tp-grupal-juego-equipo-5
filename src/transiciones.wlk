@@ -122,7 +122,7 @@ object b {
 object a {
 
 	method generar(posicion) {
-		const james = new James(position = posicion, direccion = arriba)
+		const james = new James(position = posicion, direccion = derecha)
 		game.addVisual(james)
 		game.onTick(400, "Custodia 2", {james.mover()})
 	}
@@ -132,7 +132,7 @@ object a {
 object j {
 
 	method generar(posicion) {
-		const jessie = new Jessie(position = posicion, direccion = abajo)
+		const jessie = new Jessie(position = posicion, direccion = arriba)
 		game.addVisual(jessie)
 		game.onTick(400, "Custodia 3", {jessie.mover()})
 	}
@@ -251,32 +251,32 @@ object escenario {
 	method nivel2() = [ 
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 		[x,_,_,_,x,_,_,_,w,_,_,x,_,_,_,_,_,x],
-		[x,_,_,o,x,_,_,_,_,_,_,x,_,_,p,_,_,x],
-		[x,_,_,_,x,_,_,_,_,_,_,u,_,_,_,_,i,x],
+		[x,_,_,o,x,_,_,_,_,i,_,x,_,_,p,_,_,x],
+		[x,_,_,_,x,_,_,_,_,i,_,u,_,_,_,_,i,x],
 		[x,x,n,x,x,_,_,t,_,_,_,x,x,x,x,x,x,x],
-		[x,d,_,_,_,_,_,x,x,x,x,_,_,_,_,_,_,x],
+		[x,d,_,_,_,_,_,x,x,x,x,_,_,i,_,_,_,x],
 		[x,_,_,_,_,_,_,x,_,_,n,_,_,_,_,_,m,x],
-		[x,x,u,x,x,x,_,x,o,_,x,_,_,_,_,_,_,x],
+		[x,x,u,x,x,x,_,x,o,_,x,_,_,i,_,_,_,x],
 		[x,_,_,i,_,x,_,x,x,x,x,_,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,i,_,_,_,n,_,_,i,g,x],
-		[x,_,o,_,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
-		[x,_,_,i,_,x,_,i,_,k,_,_,x,_,_,_,_,x],
+		[x,_,i,_,_,x,_,_,i,_,_,_,n,_,_,i,g,x],
+		[x,_,o,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
+		[x,_,_,i,_,x,_,i,_,k,_,_,x,i,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
-	].reverse() // COMPLETAR RESTO 
+	].reverse()
 	
 	method nivel3() = [
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,o,x,_,w,_,i,_,x,_,_,_,_,_,k,x],
+		[x,_,_,o,x,_,w,_,i,_,x,_,_,_,_,j,k,x],
 		[x,_,_,i,x,_,_,_,_,o,x,_,_,_,_,_,_,x],
-		[x,_,_,_,x,_,_,_,i,_,x,j,_,_,_,_,i,x],
+		[x,_,_,_,x,_,_,_,i,_,x,_,_,_,_,_,i,x],
 		[x,x,n,x,x,_,_,_,_,_,x,d,_,_,_,_,_,x],
-		[x,_,_,_,u,_,_,_,_,_,x,o,_,_,_,_,_,x],
+		[x,_,_,_,u,i,_,_,i,_,x,o,_,_,_,_,_,x],
 		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,n,x,x],
-		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,m,t,x],
+		[x,m,_,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
 		[x,x,x,x,x,x,x,x,x,u,x,n,x,x,x,x,x,x],
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
-		[x,_,v,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
-		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,_,_,x],
+		[x,_,v,_,_,x,_,_,_,_,x,_,_,_,_,i,_,x],
+		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,i,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() // COMPLETAR RESTO
 	
@@ -302,13 +302,13 @@ object escenario {
 		[x,_,_,u,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
 		[x,_,i,x,_,_,_,_,_,_,_,x,_,x,u,x,x,x],
 		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
-		[x,t,_,x,j,_,i,u,_,_,_,x,_,x,_,_,x,x],
+		[x,t,_,x,t,_,i,u,_,_,_,x,_,x,_,_,x,x],
 		[x,x,_,x,c,_,_,x,x,x,x,x,_,n,m,_,x,x],
-		[x,x,_,x,t,_,_,n,_,_,_,x,_,x,_,_,x,x],
+		[x,x,_,x,a,_,_,n,_,_,_,x,_,x,_,_,x,x],
 		[x,k,_,x,x,x,x,x,x,x,_,x,_,x,t,_,_,x],
 		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,n,x],
-		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,a,_,_,x],
-		[x,p,_,x,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
+		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,_,_,j,x],
+		[x,_,p,x,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() // COMPLETAR RESTO
 	
@@ -347,7 +347,7 @@ object nivelManager {
 	}
 
 	method quedanNiveles() {
-		return nivelActual < (niveles.size() - 1)
+		return nivelActual < niveles.size()
 	}
 
 	method resetear() {
@@ -387,68 +387,73 @@ object gameManager {
 	}
 
 	method victoriaParcial() {
-		nivelManager.aumentarNivelActual()
 		self.resetTemporal(pikachu.energia())
-		game.schedule(100, { self.generar()})
+		nivelManager.aumentarNivelActual()
+		game.schedule(100, {self.generar()})
 	}
 
 	method derrota() {
 		game.clear()
 		portadaManager.presentarDerrota()
-		game.schedule(4000, { self.reset()})
+		game.schedule(4000, {self.reset()})
 	}
 
 }
 
-object victoria {
-
+class Portada {
+	
 	const property position = game.at(0, 0)
-	const property image = "victoria.png"
+	
+	method image() = self.nombre() + ".png"
+	
+	method nombre()
+}
+
+object victoria inherits Portada {
+
+	override method nombre() = "victoria"
 
 }
 
-object derrota {
+object derrota inherits Portada {
 
-	const property position = game.at(0, 0)
-	const property image = "derrota.png"
-
-}
-
-object inicioDelJuego {
-
-	const property position = game.at(0, 0)
-	const property image = "menu-inicial.png"
+	override method nombre() = "derrota"
 
 }
 
-object inicioNivel {
+object inicioDelJuego inherits Portada {
 
-	const property image = "instrucciones-nivel-" + (nivelManager.numeroDeNivel() + 1).toString() + ".png"
-	const property position = game.at(0, 0)
+	override method nombre() = "menu-inicial"
 
 }
 
-object infoJugabilidad {
+object inicioNivel inherits Portada {
 
-	const property image = "infoJugabilidad.png"
-	const property position = game.at(0, 0)
+	override method nombre() = "instrucciones-nivel-" + self.nivelActual().toString()
+	
+	method nivelActual() {
+		return nivelManager.numeroDeNivel() + 1
+	}
 
+}
+
+object infoJugabilidad inherits Portada {
+
+	override method nombre() = "infoJugabilidad"
+	
 }
 
 object portadaManager {
 
-	const property position = game.at(0, 0)
-	var property image = "menu-inicial.png"
-
 	method presentarMenuInicio() {
 		game.addVisual(inicioDelJuego)
-		keyboard.enter().onPressDo{ self.presentarNivel()}
+		keyboard.enter().onPressDo{ self.presentarNivel() }
 	}
 
 	method presentarNivel() {
 		game.clear()
 		game.addVisual(inicioNivel)
-		keyboard.enter().onPressDo{ gameManager.generar()}
+		keyboard.enter().onPressDo{ gameManager.generar() }
 	}
 
 	method removerVisual() {
@@ -465,8 +470,7 @@ object portadaManager {
 
 	method presentarInfo() {
 		game.addVisual(infoJugabilidad)
-		keyboard.enter().onPressDo{ game.removeVisual(infoJugabilidad)// game.start()
-		}
+		keyboard.enter().onPressDo{ game.removeVisual(infoJugabilidad) }
 	}
 
 }
@@ -477,7 +481,6 @@ object info {
 	var property image = "info.png"
 
 	method mostrarInfo() {
-		// game.stop()
 		portadaManager.presentarInfo()
 	}
 
