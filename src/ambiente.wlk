@@ -5,6 +5,7 @@ import posicionamiento.*
 import randomizer.*
 import transiciones.*
 import wollok.game.*
+import config.*
 
 // PAREDES
 class Pared inherits Articulo {
@@ -159,6 +160,7 @@ object cofresManager {
 object llave {
 
 	var property position
+	const property sonido = "agarrarLlave.wav"
 
 	method image() {
 		return "llave.png"
@@ -168,6 +170,7 @@ object llave {
 		game.say(pikachu, "Si!, la encontramos")
 		self.cambiarVisual()
 		pikachu.obtenerLlave()
+		sonidosManager.sonar(self.sonido())
 	}
 
 	method cambiarVisual() {
@@ -231,10 +234,12 @@ class Boton inherits Articulo {
 
 	var property image = "botonSinPresion.png"
 	var estaPresionado = false
-
+	const property sonido = "musica-botonPuertas.wav"
+	
 	override method action() {
 		puertasManager.cambiarEstadoPuertas()
 		self.cambiarImagen()
+		sonidosManager.sonar(self.sonido())
 	}
 
 	method cambiarImagen() {

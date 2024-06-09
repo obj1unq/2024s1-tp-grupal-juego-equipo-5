@@ -35,3 +35,9 @@ object config {
 	
 }
 
+object sonidosManager {
+	method sonar(musica){
+		game.sound(musica).play()
+	}
+}
+
