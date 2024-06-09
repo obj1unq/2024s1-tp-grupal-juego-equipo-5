@@ -1,0 +1,20 @@
+import alimentosFrutales.*
+import ambiente.*
+import config.*
+import enemigos.*
+import pokemons.*
+import posicionamiento.*
+import randomizer.*
+import transiciones.*
+import wollok.game.*
+
+describe "FRUTAS" {
+	
+	test "CREAR UNA NUEVA FRUTA." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		frutaManager.nuevaFruta()
+		assert.equals(1, frutaManager.frutas().size())
+	}
+	
+}

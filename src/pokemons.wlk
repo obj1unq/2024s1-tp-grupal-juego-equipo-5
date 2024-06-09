@@ -80,9 +80,7 @@ object pikachu {
 		self.energia(energiaReset) 
 		self.tieneLlave(false)
 		self.heRescatadoAlPrisionero(false)
-		//self.position(game.at(1,1))
 		self.estado(caminando)
-		
 	}
 
 }

@@ -14,7 +14,7 @@ describe "DETECTIVE" {
 	const manzana = new Manzana(position = game.at(3,4))
 	const uva     = new Uva(position = game.at(4,3))
 	// ENEMIGOS EJEMPLIFICADORES
-	const james  = new James(position = game.at(10,1), direccion = arriba)
+	const james  = new James(position = game.at(10,1))
 	const pinche = new Pinche(position = game.at(9,1))
 	// AMBIENTE
 	const cofre = new Cofre(position = game.at(7,7))
@@ -154,90 +154,22 @@ describe "DETECTIVE" {
 		assert.notThat(prisioneroEvee.esAtravesable())
 	}
 	
-}
-
-describe "EQUIPO ROCKET" {
-	
-	const james  = new James(position = game.at(1,1), direccion = arriba)
-	const jessie = new Jessie(position = game.at(2,2), direccion = abajo)
-	const meowth = new Meowth(position = game.at(3,3), direccion = izquierda)
-	const daga   = new Daga(position = game.at(4,4), direccion = derecha)
-	const pinche = new Pinche(position = game.at(5,5))
-	const enemigos = #{james, jessie, meowth, daga, pinche}
-	
-	const pared1 = new Pared(position = game.at(5,4))
-	const pared2 = new Pared(position = game.at(2,3))
-	const pared3 = new Pared(position = game.at(1,2))
-	const pared4 = new Pared(position = game.at(2,1))
-	const paredes = #{pared1, pared2, pared3, pared4}
-
-	method initialize() {
-		game.clear()
-		config.ambienteBasico()
-		enemigos.forEach({enemigo => game.addVisual(enemigo)})
-	}
-	
-	test "GENERAL: PRIMERA OPCION DE MOVIMIENTO..." {
-		// Estado inicial, no pedido.
-		// Caso prueba: DAGA --> DIRECCION EJEMPLIFICADORA: DERECHA
-		daga.mover()
-		assert.equals("equipo-rocket-daga-va-para-derecha.png", daga.image())
-		assert.equals(game.at(5,4), daga.position())
-		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: IZQUIERDA
-		meowth.mover()
-		assert.equals("equipo-rocket-meowth.png", meowth.image())
-		assert.equals(game.at(2,3), meowth.position())
-		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ARRIBA
-//		james.mover()
-//		assert.equals("equipo-rocket-james.png", james.image())
-//		assert.equals(game.at(1,2), james.position())
-		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ABAJO
-//		jessie.mover()
-//		assert.equals("equipo-rocket-jessie.png", jessie.image())
-//		assert.equals(game.at(2,1), jessie.position())
-	}
-	
-	test "GENERAL: SEGUNDA OPCION DE MOVIMIENTO..." {
-		// Estado inicial pedido: Una pared bloquea la primera opción de movimiento posible.
-		paredes.forEach({pared => game.addVisual(pared)})
-		// Caso prueba: DAGA --> DIRECCION EJEMPLIFICADORA: DERECHA
-		daga.mover()
-		assert.equals(game.at(4,4), daga.position()) // POSICION INICIAL
-		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: IZQUIERDA
-		meowth.mover()
-		assert.equals(game.at(4,3), meowth.position()) // POSICION OPUESTA
-		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ARRIBA
-//		james.mover()
-//		assert.equals(game.at(1,0), james.position()) // POSICION OPUESTA
-		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: ABAJO
-//		jessie.mover()
-//		assert.equals(game.at(2,3), jessie.position()) // POSICION OPUESTA
+	test "RESETEAR...
+		Una vez que pikachu es reseteado: 
+		no tiene la llave ni rescató al prisionero, obtiene la energia que le pasen 
+		(ya sea la inicial o la del nivel previo) y su estado es caminando." {
+		// Estado inicial pedido, versión ejemplificadora: GANADOR
+		pikachu.estado(ganador)
+		pikachu.energia(400)
+		pikachu.obtenerLlave()
+		pikachu.heRescatadoAlPrisionero(true)
+		// Caso prueba versión ejemplificadora: GANADOR
+		pikachu.resetear(400)
+		assert.notThat(pikachu.tieneLlave())
+		assert.notThat(pikachu.heRescatadoAlPrisionero())
+		assert.equals(caminando, pikachu.estado())
+		assert.equals(400, pikachu.energia())
 	}
 	
 }
 
-describe "FRUTAS" {
-	
-	test "CREAR UNA NUEVA FRUTA, ES POSIBLE..." {
-		// Estado inicial, no pedido.
-		// Caso prueba:
-		frutaManager.nuevaFruta()
-		assert.equals(1, frutaManager.frutas().size())
-	}
-	
-//	test "CREAR UNA NUEVA FRUTA, NO ES POSIBLE...
-//		Si ya tenemos 7 frutas creadas, no es posible porque el límite es de 7." {
-//		// Estado inicial, pedido:
-//		frutaManager.nuevaFruta()
-//		frutaManager.nuevaFruta()
-//		frutaManager.nuevaFruta()
-//		frutaManager.nuevaFruta()
-//		frutaManager.nuevaFruta()
-//		frutaManager.nuevaFruta()
-//		frutaManager.nuevaFruta()
-//		// Caso prueba:
-//		assert.equals(7, frutaManager.frutas().size())
-//		assert.throwsException({ frutaManager.nuevaFruta() })
-//		assert.equals(7, frutaManager.frutas().size())
-//	}
-}

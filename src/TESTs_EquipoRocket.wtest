@@ -1,0 +1,61 @@
+import ambiente.*
+import config.*
+import enemigos.*
+import posicionamiento.*
+import wollok.game.*
+
+describe "EQUIPO ROCKET" {
+	
+	const jessie   = new Jessie(position = game.at(1,1))
+	const meowth   = new Meowth(position = game.at(3,3), direccion = izquierda)
+	const daga     = new Daga(position = game.at(4,4), direccion = derecha)
+	const enemigos = #{jessie, meowth, daga}
+	
+	const pared1 = new Pared(position = game.at(5,4))
+	const pared2 = new Pared(position = game.at(2,3))
+	const pared3 = new Pared(position = game.at(1,2))
+	const pared4 = new Pared(position = game.at(2,1))
+	const pared5 = new Pared(position = game.at(0,1))
+	
+	const paredesParaFijos = #{pared1, pared2}
+	const paredesParaVariable = #{pared3, pared4, pared5}
+	
+	method initialize() {
+		game.clear()
+		config.ambienteBasico()
+		enemigos.forEach({enemigo => game.addVisual(enemigo)})
+	}
+	
+	test "EQUIPO ROCKET CON MOVIMIENTO DE DIRECCION FIJA: PRIMERA OPCION..." {
+		// Estado inicial, no pedido.
+		// Caso prueba: DAGA --> DIRECCION EJEMPLIFICADORA: DERECHA
+		daga.mover()
+		assert.equals("equipo-rocket-daga-va-para-derecha.png", daga.image())
+		assert.equals(game.at(5,4), daga.position())
+		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: IZQUIERDA
+		meowth.mover()
+		assert.equals("equipo-rocket-meowth.png", meowth.image())
+		assert.equals(game.at(2,3), meowth.position())
+	}
+	
+	test "EQUIPO ROCKET CON MOVIMIENTO DE DIRECCION FIJA: SEGUNDA OPCION..." {
+		// Estado inicial pedido: Una pared bloquea la primera opción de dirección posible.
+		paredesParaFijos.forEach({pared => game.addVisual(pared)})
+		// Caso prueba: DAGA --> DIRECCION EJEMPLIFICADORA: DERECHA
+		daga.mover()
+		assert.equals(game.at(4,4), daga.position()) // POSICION INICIAL
+		// Caso prueba: MEOWTH --> DIRECCION EJEMPLIFICADORA: IZQUIERDA
+		meowth.mover()
+		assert.equals(game.at(4,3), meowth.position()) // POSICION OPUESTA
+	}
+	
+	test "EQUIPO ROCKET CON MOVIMIENTO DE DIRECCION VARIABLE..." {
+		// Estado inicial pedido: Hay una pared que bloquea todas las direcciones posibles salvo una.
+		paredesParaVariable.forEach({pared => game.addVisual(pared)})
+		// Caso prueba: ENEMIGO EJEMPLIFICADOR: Jessie.
+		jessie.mover()
+		assert.equals(game.at(1,0), jessie.position())
+	}
+	
+}
+

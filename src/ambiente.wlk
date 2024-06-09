@@ -194,12 +194,12 @@ class Puerta {
 	}
 
 	method cambiarEstado() {
-		estado.cambiar(self)
+		estado = estado.siguiente()
 	}
 
 	method esAtravesable() = estado.esAtravesable()
 
-	method image() = estado.image()
+	method image() = "puerta-" + self.estado().toString() + ".png"  
 
 }
 
@@ -207,10 +207,8 @@ object cerrada {
 
 	method esAtravesable() = false
 
-	method image() = "puertaCerrada.png"
-
-	method cambiar(puerta) {
-		puerta.estado(abierta)
+	method siguiente() {
+		return abierta
 	}
 
 }
@@ -218,11 +216,9 @@ object cerrada {
 object abierta {
 
 	method esAtravesable() = true
-
-	method image() = "puertaAbierta.png"
-
-	method cambiar(puerta) {
-		puerta.estado(cerrada)
+	
+	method siguiente() {
+		return cerrada
 	}
 
 }
