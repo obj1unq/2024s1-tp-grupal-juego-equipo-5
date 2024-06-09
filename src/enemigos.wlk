@@ -4,7 +4,7 @@ import posicionamiento.*
 import randomizer.*
 import wollok.game.*
 
-// AMBIENTACION CON COLISIONES
+// EQUIPO ROCKET
 class EquipoRocket {
 
 	var property position
@@ -26,51 +26,62 @@ class EquipoRocket {
 
 }
 
-/////EQUIPO ROCKET
 class EquipoRocketConMovimiento inherits EquipoRocket {
-
+	
 	const escenario = tablero
+	
+	method mover()
+	
+	method puedeMover(dir) {
+		return escenario.puedeIr(self.position(), dir)
+	}
+	
+}
+
+class EquipoRocketConDireccionFija inherits EquipoRocketConMovimiento {
+
 	var property direccion
 
-	method mover() {
+	override method mover() {
 		if (not self.puedeMover(direccion)) {
 			direccion = direccion.opuesto()
 		}
 		self.position(direccion.siguiente(self.position()))
 	}
 
-	method puedeMover(dir) {
-		return escenario.puedeIr(self.position(), dir)
+}
+
+class EquipoRocketConDireccionVariable inherits EquipoRocketConMovimiento {
+	
+	const property direcciones = [arriba,derecha,abajo,izquierda]
+	
+	override method mover() {
+		self.position(self.unaDireccionPosible().siguiente(self.position()))
+	}
+	
+	method unaDireccionPosible(){
+		return self.direcciones().find( { direccion => self.puedeMover(direccion)})
 	}
 
 }
-
-class Jessie inherits EquipoRocketConMovimiento {
-  const property direcciones = [arriba,derecha,abajo,izquierda]
 	
+class Jessie inherits EquipoRocketConDireccionVariable {
+    
 	override method danio() = 150
 
 	override method nombre() = "jessie"
 	
-	override method mover() {
-		self.position(self.direccionesPosibles().anyOne().siguiente(self.position()))
-	}
-	
-	method direccionesPosibles(){
-		return self.direcciones().filter( { direccion => self.puedeMover(direccion)})
-	}
-
 }
 
-
-class James inherits Jessie {
+class James inherits EquipoRocketConDireccionVariable {
+	
 	override method danio() = 100
 
 	override method nombre() = "james"
 
 }
 
-class Meowth inherits EquipoRocketConMovimiento {
+class Meowth inherits EquipoRocketConDireccionFija {
 
 	override method danio() = 75
 
@@ -78,7 +89,7 @@ class Meowth inherits EquipoRocketConMovimiento {
 
 }
 
-class Daga inherits EquipoRocketConMovimiento {
+class Daga inherits EquipoRocketConDireccionFija {
 
 	var property inicial = position
 
