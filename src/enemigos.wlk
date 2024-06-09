@@ -29,8 +29,16 @@ class EquipoRocket {
 class EquipoRocketConMovimiento inherits EquipoRocket {
 	
 	const escenario = tablero
+	var property direccion
 	
-	method mover()
+	method direccionDeCambio() = direccion.opuesto()
+	
+	method mover() {
+		if (not self.puedeMover(direccion)) {
+			direccion = self.direccionDeCambio()
+		}
+		self.position(direccion.siguiente(self.position())) 
+	}
 	
 	method puedeMover(dir) {
 		return escenario.puedeIr(self.position(), dir)
@@ -38,34 +46,19 @@ class EquipoRocketConMovimiento inherits EquipoRocket {
 	
 }
 
-class EquipoRocketConDireccionFija inherits EquipoRocketConMovimiento {
-
-	var property direccion
-
-	override method mover() {
-		if (not self.puedeMover(direccion)) {
-			direccion = direccion.opuesto()
-		}
-		self.position(direccion.siguiente(self.position()))
-	}
-
-}
-
-class EquipoRocketConDireccionVariable inherits EquipoRocketConMovimiento {
+class EquipoRocketConMovimientoVariable inherits EquipoRocketConMovimiento {
 	
 	const property direcciones = [arriba,derecha,abajo,izquierda]
 	
-	override method mover() {
-		self.position(self.unaDireccionPosible().siguiente(self.position()))
-	}
+	override method direccionDeCambio() = self.direccionPosible() 
 	
-	method unaDireccionPosible(){
-		return self.direcciones().find( { direccion => self.puedeMover(direccion)})
+	method direccionPosible(){
+		return self.direcciones().find({ direccion => self.puedeMover(direccion) })
 	}
 
 }
 	
-class Jessie inherits EquipoRocketConDireccionVariable {
+class Jessie inherits EquipoRocketConMovimientoVariable {
     
 	override method danio() = 150
 
@@ -73,7 +66,7 @@ class Jessie inherits EquipoRocketConDireccionVariable {
 	
 }
 
-class James inherits EquipoRocketConDireccionVariable {
+class James inherits EquipoRocketConMovimientoVariable {
 	
 	override method danio() = 100
 
@@ -81,7 +74,7 @@ class James inherits EquipoRocketConDireccionVariable {
 
 }
 
-class Meowth inherits EquipoRocketConDireccionFija {
+class Meowth inherits EquipoRocketConMovimiento {
 
 	override method danio() = 75
 
@@ -89,7 +82,7 @@ class Meowth inherits EquipoRocketConDireccionFija {
 
 }
 
-class Daga inherits EquipoRocketConDireccionFija {
+class Daga inherits EquipoRocketConMovimiento {
 
 	var property inicial = position
 

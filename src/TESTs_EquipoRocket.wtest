@@ -6,7 +6,7 @@ import wollok.game.*
 
 describe "EQUIPO ROCKET" {
 	
-	const jessie   = new Jessie(position = game.at(1,1))
+	const jessie   = new Jessie(position = game.at(1,1), direccion = arriba)
 	const meowth   = new Meowth(position = game.at(3,3), direccion = izquierda)
 	const daga     = new Daga(position = game.at(4,4), direccion = derecha)
 	const enemigos = #{jessie, meowth, daga}

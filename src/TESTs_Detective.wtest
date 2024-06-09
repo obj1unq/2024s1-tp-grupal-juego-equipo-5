@@ -14,7 +14,7 @@ describe "DETECTIVE" {
 	const manzana = new Manzana(position = game.at(3,4))
 	const uva     = new Uva(position = game.at(4,3))
 	// ENEMIGOS EJEMPLIFICADORES
-	const james  = new James(position = game.at(10,1))
+	const james  = new James(position = game.at(10,1), direccion = derecha)
 	const pinche = new Pinche(position = game.at(9,1))
 	// AMBIENTE
 	const cofre = new Cofre(position = game.at(7,7))
