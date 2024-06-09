@@ -122,7 +122,7 @@ object b {
 object a {
 
 	method generar(posicion) {
-		const james = new James(position = posicion)
+		const james = new James(position = posicion, direccion = arriba)
 		game.addVisual(james)
 		game.onTick(400, "Custodia 2", {james.mover()})
 	}
@@ -132,7 +132,7 @@ object a {
 object j {
 
 	method generar(posicion) {
-		const jessie = new Jessie(position = posicion)
+		const jessie = new Jessie(position = posicion, direccion = abajo)
 		game.addVisual(jessie)
 		game.onTick(400, "Custodia 3", {jessie.mover()})
 	}
@@ -213,6 +213,7 @@ object f {
 object mapa {
 
 	method generar(nivel) {
+		cofresManager.resetear()
 		(0 .. game.width() - 1).forEach({ x => (0 .. game.height() - 1).forEach({ y => self.generarCelda(x, y, nivel)})})
 		cofresManager.colocarLLave()
 		game.addVisual(pikachu)
@@ -254,20 +255,20 @@ object escenario {
 		[x,_,_,_,x,_,_,_,_,_,_,u,_,_,_,_,i,x],
 		[x,x,n,x,x,_,_,t,_,_,_,x,x,x,x,x,x,x],
 		[x,d,_,_,_,_,_,x,x,x,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,_,_,x,_,_,n,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,_,x,_,_,n,_,_,_,_,_,m,x],
 		[x,x,u,x,x,x,_,x,o,_,x,_,_,_,_,_,_,x],
 		[x,_,_,i,_,x,_,x,x,x,x,_,x,x,x,x,x,x],
 		[x,_,_,_,_,x,_,_,i,_,_,_,n,_,_,i,g,x],
 		[x,_,o,_,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
 		[x,_,_,i,_,x,_,i,_,k,_,_,x,_,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse() // COMPLETAR RESTO 
 	
 	method nivel3() = [
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,o,x,_,_,_,i,_,x,_,_,_,_,_,k,x],
+		[x,_,_,o,x,_,w,_,i,_,x,_,_,_,_,_,k,x],
 		[x,_,_,i,x,_,_,_,_,o,x,_,_,_,_,_,_,x],
-		[x,_,_,_,x,_,_,_,i,_,x,_,_,_,_,_,i,x],
+		[x,_,_,_,x,_,_,_,i,_,x,j,_,_,_,_,i,x],
 		[x,x,n,x,x,_,_,_,_,_,x,d,_,_,_,_,_,x],
 		[x,_,_,_,u,_,_,_,_,_,x,o,_,_,_,_,_,x],
 		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,n,x,x],
@@ -276,7 +277,7 @@ object escenario {
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
 		[x,_,v,_,_,x,_,_,_,_,x,_,_,_,_,_,_,x],
 		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() // COMPLETAR RESTO
 	
 	method nivel4()= [
@@ -289,26 +290,26 @@ object escenario {
 		[x,_,_,_,_,x,_,x,_,x,_,o,_,x,_,_,_,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,_,x,_,_,_,x],
 		[x,_,o,_,_,x,_,x,_,x,_,j,_,x,o,_,_,x],
-		[x,_,_,a,_,u,_,_,_,x,_,_,_,x,_,_,_,x],
+		[x,_,_,a,_,u,_,_,_,x,_,_,_,x,_,_,b,x],
 		[x,x,x,x,x,x,x,x,n,x,x,x,x,x,u,x,x,x],
-		[x,p,_,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
+		[x,_,p,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() // COMPLETAR RESTO
 	
 	method nivel5()= [
 		[_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 		[x,_,_,u,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,u,x,x,x],
+		[x,_,i,x,_,_,_,_,_,_,_,x,_,x,u,x,x,x],
 		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
-		[x,x,_,x,c,_,_,x,x,x,x,x,_,u,_,_,x,x],
-		[x,x,_,x,_,_,_,u,_,_,_,x,_,x,_,_,x,x],
-		[x,_,_,x,x,x,x,x,x,x,_,x,_,x,_,_,_,x],
-		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,u,x],
-		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,_,_,_,x],
+		[x,t,_,x,j,_,i,u,_,_,_,x,_,x,_,_,x,x],
+		[x,x,_,x,c,_,_,x,x,x,x,x,_,n,m,_,x,x],
+		[x,x,_,x,t,_,_,n,_,_,_,x,_,x,_,_,x,x],
+		[x,k,_,x,x,x,x,x,x,x,_,x,_,x,t,_,_,x],
+		[x,_,_,x,_,_,_,_,_,_,_,x,_,x,x,x,n,x],
+		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,a,_,_,x],
 		[x,p,_,x,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() // COMPLETAR RESTO
 	
 	method niveles() {

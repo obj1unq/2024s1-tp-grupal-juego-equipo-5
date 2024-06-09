@@ -149,6 +149,10 @@ object cofresManager {
 		self.agregarCofre(cofre)
 		game.addVisual(cofre)
 	}
+	
+	method resetear() {
+		cofres.clear()
+	}
 
 }
 
