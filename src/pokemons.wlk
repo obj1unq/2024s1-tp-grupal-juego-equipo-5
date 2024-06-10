@@ -4,6 +4,7 @@ import posicionamiento.*
 import randomizer.*
 import transiciones.*
 import wollok.game.*
+import config.*
 
 // DETECTIVE
 object pikachu {
@@ -27,6 +28,7 @@ object pikachu {
 
 	method comerFruta(fruta) {
 		energia = (energia + fruta.energia()).min(600)
+		sonidosManager.sonar("comer-fruta.mp3")
 		self.siEstaAgotadoMuere()
 	}
 
