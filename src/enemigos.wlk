@@ -105,7 +105,7 @@ class Daga inherits EquipoRocketConMovimiento {
 			self.position(direccion.siguiente(self.position()))
 		}
 	}
-
+	override method sonido() = "daga.wav"
 }
 
 class Pinche inherits EquipoRocket {
@@ -119,6 +119,7 @@ class Pinche inherits EquipoRocket {
 	method cambiarEstado() {
 		estado = estado.siguiente()
 	}
+	
 	override method sonido() = "pinches.wav"
 }
 
