@@ -103,7 +103,23 @@ class Daga inherits EquipoRocketConMovimiento {
 	}
 
 }
+object dagasManager {
 
+	const dagas = []
+
+	method agregarDaga(daga) {
+		dagas.add(daga)
+	}
+
+	method crearDaga(posicion, direccion) {
+		const daga = new Daga(position = posicion, direccion = direccion)
+		self.agregarDaga(daga)
+		game.addVisual(daga)
+		game.onTick(500, "Custodia" + daga.identity(), {daga.mover()})
+	}
+	
+
+}
 class Pinche inherits EquipoRocket {
 
 	var property estado = desactivado
@@ -118,21 +134,27 @@ class Pinche inherits EquipoRocket {
 
 	method cambiarEstado() {
 		estado = estado.siguiente()
-	}
+	    self.refreshColision()
+    }
+    
+    method refreshColision() {
+	    if (position == pikachu.position()) {
+	    	estado.colision(pikachu,self)
+	    }
+   }
 		
 }
 
 object desactivado {
 
-	method colision(pokemon, pinche) {
-	}
+	method colision(pokemon, pinche) {}
 	
 	method danio() = 0
 
 	method siguiente() {
 		return activado
 	}
-
+	
 }
 
 object activado {
