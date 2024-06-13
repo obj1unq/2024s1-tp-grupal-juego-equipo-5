@@ -82,9 +82,7 @@ object c {
 object w {
 
 	method generar(posicion) {
-		const daga = new Daga(position = posicion, direccion = abajo)
-		game.addVisual(daga)
-		game.onTick(300, "Custodia 0", {daga.mover()})
+		dagasManager.crearDaga(posicion, abajo)
 	}
 
 }
@@ -92,9 +90,7 @@ object w {
 object z {
 
 	method generar(posicion) {
-		const daga = new Daga(position = posicion, direccion = arriba)
-		game.addVisual(daga)
-		game.onTick(300, "Custodia 0", {daga.mover()})
+		dagasManager.crearDaga(posicion, arriba)
 	}
 
 }
@@ -102,9 +98,7 @@ object z {
 object d {
 
 	method generar(posicion) {
-		const daga = new Daga(position = posicion, direccion = derecha)
-		game.addVisual(daga)
-		game.onTick(300, "Custodia 0", {daga.mover()})
+		dagasManager.crearDaga(posicion, derecha)
 	}
 
 }
@@ -112,9 +106,7 @@ object d {
 object b {
 
 	method generar(posicion) {
-		const daga = new Daga(position = posicion, direccion = izquierda)
-		game.addVisual(daga)
-		game.onTick(300, "Custodia 0", {daga.mover()})
+		dagasManager.crearDaga(posicion, izquierda)
 	}
 
 }
@@ -124,7 +116,7 @@ object a {
 	method generar(posicion) {
 		const james = new James(position = posicion, direccion = derecha)
 		game.addVisual(james)
-		game.onTick(400, "Custodia 2", {james.mover()})
+		game.onTick(400, "Custodia James", {james.mover()})
 	}
 
 }
@@ -134,7 +126,7 @@ object j {
 	method generar(posicion) {
 		const jessie = new Jessie(position = posicion, direccion = arriba)
 		game.addVisual(jessie)
-		game.onTick(400, "Custodia 3", {jessie.mover()})
+		game.onTick(400, "Custodia Jessie", {jessie.mover()})
 	}
 
 }
@@ -144,7 +136,7 @@ object m {
 	method generar(posicion) {
 		const meowth = new Meowth(position = posicion, direccion = derecha)
 		game.addVisual(meowth)
-		game.onTick(300, "Custodia 1", {meowth.mover()})
+		game.onTick(300, "Custodia Meowth", {meowth.mover()})
 	}
 
 }
@@ -234,28 +226,28 @@ object escenario {
 
 	method nivel1() = [ 
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,_,x,_,_,_,x,_,_,_,_,_,k,x],
-		[x,_,_,o,_,_,x,_,_,_,x,_,_,_,_,_,_,x],
-		[x,_,_,_,_,_,x,_,_,_,n,_,_,_,_,_,i,x],
+		[x,_,_,_,i,_,x,_,_,_,x,_,_,_,i,_,k,x],
+		[x,_,_,i,o,_,x,_,_,_,x,_,_,_,i,_,_,x],
+		[x,_,_,i,_,i,x,_,p,_,n,_,_,_,i,i,i,x],
 		[x,x,n,x,x,x,x,_,_,_,x,x,x,x,x,x,x,x],
-		[x,_,_,_,_,_,_,_,_,_,_,_,_,_,_,_,b,x],
-		[x,d,_,_,_,_,_,_,p,_,_,_,_,_,_,_,_,x],
+		[x,_,_,_,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
+		[x,_,_,_,_,_,_,_,_,_,_,_,_,n,_,_,o,x],
 		[x,x,x,x,u,x,_,_,_,_,_,_,x,x,x,x,x,x],
-		[x,_,_,i,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
-		[x,_,_,_,_,x,_,_,i,_,_,_,u,_,_,i,o,x],
-		[x,_,e,_,_,x,_,_,_,_,_,_,x,_,_,_,_,x],
-		[x,_,_,i,_,x,_,i,_,t,_,_,x,_,_,_,_,x],
+		[x,_,_,i,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
+		[x,_,_,_,_,x,_,_,i,_,i,_,u,_,_,i,o,x],
+		[x,_,e,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
+		[x,_,_,i,_,x,_,i,_,t,_,_,x,_,_,i,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse()
 	
 	method nivel2() = [ 
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
 		[x,_,_,_,x,_,_,_,w,_,_,x,_,_,_,_,_,x],
-		[x,_,_,o,x,_,_,_,_,i,_,x,_,_,p,_,_,x],
-		[x,_,_,_,x,_,_,_,_,i,_,u,_,_,_,_,i,x],
+		[x,_,_,o,x,_,_,_,_,_,_,x,_,_,p,_,_,x],
+		[x,_,i,_,x,_,_,_,_,_,_,u,_,_,_,_,i,x],
 		[x,x,n,x,x,_,_,t,_,_,_,x,x,x,x,x,x,x],
-		[x,d,_,_,_,_,_,x,x,x,x,_,_,i,_,_,_,x],
-		[x,_,_,_,_,_,_,x,_,_,n,_,_,_,_,_,m,x],
+		[x,_,_,_,_,_,_,x,x,x,x,_,_,i,_,_,_,x],
+		[x,_,_,_,_,_,_,x,_,_,n,_,_,_,_,_,b,x],
 		[x,x,u,x,x,x,_,x,o,_,x,_,_,i,_,_,_,x],
 		[x,_,_,i,_,x,_,x,x,x,x,_,x,x,x,x,x,x],
 		[x,_,i,_,_,x,_,_,i,_,_,_,n,_,_,i,g,x],
@@ -266,7 +258,7 @@ object escenario {
 	
 	method nivel3() = [
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,_,_,o,x,_,w,_,i,_,x,_,_,_,_,j,k,x],
+		[x,_,_,o,x,_,w,_,i,_,x,_,_,_,_,_,k,x],
 		[x,_,_,i,x,_,_,_,_,o,x,_,_,_,_,_,_,x],
 		[x,_,_,_,x,_,_,_,i,_,x,_,_,_,_,_,i,x],
 		[x,x,n,x,x,_,_,_,_,_,x,d,_,_,_,_,_,x],
@@ -289,7 +281,7 @@ object escenario {
 		[x,_,_,w,_,x,_,x,_,x,_,o,_,x,_,_,_,x],
 		[x,_,_,_,b,x,_,x,_,x,_,_,x,x,_,_,_,x],
 		[x,_,_,_,_,x,_,x,_,x,_,_,x,d,_,_,_,x],
-		[x,_,o,_,_,x,_,x,_,x,_,j,x,_,o,_,_,x],
+		[x,_,o,_,_,x,_,x,_,x,_,_,x,_,o,_,_,x],
 		[x,_,_,a,_,u,_,_,_,x,_,_,x,_,_,_,b,x],
 		[x,n,x,x,x,x,x,x,u,x,x,x,x,x,x,u,x,x],
 		[x,_,p,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
@@ -298,17 +290,17 @@ object escenario {
 	
 	method nivel5()= [
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x],
-		[x,w,_,u,w,_,_,_,_,_,_,_,b,x,_,i,_,x],
+		[x,_,_,u,_,_,_,_,_,_,_,_,m,x,_,i,_,x],
 		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,_,i,o,x],
-		[x,i,i,x,_,_,_,_,_,_,_,x,_,x,d,_,_,x],
+		[x,i,i,x,_,_,_,_,_,_,_,x,_,x,_,_,_,x],
 		[x,_,_,x,x,x,x,x,x,x,i,x,_,x,x,x,u,x],
 		[x,_,_,x,_,_,i,u,_,_,_,x,_,x,_,i,_,x],
-		[x,x,_,x,c,_,i,x,_,x,x,x,_,n,m,_,_,x],
+		[x,x,_,x,c,_,i,x,_,x,x,x,_,u,_,_,_,x],
 		[x,x,_,x,a,_,i,n,_,_,_,x,_,x,_,_,_,x],
 		[x,k,_,x,x,x,x,x,x,x,_,x,_,x,o,_,_,x],
 		[x,t,_,x,_,_,_,_,_,_,_,x,_,x,x,x,n,x],
-		[x,_,_,x,_,x,x,x,x,x,x,x,_,x,_,_,j,x],
-		[x,p,_,n,z,_,_,_,_,_,_,_,b,x,o,_,_,x],
+		[x,_,_,x,_,x,x,x,x,x,x,x,_,n,_,_,j,x],
+		[x,p,_,n,_,_,_,_,_,_,_,_,_,x,o,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() 
 	
