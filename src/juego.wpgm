@@ -18,13 +18,12 @@ program juego {
  
 Tareas:
 
-- Completar los ambientes de los niveles restantes (PENSAR BIEN LA DISTRIBUCIÓN PARA QUE LA DIFICULTAD SEA EN AUMENTO) . Cada vez que se complete uno avisen o borren el comentario que aclara que está incompleto en el propio código del nivel.
+- Agregarle sonido a las colisiones de Pikachu en general 
+* ( cuando come, lo dañan, gana, pierde, quizá cuando libera o encuentra la llave también) 
+* y/o una musiquita de fondo estaría bueno (puede cambiar en cada transición opcional).
 
-- Una vez completados los ambientes de los niveles, jugar para ver errores o pensar en los tests.
-
-- Agregarle sonido a las colisiones de Pikachu en general ( cuando come, lo dañan, gana, pierde, quizá cuando libera o encuentra la llave también) y/o una musiquita de fondo estaría bueno (puede cambiar en cada transición opcional).
-
-- Imágenes informativas entre cada nivel (info corta para que sea intuitivo en niveles iniciales pero que haya imágenes avisando la nueva dificultad)
+- Imágenes informativas entre cada nivel 
+* (info corta para que sea intuitivo en niveles iniciales pero que haya imágenes avisando la nueva dificultad)
 
 - Hacer tests sobre:
     • Colisiones que falten.
