@@ -108,6 +108,10 @@ class Pinche inherits EquipoRocket {
 
 	var property estado = desactivado
 
+	override method colision(pokemon) {
+		estado.colision(pokemon, self)
+	}
+	
 	override method danio() = estado.danio()
 
 	override method nombre() = "pinches-" + estado.toString()
@@ -115,15 +119,15 @@ class Pinche inherits EquipoRocket {
 	method cambiarEstado() {
 		estado = estado.siguiente()
 	}
-
+		
 }
 
 object desactivado {
 
-	method danio() = 0
-
-	method colision(pokemon) {
+	method colision(pokemon, pinche) {
 	}
+	
+	method danio() = 0
 
 	method siguiente() {
 		return activado
@@ -133,11 +137,11 @@ object desactivado {
 
 object activado {
 
-	method danio() = 50
-
-	method colision(pokemon) {
-		pokemon.recibirDanio(self)
+	method colision(pokemon, pinche) {
+		pokemon.recibirDanio(pinche)
 	}
+	
+	method danio() = 50
 
 	method siguiente() {
 		return desactivado
