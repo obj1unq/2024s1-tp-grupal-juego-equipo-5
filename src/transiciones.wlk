@@ -334,9 +334,16 @@ object nivelManager {
 	}
 
 	method aumentarNivelActual() {
+		self.validarAumentarNivelActual()
 		nivelActual += 1
 	}
-
+	
+	method validarAumentarNivelActual(){
+		if(not self.quedanNiveles()){
+			self.error("No existen más niveles")
+		}
+	}
+	
 	method quedanNiveles() {
 		return nivelActual < niveles.size()
 	}
