@@ -322,7 +322,7 @@ object nivelManager {
 	var nivelActual = 0
 
 	method numeroDeNivel() = nivelActual
-
+	
 	method nivelActual() {
 		return niveles.get(nivelActual)
 	}
@@ -384,7 +384,7 @@ object gameManager {
 	method victoriaParcial() {
 		self.resetTemporal(detective.energia())
 		nivelManager.aumentarNivelActualSiPuede()
-		game.schedule(100, {self.generar()})
+		game.schedule(100, {portadaManager.presentarNivelSiExiste()})
 	}
 
 	method derrota() {
@@ -423,13 +423,11 @@ object inicioDelJuego inherits Portada {
 
 }
 
-object inicioNivel inherits Portada {
-
-	override method nombre() = "instrucciones-nivel-" + self.nivelActual()
+object inicioDelNivel inherits Portada {
 	
-	method nivelActual() {
-		return (nivelManager.numeroDeNivel() + 1).toString()
-	}
+	method nivelActual() = nivelManager.numeroDeNivel() + 1
+	
+	override method nombre() = "instrucciones-nivel-" + self.nivelActual().toString()
 
 }
 
@@ -448,8 +446,16 @@ object portadaManager {
 
 	method presentarNivel() {
 		game.clear()
-		game.addVisual(inicioNivel)
+		game.addVisual(inicioDelNivel)
 		keyboard.enter().onPressDo{ gameManager.generar() }
+	}	
+	
+	method presentarNivelSiExiste() {
+		if (nivelManager.quedanNiveles()) {
+			self.presentarNivel()
+		} else {
+			gameManager.generar()
+		}
 	}
 	
 	method presentarInfo() {

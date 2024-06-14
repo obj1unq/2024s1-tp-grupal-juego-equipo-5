@@ -115,7 +115,7 @@ object dagasManager {
 		const daga = new Daga(position = posicion, direccion = direccion)
 		self.agregarDaga(daga)
 		game.addVisual(daga)
-		game.onTick(500, "Custodia" + daga.identity(), {daga.mover()})
+		game.onTick(500, "Custodia" + daga.identity().toString(), {daga.mover()})
 	}
 	
 
