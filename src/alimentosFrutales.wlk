@@ -68,7 +68,7 @@ class Manzana inherits Fruta {
 }
 
 class Uva inherits Fruta {
-	override method sonido() = "recibirDanio.WAV"
+	override method sonido() = "descVida.wav"
 	
 	override method nombre() = "uva"
 

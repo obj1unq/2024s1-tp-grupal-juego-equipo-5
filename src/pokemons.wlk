@@ -38,6 +38,7 @@ object pikachu {
 	}
 
 	method recibirDanio(enemigo) {
+		sonidosManager.sonar("descVida.wav")
 		energia -= enemigo.danio()
 		game.say(self, "Ay! me dolió")
 		self.siEstaAgotadoMuere()
@@ -59,6 +60,7 @@ object pikachu {
 	}
 
 	method liberarPokemon() {
+		sonidosManager.sonar("liberarPokemon.mp3")
 		heRescatadoAlPrisionero = true
 		tieneLlave = false
 	}

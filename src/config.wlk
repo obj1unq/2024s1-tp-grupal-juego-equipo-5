@@ -36,8 +36,20 @@ object config {
 }
 
 object sonidosManager {
+	
+	var sonidoFondo //= game.sound("musica-nivel-1.mp3")
 	method sonar(musica){
 		game.sound(musica).play()
+	}
+	method generarMusicaNivel(nivel){
+		//self.resetearMusica()
+		sonidoFondo = game.sound("musica-nivel-" + (nivel) + ".mp3")
+		sonidoFondo.volume(0.15)
+		sonidoFondo.shouldLoop(true)
+		sonidoFondo.play()
+	}
+	method resetearMusica(){
+		sonidoFondo.stop()
 	}
 }
 

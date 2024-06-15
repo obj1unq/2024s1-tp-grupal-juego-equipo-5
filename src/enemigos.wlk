@@ -13,7 +13,7 @@ class EquipoRocket {
 	method action() {
 	}
 	
-	method sonido() = {}
+	method sonido() = "descVida.wav" //Por ahora, hasta que encuentre mas sonidos reproducibles
 	
 	method colision(pokemon) {
 		sonidosManager.sonar(self.sonido())
