@@ -404,7 +404,7 @@ object gameManager {
 
 class Portada {
 	
-	const property position = game.at(0, 0)
+//	const property position = game.at(0, 0)
 	
 	method image() = self.nombre() + ".png"
 	
@@ -445,15 +445,19 @@ object infoJugabilidad inherits Portada {
 }
 
 object portadaManager {
-
+	
+	const property position = game.at(0, 0)
+	var property image
+	
 	method presentarMenuInicio() {
-		game.addVisual(inicioDelJuego)
+		game.clear()
+		self.presentar(inicioDelJuego)
 		keyboard.enter().onPressDo{ self.presentarNivel() }
 	}
 
 	method presentarNivel() {
 		game.clear()
-		game.addVisual(inicioDelNivel)
+		self.presentar(inicioDelNivel)
 		keyboard.enter().onPressDo{ gameManager.generar() }
 	}	
 	
@@ -465,17 +469,22 @@ object portadaManager {
 		}
 	}
 	
-	method presentarInfo() {
-		game.addVisual(infoJugabilidad)
-		keyboard.enter().onPressDo{ game.removeVisual(infoJugabilidad) }
+	method presentar(portada) {
+		self.actualizar(portada)
+		game.addVisual(self)
+	}
+	
+	method actualizar(portada) {
+		self.image(portada.image())
 	}
 
-//	method removerVisual() {
-//		game.removeVisual(self)
-//	}
+	method presentarInfo() {
+		self.presentar(infoJugabilidad)
+		keyboard.enter().onPressDo{ self.remover() }
+	}
 	
-	method presentar(portada) {
-		game.addVisual(portada)
+	method remover() {
+		game.removeVisual(self)
 	}
 
 }
