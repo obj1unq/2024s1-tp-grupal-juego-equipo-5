@@ -18,12 +18,8 @@ program juego {
  
 Tareas:
 
-- Agregarle sonido a las colisiones de Pikachu en general 
-* ( cuando come, lo dañan, gana, pierde, quizá cuando libera o encuentra la llave también) 
-* y/o una musiquita de fondo estaría bueno (puede cambiar en cada transición opcional).
-
-- Imágenes informativas entre cada nivel (CAMBIAR IMAGENES EN LOS NOMBRES DE CADA INSTRUCCION SEGÚN EL NIVEL)
-* (info corta para que sea intuitivo en niveles iniciales pero que haya imágenes avisando la nueva dificultad)
+- Agregarle sonido a las colisiones de Pikachu en general (ya esta hecho en un 90% despues lo
+* subo terminado en estos dias - Jonathan)
 
 - Hacer tests sobre:
     • Colisiones que falten.
