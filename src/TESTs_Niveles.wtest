@@ -1,0 +1,36 @@
+import transiciones.*
+import wollok.game.*
+
+describe "NIVELES" {
+
+	test "AUMENTAR EL NIVEL, ES POSIBLE CUANDO...
+		*El número del nivel actual es menor a 5 (es el último)." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		assert.equals(0, nivelManager.numeroDeNivel())
+		nivelManager.aumentarNivelActual()
+		assert.equals(1, nivelManager.numeroDeNivel())
+		nivelManager.aumentarNivelActual()
+		assert.equals(2, nivelManager.numeroDeNivel())
+		nivelManager.aumentarNivelActual()
+		assert.equals(3, nivelManager.numeroDeNivel())
+		nivelManager.aumentarNivelActual()
+		assert.equals(4, nivelManager.numeroDeNivel())
+		nivelManager.aumentarNivelActual()
+		assert.equals(5, nivelManager.numeroDeNivel())
+		assert.throwsException({ nivelManager.aumentarNivelActual() })
+		assert.equals(5, nivelManager.numeroDeNivel())
+		nivelManager.aumentarNivelActualSiPuede() // Como no es posible, no hace nada.
+		assert.equals(5, nivelManager.numeroDeNivel())
+	}
+	
+	test "RESETEAR...
+		Al resetear el nivel, su número de nivel vuelve a ser cero." {
+		// Estado inicial, pedido: El número del nivel debe ser distinto de cero.
+		nivelManager.aumentarNivelActual()
+		// Caso prueba:
+		nivelManager.resetear()
+		assert.equals(0, nivelManager.numeroDeNivel())
+	}
+	
+}

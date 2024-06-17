@@ -1,0 +1,53 @@
+import transiciones.*
+import wollok.game.*
+
+describe "PORTADAS" {
+
+	test "PRESENTACION: INICIAL." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		portadaManager.presentar(inicioDelJuego)
+		assert.equals("menu-inicial.png", portadaManager.image())
+	}
+	
+	test "PRESENTACION: NIVELES..." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		portadaManager.presentarNivel()
+		assert.equals("instrucciones-nivel-1.png", portadaManager.image())
+		nivelManager.aumentarNivelActual()
+		portadaManager.presentarNivel()
+		assert.equals("instrucciones-nivel-2.png", portadaManager.image())
+		nivelManager.aumentarNivelActual()
+		portadaManager.presentarNivel()
+		assert.equals("instrucciones-nivel-3.png", portadaManager.image())
+		nivelManager.aumentarNivelActual()
+		portadaManager.presentarNivel()
+		assert.equals("instrucciones-nivel-4.png", portadaManager.image())
+		nivelManager.aumentarNivelActual()
+		portadaManager.presentarNivel()
+		assert.equals("instrucciones-nivel-5.png", portadaManager.image())
+	}
+	
+	test "PRESENTACION: DERROTA." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		portadaManager.presentar(derrota)
+		assert.equals("derrota.png", portadaManager.image())
+	}
+	
+	test "PRESENTACION: INFO." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		portadaManager.presentar(infoJugabilidad)
+		assert.equals("infoJugabilidad.png", portadaManager.image())
+	}
+	
+	test "PRESENTACION: VICTORIA." {
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		portadaManager.presentar(victoria)
+		assert.equals("victoria.png", portadaManager.image())
+	}
+	
+}

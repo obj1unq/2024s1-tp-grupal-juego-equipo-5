@@ -1,10 +1,6 @@
-import alimentosFrutales.*
 import ambiente.*
-import config.*
 import enemigos.*
 import pokemons.*
-import posicionamiento.*
-import transiciones.*
 import wollok.game.*
 
 describe "PRISIONEROS" {
@@ -14,7 +10,6 @@ describe "PRISIONEROS" {
 	
 	method initialize() {
 		game.clear()
-		config.ambienteBasico()
 		objetos.forEach({objeto=> game.addVisual(objeto)})
 	}
 	
