@@ -49,6 +49,7 @@ object sonidosManager {
 		sonidoFondo.play()
 	}
 	method resetearMusica(){
+		sonidoFondo.shouldLoop(false)
 		sonidoFondo.stop()
 	}
 }
