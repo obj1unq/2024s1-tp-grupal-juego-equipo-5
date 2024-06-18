@@ -107,42 +107,68 @@ class Daga inherits EquipoRocketConMovimiento {
 	}
 	override method sonido() = "daga.wav"
 }
+object dagasManager {
 
+	const dagas = []
+
+	method agregarDaga(daga) {
+		dagas.add(daga)
+	}
+
+	method crearDaga(posicion, direccion) {
+		const daga = new Daga(position = posicion, direccion = direccion)
+		self.agregarDaga(daga)
+		game.addVisual(daga)
+		game.onTick(500, "Custodia" + daga.identity().toString(), {daga.mover()})
+	}
+	
+
+}
 class Pinche inherits EquipoRocket {
 
 	var property estado = desactivado
 
+	override method colision(pokemon) {
+		estado.colision(pokemon, self)
+	}
+	
 	override method danio() = estado.danio()
 
 	override method nombre() = "pinches-" + estado.toString()
-
-	method cambiarEstado() {
-		estado = estado.siguiente()
-	}
+  
+  override method sonido() = "pinches.wav"
 	
-	override method sonido() = "pinches.wav"
+  method cambiarEstado() {
+		estado = estado.siguiente()
+	  self.refreshColision()
+  }
+    
+  method refreshColision() {
+	  if (position == pikachu.position()) {
+	  	estado.colision(pikachu,self)
+	  }
+  }
 }
 
 object desactivado {
 
+	method colision(pokemon, pinche) {}
+	
 	method danio() = 0
-
-	method colision(pokemon) {
-	}
 
 	method siguiente() {
 		return activado
 	}
-
+	
 }
 
 object activado {
 
-	method danio() = 50
-
-	method colision(pokemon) {
-		pokemon.recibirDanio(self)
+	method colision(pokemon, pinche) {
+		pokemon.recibirDanio(pinche)
 	}
+	
+	method danio() = 50
 
 	method siguiente() {
 		return desactivado

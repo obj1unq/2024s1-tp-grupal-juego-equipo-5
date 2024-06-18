@@ -1,0 +1,28 @@
+import ambiente.*
+import enemigos.*
+import pokemons.*
+import wollok.game.*
+
+describe "PRISIONEROS" {
+	
+	// PRISIONERO EJEMPLIFICADOR, LLAVE Y DETECTIVE
+	const objetos = #{prisioneroEvee, llave, pikachu}
+	
+	method initialize() {
+		game.clear()
+		objetos.forEach({objeto=> game.addVisual(objeto)})
+	}
+	
+	test "RESETEAR...
+		Si existen prisioneros liberados, al resetear el game, vuelven a estar prisioneros." {
+		// Estado inicial pedido:
+		pikachu.obtenerLlave()
+		prisioneroEvee.colision(pikachu)
+		// Caso prueba:
+		assert.notThat(prisioneroEvee.preso())
+		prisionerosLiberados.resetear()
+		assert.that(prisioneroEvee.preso())
+	}
+	
+}
+

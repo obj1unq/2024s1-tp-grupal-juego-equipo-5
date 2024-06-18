@@ -165,22 +165,50 @@ class Prisionero {
 		game.schedule(2000, { game.removeVisual(self)})
 	}
 
+	method encarcelar() {
+		preso = true
+	}
+	
 	method esAtravesable() = rescatador.tieneLlave()
 
 	method image() {
 		return if (not self.preso()) {
-			"libre-" + self.nombre() + ".png"
+			"libre-"
 		} else {
-			"preso-" + self.nombre() + ".png"
+			"preso-" 
 		}
+		+ self.nombre() + ".png"
 	}
 
 	method liberar() {
 		preso = false
+		prisionerosLiberados.agregar(self)
 	}
 
 	method nombre()
 
+}
+
+object prisionerosLiberados {
+	
+	const liberados = #{}
+	
+	method agregar(liberado) {
+		liberados.add(liberado)
+	}
+	
+	method encarcelarATodos() {
+		liberados.forEach({ liberado => liberado.encarcelar() })
+	}
+	
+	method resetear() {
+		self.encarcelarATodos()
+		self.vaciar()
+	}
+	
+	method vaciar() {
+		liberados.clear()
+	}
 }
 
 // PRISIONERO: NIVEL 1

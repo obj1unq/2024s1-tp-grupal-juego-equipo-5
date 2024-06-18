@@ -1,20 +1,25 @@
 import alimentosFrutales.*
-import ambiente.*
-import config.*
-import enemigos.*
-import pokemons.*
-import posicionamiento.*
-import randomizer.*
-import transiciones.*
 import wollok.game.*
 
 describe "FRUTAS" {
 	
-	test "CREAR UNA NUEVA FRUTA." {
+	test "CREAR UNA NUEVA FRUTA ES POSIBLE CUANDO...
+		*La cantidad de frutas en frutaManager es menor a 8." {
 		// Estado inicial, no pedido.
 		// Caso prueba:
 		frutaManager.nuevaFruta()
 		assert.equals(1, frutaManager.frutas().size())
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		frutaManager.nuevaFruta()
+		assert.equals(8, frutaManager.frutas().size())
+		frutaManager.nuevaFruta()
+		// No se colocó un error para que no se visualice el mensaje en la pantalla. No obstante, no agrega la fruta.
+		assert.equals(8, frutaManager.frutas().size())
 	}
 	
 }
