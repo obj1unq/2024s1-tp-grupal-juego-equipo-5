@@ -374,6 +374,7 @@ object gameManager {
 	}
 	
 	method reset() {
+		sonidosManager.resetearMusica()
 		detective.resetear(100)
 		prisionerosLiberados.resetear()
 		nivelManager.resetear()
