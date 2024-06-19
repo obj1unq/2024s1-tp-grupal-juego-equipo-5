@@ -12,7 +12,7 @@ describe "PRISIONEROS" {
 		game.clear()
 		objetos.forEach({objeto=> game.addVisual(objeto)})
 	}
-	/*
+	
 	test "RESETEAR...
 		Si existen prisioneros liberados, al resetear el game, vuelven a estar prisioneros." {
 		// Estado inicial pedido:
@@ -23,6 +23,6 @@ describe "PRISIONEROS" {
 		prisionerosLiberados.resetear()
 		assert.that(prisioneroEvee.preso())
 	}
-	*/
+	
 }
 
