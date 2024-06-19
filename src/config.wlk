@@ -14,14 +14,13 @@ object config {
 	}
 	// CONFIG. DE TECLAS DE PIKACHU
 	method teclas() {
-		keyboard.down().onPressDo({ pikachu.mover(abajo)})
-		keyboard.up().onPressDo({ pikachu.mover(arriba)})
-		keyboard.left().onPressDo({ pikachu.mover(izquierda)})
-		keyboard.right().onPressDo({ pikachu.mover(derecha)})
-		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu")})
-		keyboard.e().onPressDo({ pikachu.interactuarConObjeto()})
-		keyboard.r().onPressDo({ gameManager.reset()})
-		keyboard.i().onPressDo({ info.mostrarInfo()})
+		keyboard.down().onPressDo({ pikachu.mover(abajo) })
+		keyboard.up().onPressDo({ pikachu.mover(arriba) })
+		keyboard.left().onPressDo({ pikachu.mover(izquierda) })
+		keyboard.right().onPressDo({ pikachu.mover(derecha) })
+		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
+		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
+		keyboard.i().onPressDo({ info.mostrarInfo() })
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
@@ -37,23 +36,22 @@ object config {
 
 object sonidosManager {
 	
-	var sonidoFondo //= game.sound("musica-nivel-1.mp3")
+	var sonidoFondo 
 	
 	method sonar(musica){
-		game.schedule(0, { game.sound(musica).play() })
+		game.schedule(7, { game.sound(musica).play() })
 	}
 	
 	method generarMusicaNivel(nivel){
-		//self.resetearMusica()
-		sonidoFondo = game.sound("musica-nivel-" + (nivel) + ".mp3")
+		sonidoFondo = game.sound("musica-nivel-" + nivel + ".mp3")
 		sonidoFondo.volume(0.15)
 		sonidoFondo.shouldLoop(true)
-		game.schedule(0, { sonidoFondo.play() })
+		game.schedule(7, { sonidoFondo.play() })
 	}
 	
 	method resetearMusica(){
 		sonidoFondo.shouldLoop(false)
-		game.schedule(0, { sonidoFondo.stop() })
+		game.schedule(7, { sonidoFondo.stop() })
 	}
 }
 
