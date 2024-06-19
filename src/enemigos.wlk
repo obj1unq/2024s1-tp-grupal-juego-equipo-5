@@ -3,6 +3,7 @@ import pokemons.*
 import posicionamiento.*
 import randomizer.*
 import wollok.game.*
+import config.*
 
 // EQUIPO ROCKET
 class EquipoRocket {
@@ -11,8 +12,11 @@ class EquipoRocket {
 
 	method action() {
 	}
-
+	
+	method sonido() = "descVida.wav" //Por ahora, hasta que encuentre mas sonidos reproducibles
+	
 	method colision(pokemon) {
+		sonidosManager.sonar(self.sonido())
 		pokemon.recibirDanio(self)
 	}
 
@@ -101,7 +105,7 @@ class Daga inherits EquipoRocketConMovimiento {
 			self.position(direccion.siguiente(self.position()))
 		}
 	}
-
+	override method sonido() = "daga.wav"
 }
 object dagasManager {
 
@@ -131,18 +135,19 @@ class Pinche inherits EquipoRocket {
 	override method danio() = estado.danio()
 
 	override method nombre() = "pinches-" + estado.toString()
-
-	method cambiarEstado() {
+  
+  override method sonido() = "pinches.wav"
+	
+  method cambiarEstado() {
 		estado = estado.siguiente()
-	    self.refreshColision()
-    }
+	  self.refreshColision()
+  }
     
-    method refreshColision() {
-	    if (position == pikachu.position()) {
-	    	estado.colision(pikachu,self)
-	    }
-   }
-		
+  method refreshColision() {
+	  if (position == pikachu.position()) {
+	  	estado.colision(pikachu,self)
+	  }
+  }
 }
 
 object desactivado {

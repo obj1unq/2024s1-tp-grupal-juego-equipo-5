@@ -2,6 +2,7 @@ import posicionamiento.*
 import pokemons.*
 import randomizer.*
 import wollok.game.*
+import config.*
 
 // ALIMENTOS FRUTALES DE PIKACHU
 object frutaManager {
@@ -67,7 +68,8 @@ class Manzana inherits Fruta {
 }
 
 class Uva inherits Fruta {
-
+	override method sonido() = "descVida.wav"
+	
 	override method nombre() = "uva"
 
 	override method energia() = -50
@@ -75,17 +77,19 @@ class Uva inherits Fruta {
 	override method mensaje() {
 		return "Qué asco!"
 	}
-
 }
 
 class Fruta {
-
+	
 	var property position = randomizer.emptyPosition()
 
 	method action() {
 	}
-
+	
+	method sonido() = "comer.mp3"
+	
 	method colision(pokemon) {
+		sonidosManager.sonar(self.sonido())
 		pokemon.comerFruta(self)
 		game.say(pokemon, self.mensaje())
 		frutaManager.frutas().remove(self)
