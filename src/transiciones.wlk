@@ -4,6 +4,7 @@ import enemigos.*
 import pokemons.*
 import posicionamiento.*
 import wollok.game.*
+import alimentosFrutales.*
 
 // VACIO
 object _ {
@@ -483,7 +484,10 @@ object portadaManager {
 
 	method presentarInfo() {
 		self.presentar(infoJugabilidad)
-		keyboard.enter().onPressDo{ self.remover() }
+		keyboard.enter().onPressDo{ 
+			self.remover()
+			frutaManager.iniciar()
+		}
 	}
 	
 	method remover() {
@@ -498,6 +502,7 @@ object info {
 	var property image = "info.png"
 
 	method mostrarInfo() {
+		frutaManager.detener()
 		portadaManager.presentarInfo()
 	}
 
