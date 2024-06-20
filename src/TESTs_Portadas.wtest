@@ -36,12 +36,6 @@ describe "PORTADAS" {
 		assert.equals("derrota.png", portadaManager.image())
 	}
 	
-	test "PRESENTACION: INFO." {
-		// Estado inicial, no pedido.
-		// Caso prueba:
-		portadaManager.presentar(infoJugabilidad)
-		assert.equals("infoJugabilidad.png", portadaManager.image())
-	}
 	
 	test "PRESENTACION: VICTORIA." {
 		// Estado inicial, no pedido.

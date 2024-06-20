@@ -4,6 +4,7 @@ import enemigos.*
 import pokemons.*
 import posicionamiento.*
 import wollok.game.*
+import menu.*
 import alimentosFrutales.*
 
 // VACIO
@@ -193,14 +194,6 @@ object t {
 
 }
 
-// INFORMACIÓN
-object f {
-
-	method generar(posicion) {
-		game.addVisual(info)
-	}
-
-}
 
 // MAPAS DE NIVEL
 object mapa {
@@ -239,7 +232,7 @@ object escenario {
 		[x,_,_,_,_,x,_,_,i,_,i,_,u,_,_,i,o,x],
 		[x,_,e,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
 		[x,_,_,i,_,x,_,i,_,t,_,_,x,_,_,i,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
 	].reverse()
 	
 	method nivel2() = [ 
@@ -255,7 +248,7 @@ object escenario {
 		[x,_,i,_,_,x,_,_,i,_,_,_,n,_,_,i,g,x],
 		[x,_,o,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
 		[x,_,_,i,_,x,_,i,_,k,_,_,x,i,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
 	].reverse()
 	
 	method nivel3() = [
@@ -271,7 +264,7 @@ object escenario {
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
 		[x,_,v,_,_,x,_,_,_,_,x,_,_,_,_,i,_,x],
 		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,i,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse() 
 	
 	method nivel4()= [
@@ -287,7 +280,7 @@ object escenario {
 		[x,_,_,a,_,u,_,_,_,x,_,_,x,_,_,_,b,x],
 		[x,n,x,x,x,x,x,x,u,x,x,x,x,x,x,u,x,x],
 		[x,_,p,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse()
 	
 	method nivel5()= [
@@ -303,7 +296,7 @@ object escenario {
 		[x,t,_,x,_,_,_,_,_,_,_,x,_,x,x,x,n,x],
 		[x,_,_,x,_,x,x,x,x,x,x,x,_,n,_,_,j,x],
 		[x,p,_,n,_,_,_,_,_,_,_,_,_,x,o,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
 	].reverse() 
 	
 	method niveles() {
@@ -442,11 +435,6 @@ object inicioDelNivel inherits Portada {
 
 }
 
-object infoJugabilidad inherits Portada {
-
-	override method nombre() = "infoJugabilidad"
-	
-}
 
 object portadaManager {
 	
@@ -454,9 +442,9 @@ object portadaManager {
 	var property image
 	
 	method presentarMenuInicio() {
-		game.clear()
+		//game.clear()
 		self.presentar(inicioDelJuego)
-		keyboard.enter().onPressDo{ self.presentarNivel() }
+		keyboard.enter().onPressDo{ menu.iniciarMenu() }
 	}
 
 	method presentarNivel() {
@@ -482,13 +470,6 @@ object portadaManager {
 		self.image(portada.image())
 	}
 
-	method presentarInfo() {
-		self.presentar(infoJugabilidad)
-		keyboard.enter().onPressDo{ 
-			self.remover()
-			frutaManager.iniciar()
-		}
-	}
 	
 	method remover() {
 		game.removeVisual(self)
@@ -496,15 +477,5 @@ object portadaManager {
 
 }
 
-object info {
 
-	const property position = game.at(game.width() - 1, 0)
-	var property image = "info.png"
-
-	method mostrarInfo() {
-		frutaManager.detener()
-		portadaManager.presentarInfo()
-	}
-
-}
 

@@ -2,6 +2,7 @@ import alimentosFrutales.*
 import posicionamiento.*
 import pokemons.*
 import transiciones.*
+import menu.*
 import wollok.game.*
 
 object config {
@@ -20,7 +21,13 @@ object config {
 		keyboard.right().onPressDo({ pikachu.mover(derecha) })
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
-		keyboard.i().onPressDo({ info.mostrarInfo() })
+		
+	}
+	//CONFIG. TECLAS MENU
+	method configurarTeclasMenu(){
+		keyboard.down().onPressDo({cursor.mover(cursor.position().down(2))})
+		keyboard.up().onPressDo({cursor.mover(cursor.position().up(2))})
+		keyboard.enter().onPressDo({cursor.action()})
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
@@ -53,6 +60,12 @@ object sonidosManager {
 	method resetearMusica(){
 		sonidoFondo.shouldLoop(false)
 		game.schedule(7, { sonidoFondo.stop() })
+	}
+	method stopMusicFondo(){
+		sonidoFondo.stop()
+	}
+	method playMusicFondo(){
+		sonidoFondo.stop()
 	}
 }
 

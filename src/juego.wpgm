@@ -5,12 +5,14 @@ import enemigos.*
 import pokemons.*
 import posicionamiento.*
 import transiciones.*
+import menu.*
 import wollok.game.*
 
 program juego {
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	config.ambienteBasico()
 	gameManager.iniciar()
+	//menu.iniciarMenu()
 	game.start()
 }
 
