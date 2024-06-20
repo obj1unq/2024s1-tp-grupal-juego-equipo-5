@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import posicionamiento.*
 import pokemons.*
 import transiciones.*
@@ -20,7 +20,7 @@ object config {
 		keyboard.right().onPressDo({ pikachu.mover(derecha) })
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
-		keyboard.i().onPressDo({ infoManager.interactuar() })
+		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
@@ -52,9 +52,9 @@ object sonidosManager {
 		game.schedule(7, { sonidoFondo.play() })
 	}
 	
-	method resetearMusica(){
-		sonidoFondo.shouldLoop(false)
+	method stop(){
 		game.schedule(7, { sonidoFondo.stop() })
 	}
+	
 }
 

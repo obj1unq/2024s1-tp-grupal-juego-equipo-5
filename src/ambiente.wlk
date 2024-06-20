@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import enemigos.*
 import pokemons.*
 import posicionamiento.*
