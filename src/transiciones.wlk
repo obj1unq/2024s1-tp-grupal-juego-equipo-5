@@ -4,7 +4,7 @@ import enemigos.*
 import pokemons.*
 import posicionamiento.*
 import wollok.game.*
-import alimentosFrutales.*
+import alimentos.*
 
 // VACIO
 object _ {
@@ -214,7 +214,7 @@ object mapa {
 		config.teclas()
 		config.colisiones()
 		config.frutas()
-		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel().toString())
+		config.sonidos()
 	}
 
 	method generarCelda(x, y, nivel) {
@@ -374,16 +374,10 @@ object gameManager {
 	}
 	
 	method reset() {
-		sonidosManager.resetearMusica()
 		detective.resetear(100)
 		prisionerosLiberados.resetear()
 		nivelManager.resetear()
 		self.iniciar()
-	}
-
-	method resetTemporal(energiaActual) {
-		sonidosManager.resetearMusica()
-		detective.resetear(energiaActual)
 	}
 
 	method victoria() {
@@ -393,13 +387,15 @@ object gameManager {
 	}
 
 	method victoriaParcial() {
-		self.resetTemporal(detective.energia())
+		sonidosManager.stop()
+		detective.resetear(detective.energia())
 		nivelManager.aumentarNivelActualSiPuede()
 		game.schedule(100, {portadaManager.presentarNivelSiExiste()})
 	}
 
 	method derrota() {
 		game.clear()
+		sonidosManager.stop()
 		portadaManager.presentar(derrota)
 		game.schedule(4000, {self.reset()})
 	}
@@ -407,8 +403,6 @@ object gameManager {
 }
 
 class Portada {
-	
-//	const property position = game.at(0, 0)
 	
 	method image() = self.nombre() + ".png"
 	
@@ -436,15 +430,30 @@ object inicioDelJuego inherits Portada {
 
 object inicioDelNivel inherits Portada {
 	
-	method nivelActual() = nivelManager.numeroDeNivel() + 1
+	method nivelActual() = (nivelManager.numeroDeNivel() + 1).toString()
 	
-	override method nombre() = "instrucciones-nivel-" + self.nivelActual().toString()
+	override method nombre() = "instrucciones-nivel-" + self.nivelActual()
 
 }
 
 object infoJugabilidad inherits Portada {
 
+	const property position = game.at(0, 0)
+	
 	override method nombre() = "infoJugabilidad"
+	
+	method accionar() {
+		self.mostrar()
+		game.schedule(3000, {self.ocultar()})
+	}
+	
+	method mostrar() {
+		game.addVisual(self)
+	}
+	
+	method ocultar() {
+		game.removeVisual(self)
+	}
 	
 }
 
@@ -480,30 +489,6 @@ object portadaManager {
 	
 	method actualizar(portada) {
 		self.image(portada.image())
-	}
-
-	method presentarInfo() {
-		self.presentar(infoJugabilidad)
-		keyboard.enter().onPressDo{ 
-			self.remover()
-			frutaManager.iniciar()
-		}
-	}
-	
-	method remover() {
-		game.removeVisual(self)
-	}
-
-}
-
-object info {
-
-	const property position = game.at(game.width() - 1, 0)
-	var property image = "info.png"
-
-	method mostrarInfo() {
-		frutaManager.detener()
-		portadaManager.presentarInfo()
 	}
 
 }

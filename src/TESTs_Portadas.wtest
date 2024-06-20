@@ -29,18 +29,19 @@ describe "PORTADAS" {
 		assert.equals("instrucciones-nivel-5.png", portadaManager.image())
 	}
 	
+	test "PRESENTACION: INFOJUGABILIDAD" {
+		// No depende del PortadaManager como el resto.
+		// Estado inicial, no pedido.
+		// Caso prueba:
+		infoJugabilidad.accionar()
+		assert.that(game.hasVisual(infoJugabilidad))
+	}
+	
 	test "PRESENTACION: DERROTA." {
 		// Estado inicial, no pedido.
 		// Caso prueba:
 		portadaManager.presentar(derrota)
 		assert.equals("derrota.png", portadaManager.image())
-	}
-	
-	test "PRESENTACION: INFO." {
-		// Estado inicial, no pedido.
-		// Caso prueba:
-		portadaManager.presentar(infoJugabilidad)
-		assert.equals("infoJugabilidad.png", portadaManager.image())
 	}
 	
 	test "PRESENTACION: VICTORIA." {

@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import ambiente.*
 import posicionamiento.*
 import randomizer.*

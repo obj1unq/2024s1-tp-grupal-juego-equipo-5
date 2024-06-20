@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import posicionamiento.*
 import pokemons.*
 import transiciones.*
@@ -20,7 +20,11 @@ object config {
 		keyboard.right().onPressDo({ pikachu.mover(derecha) })
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
-		keyboard.i().onPressDo({ info.mostrarInfo() })
+		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
+		keyboard.m().onPressDo({ sonidosManager.subirVolumen() })
+		keyboard.n().onPressDo({ sonidosManager.bajarVolumen() })
+		keyboard.s().onPressDo({ sonidosManager.silenciarVolumen() })
+		keyboard.v().onPressDo({ sonidosManager.establecerVolumen() })
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
@@ -28,16 +32,18 @@ object config {
 	}
 	// CONFIG. FRUTAS
 	method frutas() {
-//		frutaManager.frutas().clear()
-//		game.onTick(2000, "CREAR FRUTA", { frutaManager.nuevaFruta() })
 		frutaManager.configurarFrutas()
+	}
+	// CONFIG. SONIDOS
+	method sonidos() {
+		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel().toString())
 	}
 	
 }
 
 object sonidosManager {
 	
-	var sonidoFondo 
+	var sonidoFondo
 	
 	method sonar(musica){
 		game.schedule(7, { game.sound(musica).play() })
@@ -45,14 +51,30 @@ object sonidosManager {
 	
 	method generarMusicaNivel(nivel){
 		sonidoFondo = game.sound("musica-nivel-" + nivel + ".mp3")
-		sonidoFondo.volume(0.15)
+		self.establecerVolumen()
 		sonidoFondo.shouldLoop(true)
 		game.schedule(7, { sonidoFondo.play() })
 	}
 	
-	method resetearMusica(){
-		sonidoFondo.shouldLoop(false)
+	method stop(){
 		game.schedule(7, { sonidoFondo.stop() })
 	}
+	
+	method subirVolumen() {
+		// completar, el ejemplo del wollok doc no funciona
+	}
+	
+	method bajarVolumen() {
+		// completar, el ejemplo del wollok doc no funciona
+	}
+	
+	method silenciarVolumen() {
+		sonidoFondo.volume(0)
+	}
+	
+	method establecerVolumen() {
+		sonidoFondo.volume(0.15)
+	}
+	
 }
 

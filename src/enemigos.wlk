@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import pokemons.*
 import posicionamiento.*
 import randomizer.*

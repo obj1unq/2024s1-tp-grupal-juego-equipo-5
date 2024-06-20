@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import ambiente.*
 import config.*
 import enemigos.*
@@ -13,33 +13,3 @@ program juego {
 	gameManager.iniciar()
 	game.start()
 }
-
-/* FALTA:
- 
-Tareas:
-
-- Agregar sonido a las colisiones de Pikachu faltantes (si queda alguna) o sonido dentro del nivel.
-- Agregar sonido a la VICTORIA y a la DERROTA.
-- Agregar sonido a las INSTRUCCIONES (OPCIONAL) y la PRESENTACION INICIAL (OPCIONAL).
-- Agregar la tilde a ÚLTIMO en la IMAGEN de la instruccion del nivel 5.
-- Agregar más pinches en los últimos niveles (AL MENOS EN EL ÚLTIMO, RESTO OPCIONAL).
-- Solucionar que no aparezcan frutas cuando está mostrando la INFO de los controles (cuando tocamos la i y hay menos de 8 frutas ya visualizadas).
-- Borrar imagenes y/o sonidos que no se utilicen en el ASSETS.
-- Modificar nombres de archivos y/0 agrupar en distintos lugares algunos objetos para que sea más claro que hay en cada uno (opcional).
-- Modificar el README.
-
-- Hacer tests sobre:
-    • Sonidos (no sé si se puede, CHEQUEAR hoy con ISA)
-    • Test sobre el GAMEMANAGER (victorias parciales, victoria, derrota) (revisar)
-    • Más tests que aparezcan... (consultar si faltan más)
-    
-    
- * Última modificación 19/6, soy Adri en Sacar_boton_reset.
- - OPINION: 
-	* Siento que el gameManager se podría mejorar, 
-	* por el código repetido pero hay que verlo 
-	* cuando ya todo funcione y no quede nada más que hacer y chequear (sin romper nada jaja).
-
- * BORRAR COMENTARIOS AL FINALIZAR LAS TAREAS.
-    	 
- */
