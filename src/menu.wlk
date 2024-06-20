@@ -62,11 +62,7 @@ object start{
 object setup{
 	var property image="setup.png"
 	var property position=game.at(7,3)
-	const property optionSetup=[on,off,back]
-	method action(){
-		menu.cleanOptions(menu.optionMenu())
-		menu.setOptions(optionSetup)
-	}
+//esto es INSTRUCCIONES
 }
 
 object exit{
@@ -78,31 +74,3 @@ object exit{
 	
 }
 
-object on{
-	var property image="on.png"
-	var property position=game.at(7,4)
-	method action(){
-		//SOLUCIONAR SONIDOS
-		//sonidosManager.playMusicFondo()
-		game.say(self,"Sonido activado")
-	}
-}
-object off{
-	var property image="off.png"
-	var property position=game.at(7,3)
-	method action(){
-		//SOLUCIONAR SONIDOS
-		//sonidosManager.stopMusicFondo()
-		game.say(self,"Sonido desactivado")
-	}
-}
-
-object back{
-	var property image="back.png"
-	var property position=game.at(7,2)
-	
-	method action(){
-		menu.cleanOptions(setup.optionSetup())
-		menu.setOptions(menu.optionMenu())	
-	}	
-}

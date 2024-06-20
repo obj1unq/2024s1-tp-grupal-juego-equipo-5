@@ -21,7 +21,7 @@ object config {
 		keyboard.right().onPressDo({ pikachu.mover(derecha) })
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
-		
+		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
 	}
 	//CONFIG. TECLAS MENU
 	method configurarTeclasMenu(){

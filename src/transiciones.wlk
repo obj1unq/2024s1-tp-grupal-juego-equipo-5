@@ -193,7 +193,14 @@ object t {
 	}
 
 }
+// INFORMACIÓN
+object f {
 
+	method generar(posicion) {
+		game.addVisual(info)
+	}
+
+}
 
 // MAPAS DE NIVEL
 object mapa {
@@ -435,7 +442,26 @@ object inicioDelNivel inherits Portada {
 
 }
 
+object infoJugabilidad inherits Portada {
 
+	const property position = game.at(0, 0)
+	
+	override method nombre() = "infoJugabilidad"
+	
+	method accionar() {
+		self.mostrar()
+		game.schedule(3000, {self.ocultar()})
+	}
+	
+	method mostrar() {
+		game.addVisual(self)
+	}
+	
+	method ocultar() {
+		game.removeVisual(self)
+	}
+	
+}
 object portadaManager {
 	
 	const property position = game.at(0, 0)

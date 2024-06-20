@@ -13,7 +13,13 @@ class Pared inherits Articulo {
 	override method image() = "pared.png"
 
 }
+object info {
+	
+	const property position = game.at(game.width() - 1, 0)
+	
+	method image() = "info.png"
 
+}
 // BARRA DE ESTADO ACTUAL DE PIKACHU
 object anotador {
 
