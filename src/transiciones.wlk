@@ -380,10 +380,6 @@ object gameManager {
 		self.iniciar()
 	}
 
-	method resetTemporal(energiaActual) {
-		detective.resetear(energiaActual)
-	}
-
 	method victoria() {
 		game.clear()
 		portadaManager.presentar(victoria)
@@ -392,7 +388,7 @@ object gameManager {
 
 	method victoriaParcial() {
 		sonidosManager.stop()
-		self.resetTemporal(detective.energia())
+		detective.resetear(detective.energia())
 		nivelManager.aumentarNivelActualSiPuede()
 		game.schedule(100, {portadaManager.presentarNivelSiExiste()})
 	}
