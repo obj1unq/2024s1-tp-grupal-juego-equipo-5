@@ -25,8 +25,8 @@ object config {
 	}
 	//CONFIG. TECLAS MENU
 	method configurarTeclasMenu(){
-		keyboard.down().onPressDo({cursor.mover(cursor.position().down(2))})
-		keyboard.up().onPressDo({cursor.mover(cursor.position().up(2))})
+		keyboard.down().onPressDo({cursor.mover(cursor.position().down(1))})
+		keyboard.up().onPressDo({cursor.mover(cursor.position().up(1))})
 		keyboard.enter().onPressDo({cursor.action()})
 	}
 	// CONFIG. COLISIONES
@@ -61,11 +61,13 @@ object sonidosManager {
 		sonidoFondo.shouldLoop(false)
 		game.schedule(7, { sonidoFondo.stop() })
 	}
+	/* SOLUCIONAR
 	method stopMusicFondo(){
 		sonidoFondo.stop()
 	}
 	method playMusicFondo(){
 		sonidoFondo.stop()
 	}
+	*/
 }
 

@@ -82,7 +82,8 @@ object on{
 	var property image="on.png"
 	var property position=game.at(7,4)
 	method action(){
-		sonidosManager.playMusicFondo()
+		//SOLUCIONAR SONIDOS
+		//sonidosManager.playMusicFondo()
 		game.say(self,"Sonido activado")
 	}
 }
@@ -90,7 +91,8 @@ object off{
 	var property image="off.png"
 	var property position=game.at(7,3)
 	method action(){
-		sonidosManager.stopMusicFondo()
+		//SOLUCIONAR SONIDOS
+		//sonidosManager.stopMusicFondo()
 		game.say(self,"Sonido desactivado")
 	}
 }
