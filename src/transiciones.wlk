@@ -239,7 +239,7 @@ object escenario {
 		[x,_,_,_,_,x,_,_,i,_,i,_,u,_,_,i,o,x],
 		[x,_,e,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
 		[x,_,_,i,_,x,_,i,_,t,_,_,x,_,_,i,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse()
 	
 	method nivel2() = [ 
@@ -255,7 +255,7 @@ object escenario {
 		[x,_,i,_,_,x,_,_,i,_,_,_,n,_,_,i,g,x],
 		[x,_,o,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
 		[x,_,_,i,_,x,_,i,_,k,_,_,x,i,_,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]	
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse()
 	
 	method nivel3() = [
@@ -271,7 +271,7 @@ object escenario {
 		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
 		[x,_,v,_,_,x,_,_,_,_,x,_,_,_,_,i,_,x],
 		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,i,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() 
 	
 	method nivel4()= [
@@ -287,7 +287,7 @@ object escenario {
 		[x,_,_,a,_,u,_,_,_,x,_,_,x,_,_,_,b,x],
 		[x,n,x,x,x,x,x,x,u,x,x,x,x,x,x,u,x,x],
 		[x,_,p,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse()
 	
 	method nivel5()= [
@@ -303,7 +303,7 @@ object escenario {
 		[x,t,_,x,_,_,_,_,_,_,_,x,_,x,x,x,n,x],
 		[x,_,_,x,_,x,x,x,x,x,x,x,_,n,_,_,j,x],
 		[x,p,_,n,_,_,_,_,_,_,_,_,_,x,o,_,_,x],
-		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x]
+		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() 
 	
 	method niveles() {
