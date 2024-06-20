@@ -20,7 +20,7 @@ object config {
 		keyboard.right().onPressDo({ pikachu.mover(derecha) })
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
-		keyboard.i().onPressDo({ info.mostrarInfo() })
+		keyboard.i().onPressDo({ infoManager.interactuar() })
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
@@ -28,9 +28,11 @@ object config {
 	}
 	// CONFIG. FRUTAS
 	method frutas() {
-//		frutaManager.frutas().clear()
-//		game.onTick(2000, "CREAR FRUTA", { frutaManager.nuevaFruta() })
 		frutaManager.configurarFrutas()
+	}
+	// CONFIG. SONIDOS
+	method sonidos() {
+		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel().toString())
 	}
 	
 }

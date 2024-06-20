@@ -214,7 +214,7 @@ object mapa {
 		config.teclas()
 		config.colisiones()
 		config.frutas()
-		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel().toString())
+		config.sonidos()
 	}
 
 	method generarCelda(x, y, nivel) {
@@ -408,8 +408,6 @@ object gameManager {
 
 class Portada {
 	
-//	const property position = game.at(0, 0)
-	
 	method image() = self.nombre() + ".png"
 	
 	method nombre()
@@ -436,15 +434,54 @@ object inicioDelJuego inherits Portada {
 
 object inicioDelNivel inherits Portada {
 	
-	method nivelActual() = nivelManager.numeroDeNivel() + 1
+	method nivelActual() = (nivelManager.numeroDeNivel() + 1).toString()
 	
-	override method nombre() = "instrucciones-nivel-" + self.nivelActual().toString()
+	override method nombre() = "instrucciones-nivel-" + self.nivelActual()
 
 }
 
-object infoJugabilidad inherits Portada {
+class InfoJugabilidad inherits Portada {
 
+	const property position = game.at(0, 0)
+	
 	override method nombre() = "infoJugabilidad"
+	
+	method interactuar() {
+		frutaManager.detener()
+		self.mostrar()
+		self.ocultar()
+	}
+	
+	method mostrar() {
+		game.addVisual(self)
+	}
+	
+	method ocultar() {
+		keyboard.enter().onPressDo{ 
+			self.remover() frutaManager.iniciar()
+		}
+	}
+	
+	method remover() {
+		game.removeVisual(self)
+	}
+	
+}
+
+object infoFactory {
+	
+	method nuevaInfo() {
+		return new InfoJugabilidad()
+	}
+	
+}
+
+object infoManager {
+	
+	method interactuar() {
+		const infoTeclas = infoFactory.nuevaInfo()
+		infoTeclas.interactuar()
+	}
 	
 }
 
@@ -482,29 +519,30 @@ object portadaManager {
 		self.image(portada.image())
 	}
 
-	method presentarInfo() {
-		self.presentar(infoJugabilidad)
-		keyboard.enter().onPressDo{ 
-			self.remover()
-			frutaManager.iniciar()
-		}
-	}
-	
-	method remover() {
-		game.removeVisual(self)
-	}
+//	method presentarInfo() {
+//		self.presentar(infoJugabilidad)
+//		keyboard.enter().onPressDo{ 
+//			self.remover()
+//			frutaManager.iniciar()
+//		}
+//	}
+//	
+//	method remover() {
+//		game.removeVisual(self)
+//	}
 
 }
 
-object info {
-
-	const property position = game.at(game.width() - 1, 0)
-	var property image = "info.png"
-
-	method mostrarInfo() {
-		frutaManager.detener()
-		portadaManager.presentarInfo()
-	}
-
-}
+//object info {
+//
+//	const property position = game.at(game.width() - 1, 0)
+//	var property image = "info.png"
+//
+//	method mostrarInfo() {
+//		frutaManager.detener()
+//		
+//		portadaManager.presentarInfo()
+//	}
+//
+//}
 

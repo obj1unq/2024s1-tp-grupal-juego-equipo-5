@@ -1,8 +1,8 @@
+import config.*
 import posicionamiento.*
 import pokemons.*
 import randomizer.*
 import wollok.game.*
-import config.*
 
 // ALIMENTOS FRUTALES DE PIKACHU
 object frutaManager {
@@ -16,16 +16,20 @@ object frutaManager {
 			game.addVisual(fruta)
 		}
 	}
+	
 	method configurarFrutas(){
 		frutas.clear()
 		self.iniciar()
 	}
+	
 	method iniciar() {
 		game.onTick(2000, "CREAR FRUTA", { self.nuevaFruta() })
 	}
+	
 	method detener() {
 		game.removeTickEvent("CREAR FRUTA")
 	}
+	
 }
 
 object bananaFactory {
