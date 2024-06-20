@@ -444,7 +444,7 @@ object infoJugabilidad inherits Portada {
 	
 	method accionar() {
 		self.mostrar()
-		game.schedule(1000, {self.ocultar()})
+		game.schedule(3000, {self.ocultar()})
 	}
 	
 	method mostrar() {
