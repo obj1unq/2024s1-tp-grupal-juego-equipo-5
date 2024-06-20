@@ -12,7 +12,6 @@ program juego {
 	game.title("DETECTIVE PIKACHU, AL RESCATE")
 	config.ambienteBasico()
 	gameManager.iniciar()
-	//menu.iniciarMenu()
 	game.start()
 }
 

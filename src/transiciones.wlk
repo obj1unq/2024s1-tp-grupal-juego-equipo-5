@@ -442,9 +442,7 @@ object portadaManager {
 	var property image
 	
 	method presentarMenuInicio() {
-		//game.clear()
-		self.presentar(inicioDelJuego)
-		keyboard.enter().onPressDo{ menu.iniciarMenu() }
+		menu.iniciarMenu()
 	}
 
 	method presentarNivel() {
