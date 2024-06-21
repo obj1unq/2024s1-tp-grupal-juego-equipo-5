@@ -4,13 +4,14 @@ import enemigos.*
 import pokemons.*
 import posicionamiento.*
 import wollok.game.*
-import alimentosFrutales.*
+import alimentos.*
 import transiciones.*
 
 object menu {	
 	const property optionMenu=[start,setup,exit]
  	
 	method iniciarMenu(){
+		game.clear()
 		portadaManager.presentar(inicioDelJuego)
 		
 		config.configurarTeclasMenu()

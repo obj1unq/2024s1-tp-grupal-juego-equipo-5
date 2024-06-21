@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import wollok.game.*
 
 describe "FRUTAS" {

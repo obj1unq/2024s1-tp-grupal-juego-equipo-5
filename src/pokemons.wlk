@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import ambiente.*
 import posicionamiento.*
 import randomizer.*
@@ -255,4 +255,3 @@ object prisioneroCharmander inherits Prisionero {
 	override method nombre() = "charmander"
 
 }
-

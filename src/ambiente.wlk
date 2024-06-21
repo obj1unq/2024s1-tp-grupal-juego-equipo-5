@@ -1,4 +1,4 @@
-import alimentosFrutales.*
+import alimentos.*
 import enemigos.*
 import pokemons.*
 import posicionamiento.*
@@ -13,6 +13,7 @@ class Pared inherits Articulo {
 	override method image() = "pared.png"
 
 }
+
 object info {
 	
 	const property position = game.at(game.width() - 1, 0)
@@ -20,6 +21,7 @@ object info {
 	method image() = "info.png"
 
 }
+
 // BARRA DE ESTADO ACTUAL DE PIKACHU
 object anotador {
 
@@ -278,4 +280,3 @@ object puertasManager {
 	}
 
 }
-
