@@ -410,18 +410,6 @@ class Portada {
 	
 }
 
-object victoria inherits Portada {
-
-	override method nombre() = "victoria"
-
-}
-
-object derrota inherits Portada {
-
-	override method nombre() = "derrota"
-
-}
-
 object inicioDelJuego inherits Portada {
 
 	override method nombre() = "menu-inicial"
@@ -436,11 +424,30 @@ object inicioDelNivel inherits Portada {
 
 }
 
-object infoJugabilidad inherits Portada {
+object tutorialFondo inherits Portada {
+	
+	override method nombre() = "tutorial"
+	
+}
+
+class PortadaSimple inherits Portada {
+	
+	override method nombre() = self.toString()
+	
+}
+
+object victoria inherits PortadaSimple {
+}
+
+object derrota inherits PortadaSimple {
+}
+
+object creditos inherits PortadaSimple {
+}
+
+object infoJugabilidad inherits PortadaSimple {
 
 	const property position = game.at(0, 0)
-	
-	override method nombre() = "infoJugabilidad"
 	
 	method accionar() {
 		self.mostrar()
@@ -456,6 +463,7 @@ object infoJugabilidad inherits Portada {
 	}
 	
 }
+
 object portadaManager {
 	
 	const property position = game.at(0, 0)
