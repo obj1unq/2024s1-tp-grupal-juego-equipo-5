@@ -41,8 +41,6 @@ describe "PORTADAS" {
 		portadaManager.presentar(derrota)
 		assert.equals("derrota.png", portadaManager.image())
 	}
-	
-	
 	test "PRESENTACION: VICTORIA." {
 		// Estado inicial, no pedido.
 		// Caso prueba:

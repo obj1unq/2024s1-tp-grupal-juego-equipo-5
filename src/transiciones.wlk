@@ -490,5 +490,3 @@ object portadaManager {
 
 }
 
-
-

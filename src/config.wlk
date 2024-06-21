@@ -22,6 +22,7 @@ object config {
 		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
 		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
+
 		//keyboard.m().onPressDo({ sonidosManager.subirVolumen() })
 		//keyboard.n().onPressDo({ sonidosManager.bajarVolumen() })
 		keyboard.s().onPressDo({ sonidosManager.silenciarVolumen() })
@@ -32,6 +33,12 @@ object config {
 		keyboard.down().onPressDo({cursor.mover(cursor.position().down(1))})
 		keyboard.up().onPressDo({cursor.mover(cursor.position().up(1))})
 		keyboard.enter().onPressDo({cursor.action()})
+
+		keyboard.m().onPressDo({ sonidosManager.subirVolumen() })
+		keyboard.n().onPressDo({ sonidosManager.bajarVolumen() })
+		keyboard.s().onPressDo({ sonidosManager.silenciarVolumen() })
+		keyboard.v().onPressDo({ sonidosManager.establecerVolumen() })
+
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
@@ -81,5 +88,5 @@ object sonidosManager {
 	method establecerVolumen() {
 		sonidoFondo.volume(0.15)
 	}
-	
 }
+
