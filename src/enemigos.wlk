@@ -10,8 +10,7 @@ class EquipoRocket {
 
 	var property position
 
-	method action() {
-	}
+	method action() {}
 	
 	method sonido() = "descVida.wav" //Por ahora, hasta que encuentre mas sonidos reproducibles
 	
