@@ -12,7 +12,7 @@ class EquipoRocket {
 
 	method action() {}
 	
-	method sonido() = "descVida.wav" //Por ahora, hasta que encuentre mas sonidos reproducibles
+	method sonido() = "descVida.wav"
 	
 	method colision(pokemon) {
 		sonidosManager.sonar(self.sonido())
@@ -104,7 +104,7 @@ class Daga inherits EquipoRocketConMovimiento {
 			self.position(direccion.siguiente(self.position()))
 		}
 	}
-	override method sonido() = "daga.wav"
+	override method sonido() = "corte-daga.mp3"
 }
 object dagasManager {
 
@@ -135,7 +135,7 @@ class Pinche inherits EquipoRocket {
 
 	override method nombre() = "pinches-" + estado.toString()
   
-  override method sonido() = "pinches.wav"
+  override method sonido() = "pinche.mp3"
 	
   method cambiarEstado() {
 		estado = estado.siguiente()
@@ -164,6 +164,7 @@ object desactivado {
 object activado {
 
 	method colision(pokemon, pinche) {
+		sonidosManager.sonar(pinche.sonido())
 		pokemon.recibirDanio(pinche)
 	}
 	
