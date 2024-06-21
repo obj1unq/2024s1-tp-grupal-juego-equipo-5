@@ -145,7 +145,7 @@ class Pokebola {
 		pokemon.estado(ganador)
 		game.schedule(500, { game.removeVisual(self)})
 	}
-
+	method action(){}
 }
 
 // POKEMONS PRISIONEROS
@@ -255,4 +255,3 @@ object prisioneroCharmander inherits Prisionero {
 	override method nombre() = "charmander"
 
 }
-

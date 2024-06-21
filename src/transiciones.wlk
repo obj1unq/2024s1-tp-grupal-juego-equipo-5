@@ -4,6 +4,7 @@ import enemigos.*
 import pokemons.*
 import posicionamiento.*
 import wollok.game.*
+import menu.*
 import alimentos.*
 
 // VACIO
@@ -192,7 +193,6 @@ object t {
 	}
 
 }
-
 // INFORMACIÓN
 object f {
 
@@ -456,16 +456,13 @@ object infoJugabilidad inherits Portada {
 	}
 	
 }
-
 object portadaManager {
 	
 	const property position = game.at(0, 0)
 	var property image
 	
 	method presentarMenuInicio() {
-		game.clear()
-		self.presentar(inicioDelJuego)
-		keyboard.enter().onPressDo{ self.presentarNivel() }
+		menu.iniciarMenu()
 	}
 
 	method presentarNivel() {

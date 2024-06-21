@@ -129,4 +129,3 @@ class Fruta {
 	method nombre()
 
 }
-
