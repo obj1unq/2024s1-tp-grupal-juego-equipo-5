@@ -15,24 +15,7 @@ object config {
 	}
 	// CONFIG. DE TECLAS: PIKACHU Y NIVEL
 	method teclas() {
-		keyboard.down().onPressDo({ pikachu.mover(abajo) })
-		keyboard.up().onPressDo({ pikachu.mover(arriba) })
-		keyboard.left().onPressDo({ pikachu.mover(izquierda) })
-		keyboard.right().onPressDo({ pikachu.mover(derecha) })
-		keyboard.p().onPressDo({ 
-			sonidosManager.sonar("pikachu.mp3")
-			game.say(pikachu, "Pika, Pika, Pikachu")
-		})
-		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
-		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
-
-		//keyboard.m().onPressDo({ sonidosManager.subirVolumen() })
-		//keyboard.n().onPressDo({ sonidosManager.bajarVolumen() })
-		keyboard.s().onPressDo({ sonidosManager.silenciarVolumen() })
-		keyboard.v().onPressDo({ sonidosManager.establecerVolumen() })
-
 		tecladoNiveles.usar()
-
 	}
 	//CONFIG. DE TECLAS: MENU
 	method teclasMenu() {
@@ -50,7 +33,7 @@ object config {
 	method sonidos() {
 		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel().toString())
 	}
-}
+}	
 
 object sonidosManager {
 	
@@ -79,7 +62,6 @@ object sonidosManager {
 		sonidoFondo.volume(0.15)
 	}
 }
-
 class Teclado {
 	
 	method usar() {
@@ -98,7 +80,10 @@ object tecladoNiveles inherits Teclado {
 		keyboard.up().onPressDo({ pikachu.mover(arriba) })
 		keyboard.left().onPressDo({ pikachu.mover(izquierda) })
 		keyboard.right().onPressDo({ pikachu.mover(derecha) })
-		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
+		keyboard.p().onPressDo({ 
+			sonidosManager.sonar("pikachu.mp3")
+			game.say(pikachu, "Pika, Pika, Pikachu")
+		})
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
 		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
 	}
@@ -115,4 +100,3 @@ object tecladoMenu inherits Teclado {
 	}
 	
 }
-
