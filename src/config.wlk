@@ -1,8 +1,8 @@
 import alimentos.*
+import menu.*
 import posicionamiento.*
 import pokemons.*
 import transiciones.*
-import menu.*
 import wollok.game.*
 
 object config {
@@ -13,7 +13,7 @@ object config {
 		game.height(13)
 		game.ground("piso.png")
 	}
-	// CONFIG. DE TECLAS DE PIKACHU
+	// CONFIG. DE TECLAS: PIKACHU Y NIVEL
 	method teclas() {
 		keyboard.down().onPressDo({ pikachu.mover(abajo) })
 		keyboard.up().onPressDo({ pikachu.mover(arriba) })
@@ -30,18 +30,13 @@ object config {
 		//keyboard.n().onPressDo({ sonidosManager.bajarVolumen() })
 		keyboard.s().onPressDo({ sonidosManager.silenciarVolumen() })
 		keyboard.v().onPressDo({ sonidosManager.establecerVolumen() })
+
+		tecladoNiveles.usar()
+
 	}
-	//CONFIG. TECLAS MENU
-	method configurarTeclasMenu(){
-		keyboard.down().onPressDo({cursor.mover(cursor.position().down(1))})
-		keyboard.up().onPressDo({cursor.mover(cursor.position().up(1))})
-		keyboard.enter().onPressDo({cursor.action()})
-
-		keyboard.m().onPressDo({ sonidosManager.subirVolumen() })
-		keyboard.n().onPressDo({ sonidosManager.bajarVolumen() })
-		keyboard.s().onPressDo({ sonidosManager.silenciarVolumen() })
-		keyboard.v().onPressDo({ sonidosManager.establecerVolumen() })
-
+	//CONFIG. DE TECLAS: MENU
+	method teclasMenu() {
+		tecladoMenu.usar()
 	}
 	// CONFIG. COLISIONES
 	method colisiones() {
@@ -67,7 +62,7 @@ object sonidosManager {
 	
 	method generarMusicaNivel(nivel){
 		sonidoFondo = game.sound("musica-nivel-" + nivel + ".mp3")
-		self.establecerVolumen()
+		self.on()
 		sonidoFondo.shouldLoop(true)
 		game.schedule(7, { sonidoFondo.play() })
 	}
@@ -76,20 +71,48 @@ object sonidosManager {
 		game.schedule(7, { sonidoFondo.stop() })
 	}
 	
-	method subirVolumen() {
-		// completar, el ejemplo del wollok doc no funciona
-	}
-	
-	method bajarVolumen() {
-		// completar, el ejemplo del wollok doc no funciona
-	}
-	
-	method silenciarVolumen() {
+	method off() {
 		sonidoFondo.volume(0)
 	}
 	
-	method establecerVolumen() {
+	method on() {
 		sonidoFondo.volume(0.15)
 	}
+}
+
+class Teclado {
+	
+	method usar() {
+		keyboard.s().onPressDo({ sonidosManager.off() })
+		keyboard.v().onPressDo({ sonidosManager.on() })
+	}
+	
+}
+
+
+object tecladoNiveles inherits Teclado {
+	
+	override method usar() {
+		super()
+		keyboard.down().onPressDo({ pikachu.mover(abajo) })
+		keyboard.up().onPressDo({ pikachu.mover(arriba) })
+		keyboard.left().onPressDo({ pikachu.mover(izquierda) })
+		keyboard.right().onPressDo({ pikachu.mover(derecha) })
+		keyboard.p().onPressDo({ game.say(pikachu, "Pika, Pika, Pikachu") })
+		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
+		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
+	}
+	
+}
+
+object tecladoMenu inherits Teclado {
+	
+	override method usar() {
+		super()
+		keyboard.down().onPressDo({ cursor.mover(cursor.position().down(1)) })
+		keyboard.up().onPressDo({ cursor.mover(cursor.position().up(1)) })
+		keyboard.enter().onPressDo({ cursor.action() })
+	}
+	
 }
 
