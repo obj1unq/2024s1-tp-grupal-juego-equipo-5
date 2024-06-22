@@ -1,11 +1,11 @@
+import alimentos.*
 import ambiente.*
 import config.*
 import enemigos.*
 import pokemons.*
 import posicionamiento.*
-import wollok.game.*
-import alimentos.*
 import transiciones.*
+import wollok.game.*
 
 object menu {
 
@@ -83,7 +83,7 @@ object tutorial inherits Option {
 	method action() {
 		game.clear()
 		portadaManager.presentar(tutorialFondo)
-		keyboard.enter().onPressDo{ tutorialPuertas.actualizar() }
+		tutorialPuertas.iniciar() 
 	}
 
 }
@@ -114,13 +114,18 @@ class Tutorial {
 
 	var vistos = 0
 	
+	method iniciar() {
+		self.resetear()
+		self.actualizar()
+	}
+	
 	method actualizar() {
 		if (self.quedanPorVer()) {
 			self.mostrarActual()
 			self.aumentarVistos()
-			keyboard.enter().onPressDo{ self.actualizar() }
+			game.schedule(4000, { self.actualizar() })
 		} else {
-			self.resetear()
+			self.ocultarElementos()
 			self.continuar()
 		}
 	}
@@ -134,24 +139,19 @@ class Tutorial {
 	}
 
 	method mostrarActual() {
-		game.addVisual(self.actual())
+		self.actual().mostrar()
 	}
 
 	method ocultarElementos() {
-		self.elementos().forEach({ elemento => game.removeVisual(elemento)})
+		self.elementos().forEach({ elemento => elemento.ocultar() })
 	}
 	
 	method resetear() {
-		self.ocultarElementos()
 		vistos = 0
 	}
 
 	method quedanPorVer() {
-		return vistos < self.cantidadElementos()
-	}
-
-	method cantidadElementos() {
-		return self.elementos().size()
+		return vistos < self.elementos().size()
 	}
 
 	method elementos()
@@ -165,7 +165,7 @@ object tutorialPuertas inherits Tutorial {
 	override method elementos() = [ t1, t2, t3 ]
 	
 	override method continuar() {
-	 	tutorialCofres.actualizar()
+	 	tutorialCofres.iniciar()
 	}
 	
 }
@@ -195,7 +195,7 @@ class ElementoTutorial inherits Portada {
 	}
 
 	method ocultar() {
-		game.addVisual(self)
+		game.removeVisual(self)
 	}
 
 }
