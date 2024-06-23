@@ -382,6 +382,7 @@ object gameManager {
 
 	method victoria() {
 		game.clear()
+		sonidosManager.sonar(victoria.sonido())
 		portadaManager.presentar(victoria)
 		game.schedule(8000, {self.reset()})
 	}
@@ -396,6 +397,7 @@ object gameManager {
 	method derrota() {
 		game.clear()
 		sonidosManager.stop()
+		sonidosManager.sonar(derrota.sonido())
 		portadaManager.presentar(derrota)
 		game.schedule(4000, {self.reset()})
 	}
@@ -437,9 +439,11 @@ class PortadaSimple inherits Portada {
 }
 
 object victoria inherits PortadaSimple {
+	method sonido() = "victoria.mp3"
 }
 
 object derrota inherits PortadaSimple {
+	method sonido() = "derrota.mp3"
 }
 
 object creditos inherits PortadaSimple {
