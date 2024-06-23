@@ -86,6 +86,8 @@ class Meowth inherits EquipoRocketConMovimiento {
 	override method danio() = 75
 
 	override method nombre() = "meowth"
+	
+	override method sonido() = "meowth.mp3"
 
 }
 
