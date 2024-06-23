@@ -71,6 +71,7 @@ class Jessie inherits EquipoRocketConMovimientoVariable {
 
 	override method nombre() = "jessie"
 	
+	override method sonido() = "jessie.mp3"
 }
 
 class James inherits EquipoRocketConMovimientoVariable {
@@ -78,7 +79,8 @@ class James inherits EquipoRocketConMovimientoVariable {
 	override method danio() = 100
 
 	override method nombre() = "james"
-
+	
+	override method sonido() = "james.mp3"
 }
 
 class Meowth inherits EquipoRocketConMovimiento {
