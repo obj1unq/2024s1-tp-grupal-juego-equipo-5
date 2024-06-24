@@ -67,6 +67,13 @@ object pikachu {
 
 	method esAtravesable() = true
 
+	method hablar() {
+		sonidosManager.sonar(self.voz())
+		game.say(self, "Pika, Pika, Pikachu")
+	}
+	
+	method voz() = "pikachu.mp3"
+	
 	method interactuarConObjeto() {
 		const posiciones = #{ direccion.siguiente(self.position()), 
 							  direccion.opuesto().siguiente(self.position()), 

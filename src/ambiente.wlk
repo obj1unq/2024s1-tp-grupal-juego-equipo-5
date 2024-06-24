@@ -60,43 +60,55 @@ object iconCorazonPikachu {
 }
 
 // ESTADOS DEL CORAZON DE PIKACHU
-object vacio {
+class EstadoCorazon {
 
 	method estaEnPorcentaje(energia) {
-		return energia <= 0
+		return energia.between(self.inicio(), self.fin())
 	}
+
+	method inicio()
+
+	method fin()
 
 }
 
-object cuarto {
+object vacio inherits EstadoCorazon {
 
-	method estaEnPorcentaje(energia) {
-		return energia.between(1, 150)
-	}
+	override method inicio() = -1000
 
-}
-
-object medio {
-
-	method estaEnPorcentaje(energia) {
-		return energia.between(151, 300)
-	}
+	override method fin() = 0
 
 }
 
-object trescuartos {
+object cuarto inherits EstadoCorazon {
 
-	method estaEnPorcentaje(energia) {
-		return energia.between(301, 450)
-	}
+	override method inicio() = 1
+
+	override method fin() = 150
 
 }
 
-object lleno {
+object medio inherits EstadoCorazon {
 
-	method estaEnPorcentaje(energia) {
-		return energia.between(451, 600)
-	}
+	override method inicio() = 151
+
+	override method fin() = 300
+
+}
+
+object trescuartos inherits EstadoCorazon {
+
+	override method inicio() = 301
+
+	override method fin() = 450
+
+}
+
+object lleno inherits EstadoCorazon {
+
+	override method inicio() = 451
+
+	override method fin() = 600
 
 }
 

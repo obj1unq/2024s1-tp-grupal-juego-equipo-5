@@ -159,7 +159,6 @@ describe "DETECTIVE" {
 		no tiene la llave ni rescató al prisionero, obtiene la energia que le pasen 
 		(ya sea la inicial o la del nivel previo) y su estado es caminando." {
 		// Estado inicial pedido, versión ejemplificadora: GANADOR
-		sonidosManager.generarMusicaNivel("1")
 		pikachu.estado(ganador)
 		pikachu.energia(400)
 		pikachu.obtenerLlave()

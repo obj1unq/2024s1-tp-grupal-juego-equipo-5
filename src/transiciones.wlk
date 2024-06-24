@@ -235,10 +235,10 @@ object escenario {
 		[x,_,_,_,_,_,_,_,_,_,_,_,_,x,_,_,_,x],
 		[x,_,_,_,_,_,_,_,_,_,_,_,_,n,_,_,o,x],
 		[x,x,x,x,u,x,_,_,_,_,_,_,x,x,x,x,x,x],
-		[x,_,_,i,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
+		[x,_,_,_,i,x,_,_,_,_,_,_,x,_,_,i,_,x],
 		[x,_,_,_,_,x,_,_,i,_,i,_,u,_,_,i,o,x],
-		[x,_,e,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
-		[x,_,_,i,_,x,_,i,_,t,_,_,x,_,_,i,_,x],
+		[x,e,i,_,_,x,_,_,_,_,_,_,x,_,_,i,_,x],
+		[x,_,i,_,_,x,_,i,_,t,_,_,x,_,_,i,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]	
 	].reverse()
 	
@@ -268,9 +268,9 @@ object escenario {
 		[x,_,x,x,x,x,x,x,x,x,x,x,x,x,x,n,x,x],
 		[x,m,_,_,_,_,_,_,_,_,_,_,_,_,_,_,t,x],
 		[x,x,x,x,x,x,x,x,x,u,x,n,x,x,x,x,x,x],
-		[x,_,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
-		[x,_,v,_,_,x,_,_,_,_,x,_,_,_,_,i,_,x],
-		[x,p,_,i,_,u,_,i,_,_,x,_,_,_,_,i,_,x],
+		[x,p,_,_,_,x,_,_,i,_,x,_,_,_,_,i,o,x],
+		[x,_,_,_,_,x,_,_,_,_,x,_,_,_,_,i,_,x],
+		[x,v,_,i,_,u,_,i,_,_,x,_,_,_,_,i,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
 	].reverse() 
 	
@@ -304,7 +304,7 @@ object escenario {
 		[x,_,_,x,_,x,x,x,x,x,x,x,_,n,_,_,j,x],
 		[x,p,_,n,_,_,_,_,_,_,_,_,_,x,o,_,_,x],
 		[x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,x,f]
-	].reverse() 
+	].reverse()  
 	
 	method niveles() {
 		return [
@@ -365,8 +365,8 @@ object gameManager {
 	}
 
 	method generar() {
+		game.clear()
 		if (nivelManager.quedanNiveles()) {
-			game.clear()
 			mapa.generar(nivelManager.nivelActual())
 		} else {
 			self.victoria()
@@ -381,10 +381,9 @@ object gameManager {
 	}
 
 	method victoria() {
-		game.clear()
 		sonidosManager.sonar(victoria.sonido())
 		portadaManager.presentar(victoria)
-		game.schedule(8000, {self.reset()})
+		game.schedule(9000, {self.reset()})
 	}
 
 	method victoriaParcial() {
@@ -399,7 +398,7 @@ object gameManager {
 		sonidosManager.stop()
 		sonidosManager.sonar(derrota.sonido())
 		portadaManager.presentar(derrota)
-		game.schedule(4000, {self.reset()})
+		game.schedule(9000, {self.reset()})
 	}
 
 }
@@ -420,7 +419,7 @@ object inicioDelJuego inherits Portada {
 
 object inicioDelNivel inherits Portada {
 	
-	method nivelActual() = (nivelManager.numeroDeNivel() + 1).toString()
+	method nivelActual() = nivelManager.numeroDeNivel().toString()
 	
 	override method nombre() = "instrucciones-nivel-" + self.nivelActual()
 
@@ -439,11 +438,15 @@ class PortadaSimple inherits Portada {
 }
 
 object victoria inherits PortadaSimple {
+	
 	method sonido() = "victoria.mp3"
+	
 }
 
 object derrota inherits PortadaSimple {
+	
 	method sonido() = "derrota.mp3"
+	
 }
 
 object creditos inherits PortadaSimple {

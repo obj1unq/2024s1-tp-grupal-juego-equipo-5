@@ -15,16 +15,16 @@ object menu {
 		game.clear()
 		portadaManager.presentar(inicioDelJuego)
 		config.teclasMenu()
-		game.addVisual(cursor)
+		cursor.visualizar()
 		self.setOptions(optionMenu)
 	}
 
-	method cleanOptions(options) {
-		options.forEach({ option => game.removeVisual(option)})
+	method setOptions(options) {
+		options.forEach({ option => game.addVisual(option) })
 	}
 
-	method setOptions(options) {
-		options.forEach({ option => game.addVisual(option)})
+	method cleanOptions(options) {
+		options.forEach({ option => game.removeVisual(option) })
 	}
 
 }
@@ -41,8 +41,8 @@ object cursor {
 	}
 
 	method action() {
-		self.option().forEach({ option => option.action()})
-	// solo es 1, pero como es una coleccion, lo tratramos asi
+		self.option().forEach({ option => option.action() })
+	// Solamente es una, pero como es una coleccion, lo abordamos de esta manera
 	}
 
 	method option() {
@@ -51,6 +51,10 @@ object cursor {
 
 	method validacionDeMovimiento(unaPosicion) {
 		return unaPosicion.x() == 6 and unaPosicion.y().between(2, 5)
+	}
+
+	method visualizar() {
+		game.addVisual(self)
 	}
 
 }
@@ -63,6 +67,10 @@ class Option {
 	method position() = game.at(7, self.positionX())
 
 	method positionX()
+	
+	method action() {
+		game.clear()
+	}
 
 }
 
@@ -70,7 +78,8 @@ object start inherits Option {
 
 	override method positionX() = 5
 
-	method action() {
+	override method action() {
+		super()
 		portadaManager.presentarNivel()
 	}
 
@@ -80,10 +89,10 @@ object tutorial inherits Option {
 
 	override method positionX() = 4
 
-	method action() {
-		game.clear()
+	override method action() {
+		super()
 		portadaManager.presentar(tutorialFondo)
-		tutorialPuertas.iniciar() 
+		tutorialPuertas.iniciar()
 	}
 
 }
@@ -92,10 +101,10 @@ object credits inherits Option {
 
 	override method positionX() = 3
 
-	method action() {
-		game.clear()
+	override method action() {
+		super()
 		portadaManager.presentar(creditos)
-		game.schedule(7000, { menu.iniciarMenu()})
+		game.schedule(7000, { menu.iniciarMenu() })
 	}
 
 }
@@ -113,23 +122,27 @@ object exit inherits Option {
 class Tutorial {
 
 	var vistos = 0
-	
+
 	method iniciar() {
 		self.resetear()
 		self.actualizar()
 	}
-	
+
 	method actualizar() {
 		if (self.quedanPorVer()) {
 			self.mostrarActual()
 			self.aumentarVistos()
-			game.schedule(4000, { self.actualizar() })
+			self.actualizarAutomatico()
 		} else {
 			self.ocultarElementos()
 			self.continuar()
 		}
 	}
-	
+
+	method actualizarAutomatico() {
+		game.schedule(3000, { self.actualizar() })
+	}
+
 	method actual() {
 		return self.elementos().get(vistos)
 	}
@@ -143,9 +156,9 @@ class Tutorial {
 	}
 
 	method ocultarElementos() {
-		self.elementos().forEach({ elemento => elemento.ocultar() })
+		self.elementos().forEach({ elemento => elemento.ocultar()})
 	}
-	
+
 	method resetear() {
 		vistos = 0
 	}
@@ -155,7 +168,7 @@ class Tutorial {
 	}
 
 	method elementos()
-	
+
 	method continuar()
 
 }
@@ -163,11 +176,11 @@ class Tutorial {
 object tutorialPuertas inherits Tutorial {
 
 	override method elementos() = [ t1, t2, t3 ]
-	
+
 	override method continuar() {
-	 	tutorialCofres.iniciar()
+		tutorialCofres.iniciar()
 	}
-	
+
 }
 
 object tutorialCofres inherits Tutorial {
@@ -177,7 +190,7 @@ object tutorialCofres inherits Tutorial {
 	override method continuar() {
 		menu.iniciarMenu()
 	}
-	
+
 }
 
 class ElementoTutorial inherits Portada {
@@ -214,7 +227,7 @@ class ElementoTutorialCofres inherits ElementoTutorial {
 
 object t1 inherits ElementoTutorialPuertas {
 
-	override method position() = game.at(3, 9)
+	override method position() = game.at(2, 8)
 
 	override method num() = 1
 
@@ -222,7 +235,7 @@ object t1 inherits ElementoTutorialPuertas {
 
 object t2 inherits ElementoTutorialPuertas {
 
-	override method position() = game.at(10, 6)
+	override method position() = game.at(11, 5)
 
 	override method num() = 2
 
@@ -230,7 +243,7 @@ object t2 inherits ElementoTutorialPuertas {
 
 object t3 inherits ElementoTutorialPuertas {
 
-	override method position() = game.at(3, 3)
+	override method position() = game.at(2, 2)
 
 	override method num() = 3
 
@@ -238,7 +251,7 @@ object t3 inherits ElementoTutorialPuertas {
 
 object t4 inherits ElementoTutorialCofres {
 
-	override method position() = game.at(6, 8)
+	override method position() = game.at(2, 5)
 
 	override method num() = 1
 
@@ -246,7 +259,7 @@ object t4 inherits ElementoTutorialCofres {
 
 object t5 inherits ElementoTutorialCofres {
 
-	override method position() = game.at(6, 3)
+	override method position() = game.at(11, 5)
 
 	override method num() = 2
 
