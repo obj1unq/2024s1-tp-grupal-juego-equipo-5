@@ -14,6 +14,9 @@ describe "PORTADAS" {
 		// Estado inicial, no pedido.
 		// Caso prueba:
 		portadaManager.presentarNivel()
+		assert.equals("instrucciones-nivel-0.png", portadaManager.image())
+		nivelManager.aumentarNivelActual()
+		portadaManager.presentarNivel()
 		assert.equals("instrucciones-nivel-1.png", portadaManager.image())
 		nivelManager.aumentarNivelActual()
 		portadaManager.presentarNivel()
@@ -24,9 +27,6 @@ describe "PORTADAS" {
 		nivelManager.aumentarNivelActual()
 		portadaManager.presentarNivel()
 		assert.equals("instrucciones-nivel-4.png", portadaManager.image())
-		nivelManager.aumentarNivelActual()
-		portadaManager.presentarNivel()
-		assert.equals("instrucciones-nivel-5.png", portadaManager.image())
 	}
 	test "PRESENTACION: INFOJUGABILIDAD" {
 		// No depende del PortadaManager como el resto.

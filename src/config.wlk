@@ -80,10 +80,7 @@ object tecladoNiveles inherits Teclado {
 		keyboard.up().onPressDo({ pikachu.mover(arriba) })
 		keyboard.left().onPressDo({ pikachu.mover(izquierda) })
 		keyboard.right().onPressDo({ pikachu.mover(derecha) })
-		keyboard.p().onPressDo({ 
-			sonidosManager.sonar("pikachu.mp3")
-			game.say(pikachu, "Pika, Pika, Pikachu")
-		})
+		keyboard.p().onPressDo({ pikachu.hablar() })
 		keyboard.e().onPressDo({ pikachu.interactuarConObjeto() })
 		keyboard.i().onPressDo({ infoJugabilidad.accionar() })
 	}
