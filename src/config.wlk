@@ -31,43 +31,93 @@ object config {
 	}
 	// CONFIG. SONIDOS
 	method sonidos() {
-		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel().toString())
+		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel())
 	}
 }	
 
 object sonidosManager {
 	
 	var sonidoFondo
+	var estadoSonido = on
 	
-	method sonar(musica){
-		game.schedule(7, { game.sound(musica).play() })
+	method sonar(nombreSonido){
+		const sonido = game.sound(nombreSonido) 
+		self.actualizar(sonido)
+		game.schedule(7, {sonido.play()} )
 	}
 	
 	method generarMusicaNivel(nivel){
-		sonidoFondo = game.sound("musica-nivel-" + nivel + ".mp3")
-		self.on()
+		sonidoFondo = game.sound("musica-nivel-" + nivel.toString() + ".mp3")
+		self.actualizar(sonidoFondo)
 		sonidoFondo.shouldLoop(true)
-		game.schedule(7, { sonidoFondo.play() })
+		game.schedule(7, {sonidoFondo.play()} )	
 	}
 	
 	method stop(){
-		game.schedule(7, { sonidoFondo.stop() })
+		game.schedule(7, {sonidoFondo.stop()} )
 	}
 	
-	method off() {
-		sonidoFondo.volume(0)
+	method cambiarEstado() {
+		estadoSonido = estadoSonido.siguiente()
 	}
 	
-	method on() {
-		sonidoFondo.volume(0.15)
+	method validarCambiarEstado() {
+		if (not self.puedeCambiarEstado()) {
+			self.error("No puede cambiar al estado del sonido pedido")
+		}
 	}
+	
+	method puedeCambiarEstado() {
+		return estadoSonido != estadoSonido.siguiente()
+	}
+	
+	method actualizar(sonido) {
+		sonido.volume(estadoSonido.volumen())
+	}
+	
+	method position() = game.at(0,0)
+	
+	method image() = estadoSonido.image()
+	
+	method visualizar() {
+		game.addVisual(self)
+	}
+	
 }
+
+// ESTADO DEL SONIDO
+
+class EstadoSonido {
+	
+	method image() = "sound-" + self.toString() + ".png"
+	
+	method volumen()
+	
+	method siguiente()
+	
+}
+
+object on inherits EstadoSonido {
+	
+	override method volumen() = 0.15
+	
+	override method siguiente() = off
+	
+}
+
+object off inherits EstadoSonido {
+	
+	override method volumen() = 0
+	
+	override method siguiente() = on
+	
+}
+
+// TECLADO
+
 class Teclado {
 	
-	method usar() {
-		keyboard.s().onPressDo({ sonidosManager.off() })
-		keyboard.v().onPressDo({ sonidosManager.on() })
-	}
+	method usar()
 	
 }
 
@@ -75,7 +125,6 @@ class Teclado {
 object tecladoNiveles inherits Teclado {
 	
 	override method usar() {
-		super()
 		keyboard.down().onPressDo({ pikachu.mover(abajo) })
 		keyboard.up().onPressDo({ pikachu.mover(arriba) })
 		keyboard.left().onPressDo({ pikachu.mover(izquierda) })
@@ -90,10 +139,11 @@ object tecladoNiveles inherits Teclado {
 object tecladoMenu inherits Teclado {
 	
 	override method usar() {
-		super()
 		keyboard.down().onPressDo({ cursor.mover(cursor.position().down(1)) })
 		keyboard.up().onPressDo({ cursor.mover(cursor.position().up(1)) })
 		keyboard.enter().onPressDo({ cursor.action() })
+		keyboard.s().onPressDo({ sonidosManager.cambiarEstado() })
 	}
 	
 }
+

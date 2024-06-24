@@ -16,6 +16,7 @@ object menu {
 		portadaManager.presentar(inicioDelJuego)
 		config.teclasMenu()
 		cursor.visualizar()
+		sonidosManager.visualizar()
 		self.setOptions(optionMenu)
 	}
 
@@ -113,7 +114,7 @@ object exit inherits Option {
 
 	override method positionX() = 2
 
-	method action() {
+	override method action() {
 		game.stop()
 	}
 
