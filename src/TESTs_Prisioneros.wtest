@@ -1,4 +1,5 @@
 import ambiente.*
+import config.*
 import enemigos.*
 import pokemons.*
 import wollok.game.*
@@ -11,6 +12,7 @@ describe "PRISIONEROS" {
 	method initialize() {
 		game.clear()
 		objetos.forEach({objeto=> game.addVisual(objeto)})
+		sonidosManager.cambiarEstado()
 	}
 	
 	test "RESETEAR...

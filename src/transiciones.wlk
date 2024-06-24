@@ -214,7 +214,7 @@ object mapa {
 		config.teclas()
 		config.colisiones()
 		config.frutas()
-		config.sonidos()
+		config.sonidos(nivelManager.numeroDeNivel())
 	}
 
 	method generarCelda(x, y, nivel) {

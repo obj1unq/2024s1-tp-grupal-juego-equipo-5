@@ -28,6 +28,7 @@ describe "DETECTIVE" {
 		game.clear()
 		config.ambienteBasico()
 		objetos.forEach({obj => game.addVisual(obj)})
+		sonidosManager.cambiarEstado()
 	}
 	
 	test "ENERGIA AL COMER FRUTAS...
