@@ -26,7 +26,7 @@ Para salvar al pokemon prisionero e irse finalmente a su pokebola.
 
 Para lograrlo, Pikachu enfrentará varias dificultades a lo largo del camino.
 
-#### Interacción con Puertas\*\*
+**Interacción con Puertas**
 
 En el mapa hay varias puertas, algunas comienzan cerradas y otras abiertas. Para cambiar su estado, dirígete al interruptor rojo. Al apretar el interruptor, se invierte el estado de todas las puertas: las cerradas se abrirán y las abiertas se cerrarán.
 
