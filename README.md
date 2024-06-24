@@ -10,8 +10,8 @@
 
 ## Capturas
 
-![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-captura1.png)
-![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-captura2.png)
+![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/readme/assets/readme-captura1.png)
+![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/readme/assets/readme-captura2.png)
 
 ## Reglas de Juego / Instrucciones
 
