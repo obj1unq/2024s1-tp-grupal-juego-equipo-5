@@ -12,13 +12,14 @@
 
 (agregar)
 
-![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-tutorial.png)
+
 
 ## Reglas de Juego / Instrucciones
 
 (Escribirlas)
 
-![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-controles.png)
+![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-tutorial.png)
+![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-teclas.png)
 
 ## Otros
 
