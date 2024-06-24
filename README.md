@@ -10,13 +10,19 @@
 
 ## Capturas
 
-(agregar)
-
-
+![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-captura1.png)
+![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-captura2.png)
 
 ## Reglas de Juego / Instrucciones
 
-(Escribirlas)
+Objetivo:
+El objetivo de Pikachu es encontrar la llave escondida en uno de los cofres del mapa. Para lograrlo, Pikachu enfrentará varias dificultades a lo largo del camino.
+
+Interacción con Puertas:
+En el mapa hay varias puertas, algunas comienzan cerradas y otras abiertas. Para cambiar su estado, dirígete al interruptor rojo. Al apretar el interruptor, se invierte el estado de todas las puertas: las cerradas se abrirán y las abiertas se cerrarán. Tendrás que regresar al interruptor cada vez que necesites cambiar el estado de las puertas.
+
+Consejos:
+Mantén un ojo en tu nivel de vida, evita las bayas, busca manzanas y bananas para recuperarte, ya que pikachu recuerda su porcentaje de vida a medida que avanza los niveles.
 
 ![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-tutorial.png)
 ![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-teclas.png)

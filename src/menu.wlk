@@ -33,7 +33,7 @@ object menu {
 object cursor {
 
 	const property image = "cursor.png"
-	var property position = game.at(6, 4)
+	var property position = game.at(6, 5)
 
 	method mover(unaPosicion) {
 		if (self.validacionDeMovimiento(unaPosicion)) {
