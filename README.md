@@ -30,11 +30,11 @@ Para lograrlo, Pikachu enfrentará varias dificultades a lo largo del camino.
 
 En el mapa hay varias puertas, algunas comienzan cerradas y otras abiertas. Para cambiar su estado, dirígete al interruptor rojo. Al apretar el interruptor, se invierte el estado de todas las puertas: las cerradas se abrirán y las abiertas se cerrarán.
 
-#### Consejos
+**Consejos**
 
-Mantén un ojo en tu nivel de vida, evita las bayas, busca manzanas y bananas para recuperarte, ya que pikachu recuerda su porcentaje de vida a medida que avanza los niveles.
+Mantén un ojo en tu nivel de vida, evita las bayas, busca manzanas y bananas para recuperarte, ya que pikachu recuerda su vitalidad a medida que avanza los niveles.
 
-#### Teclas
+**Teclas**
 
 ![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-teclas.png)
 
