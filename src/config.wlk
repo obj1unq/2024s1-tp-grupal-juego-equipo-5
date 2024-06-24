@@ -30,35 +30,47 @@ object config {
 		frutaManager.configurarFrutas()
 	}
 	// CONFIG. SONIDOS
-	method sonidos() {
-		sonidosManager.generarMusicaNivel(nivelManager.numeroDeNivel())
+	method sonidos(nivel) {
+		sonidosManager.generarMusica(nivel)
 	}
 }	
 
 object sonidosManager {
 	
-	var sonidoFondo
-	var estadoSonido = on
+	var musica
+	var estado = on 
 	
-	method sonar(nombreSonido){
-		const sonido = game.sound(nombreSonido) 
-		self.actualizar(sonido)
-		game.schedule(7, {sonido.play()} )
+	method generarMusica(nivel){	// OBS: generarMusicaSiPuede, sería un nombre más apropiado.
+		if (self.estaEncendido()) {
+			musica = game.sound("musica-nivel-" + nivel.toString() + ".mp3")
+			musica.volume(0.15)
+			musica.shouldLoop(true)
+			musica.play()
+		}
+		
 	}
 	
-	method generarMusicaNivel(nivel){
-		sonidoFondo = game.sound("musica-nivel-" + nivel.toString() + ".mp3")
-		self.actualizar(sonidoFondo)
-		sonidoFondo.shouldLoop(true)
-		game.schedule(7, {sonidoFondo.play()} )	
+	method sonar(sonido){			// OBS: sonarSiPuede, sería un nombre más apropiado.
+		if (self.estaEncendido()) {
+			game.sound(sonido).play()
+		} 
+		
 	}
 	
-	method stop(){
-		game.schedule(7, {sonidoFondo.stop()} )
+	method stop(){					// OBS: stopSiPuede, sería el nombre más apropiado.
+		if (self.estaEncendido()) {
+			musica.stop()
+		}
+		 
+	}
+	
+	method estaEncendido(){
+		return estado != off
 	}
 	
 	method cambiarEstado() {
-		estadoSonido = estadoSonido.siguiente()
+		self.validarCambiarEstado()
+		estado = estado.siguiente()
 	}
 	
 	method validarCambiarEstado() {
@@ -68,16 +80,12 @@ object sonidosManager {
 	}
 	
 	method puedeCambiarEstado() {
-		return estadoSonido != estadoSonido.siguiente()
-	}
-	
-	method actualizar(sonido) {
-		sonido.volume(estadoSonido.volumen())
+		return estado != estado.siguiente()
 	}
 	
 	method position() = game.at(0,0)
 	
-	method image() = estadoSonido.image()
+	method image() = estado.image()
 	
 	method visualizar() {
 		game.addVisual(self)
@@ -91,23 +99,17 @@ class EstadoSonido {
 	
 	method image() = "sound-" + self.toString() + ".png"
 	
-	method volumen()
-	
 	method siguiente()
 	
 }
 
 object on inherits EstadoSonido {
 	
-	override method volumen() = 0.15
-	
 	override method siguiente() = off
 	
 }
 
 object off inherits EstadoSonido {
-	
-	override method volumen() = 0
 	
 	override method siguiente() = on
 	
