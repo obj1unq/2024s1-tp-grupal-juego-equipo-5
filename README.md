@@ -20,8 +20,8 @@ El objetivo de Pikachu es encontrar la llave escondida en alguno de los cofres d
 ![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/readme/assets/readme-captura3.png)
 
 Para salvar al pokemon prisionero e irse finalmente a su pokebola.
-![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/readme/assets/readme-captura4.png)
 
+![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/readme/assets/readme-captura4.png)
 Para lograrlo, Pikachu enfrentará varias dificultades a lo largo del camino.
 ![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/readme/assets/readme-captura5.png)
 
