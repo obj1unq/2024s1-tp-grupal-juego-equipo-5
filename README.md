@@ -4,9 +4,9 @@
 
 ## Equipo de desarrollo
 
-- Adrián Fermoselle
-- Jonathan Maresca
-- Lourdes de la Cerda
+- *Adrián Fermoselle*
+- *Jonathan Maresca*
+- *Lourdes de la Cerda*
 
 ## Capturas
 
@@ -16,7 +16,7 @@
 
 ## Reglas de Juego / Instrucciones
 
-El **objetivo** de Pikachu es encontrar la llave escondida en alguno de los cofres del mapa.
+El **objetivo** de Pikachu es encontrar la llave escondida en uno de los cofres del mapa.
 
 ![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-captura3.png)
 
@@ -39,8 +39,12 @@ Mantén un ojo en tu nivel de vida, evita las bayas, busca manzanas y bananas pa
 
 ![Portada](https://github.com/obj1unq/2024s1-tp-grupal-juego-equipo-5/blob/master/assets/readme-teclas.png)
 
-## Otros
+Además de estas teclas que te mostramos, al iniciar el juego puedes optar por tocar la **Tecla S** para jugar en silencio, Pikachu te mostrará en qué modo te encuentras en el extremo inferior izquierdo del menú. No obstante, no te preocupes, si te arrepientes cuando vuelvas a estar en el menú puedes cambiarlo al modo con sonido activo. 
+Disfruta de ambas experiencias, aunque te recomendamos que: *no te pierdas de escuchar a Pikachu hablar*.  
 
-- Programación con Objetos I, Universidad Nacional de Quilmes.
-- Versión de wollok.
-- Una vez terminado, no tenemos problemas en que el repositorio sea público.
+Por último y no por eso menos importante. No te olvides de ver los **créditos del juego** *(estos sí, duran unos segundos, no como en las películas)*. Que lo disfrutes. Fin.
+
+## Otros
+- *Programación Orientada a Objetos I, Universidad Nacional de Quilmes.*
+- *Versión de wollok: 3.0.0*
+- *Una vez terminado, no tenemos problemas en que el repositorio sea público.*
