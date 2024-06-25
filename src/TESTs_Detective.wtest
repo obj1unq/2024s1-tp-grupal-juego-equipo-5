@@ -61,6 +61,9 @@ describe "DETECTIVE" {
 		// Caso prueba:
 		pikachu.comerFruta(banana)
 		assert.equals(600, pikachu.energia())
+		assert.equals("vivo", iconPikachu.vitalidad(pikachu.energia()))
+		assert.equals(lleno, iconCorazonPikachu.estadoActualDelCorazon())
+		
 	}
 	
 	test "ENERGIA AL COMER FRUTAS PARA MORIR...
@@ -72,6 +75,8 @@ describe "DETECTIVE" {
 		pikachu.comerFruta(uva)
 		assert.equals(-50, pikachu.energia())
 		assert.equals(muerto, pikachu.estado())
+		assert.equals("muerto", iconPikachu.vitalidad(pikachu.energia()))
+		assert.equals(vacio, iconCorazonPikachu.estadoActualDelCorazon()) 
 	}
 	
 	test "ENERGIA AL RECIBIR DAÑO...

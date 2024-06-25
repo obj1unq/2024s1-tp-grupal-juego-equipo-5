@@ -39,11 +39,10 @@ object anotador {
 object iconPikachu {
 
 	const property position = game.at(0, game.height() - 1)
-	const energia = pikachu.energia()
 	
-	method image() = "icon-Pikachu-" + self.vitalidad() + ".png"
+	method image() = "icon-Pikachu-" + self.vitalidad(pikachu.energia()) + ".png"
 	
-	method vitalidad() {
+	method vitalidad(energia) {
 		return if (energia < 0) {
 			"muerto"
 		} else {
