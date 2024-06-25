@@ -69,7 +69,7 @@ object pikachu {
 
 	method hablar() {
 		sonidosManager.sonar(self.voz())
-		game.say(self, "Pika, Pika, Pikachu")
+		game.say(self, "Pikachu!")
 	}
 	
 	method voz() = "pikachu.mp3"
