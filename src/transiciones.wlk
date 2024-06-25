@@ -457,8 +457,10 @@ object infoJugabilidad inherits PortadaSimple {
 	const property position = game.at(0, 0)
 	
 	method accionar() {
-		self.mostrar()
-		game.schedule(3000, {self.ocultar()})
+		if (not self.estaVisible()) {
+			self.mostrar()
+			game.schedule(3000, {self.ocultar()})
+		}
 	}
 	
 	method mostrar() {
@@ -467,6 +469,10 @@ object infoJugabilidad inherits PortadaSimple {
 	
 	method ocultar() {
 		game.removeVisual(self)
+	}
+	
+	method estaVisible() {
+		return game.hasVisual(self)
 	}
 	
 }

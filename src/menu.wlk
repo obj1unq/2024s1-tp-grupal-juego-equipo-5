@@ -189,6 +189,17 @@ object tutorialCofres inherits Tutorial {
 	override method elementos() = [ t4, t5 ]
 
 	override method continuar() {
+		tutorialFrutas.iniciar()
+	}
+
+}
+
+
+object tutorialFrutas inherits Tutorial {
+
+	override method elementos() = [ t6, t7 ]
+
+	override method continuar() {
 		menu.iniciarMenu()
 	}
 
@@ -226,6 +237,12 @@ class ElementoTutorialCofres inherits ElementoTutorial {
 
 }
 
+class ElementoTutorialFrutas inherits ElementoTutorial {
+
+	override method seccion() = "Frutas-"
+
+}
+
 object t1 inherits ElementoTutorialPuertas {
 
 	override method position() = game.at(2, 8)
@@ -259,6 +276,22 @@ object t4 inherits ElementoTutorialCofres {
 }
 
 object t5 inherits ElementoTutorialCofres {
+
+	override method position() = game.at(11, 5)
+
+	override method num() = 2
+
+}
+
+object t6 inherits ElementoTutorialFrutas {
+
+	override method position() = game.at(2, 5)
+
+	override method num() = 1
+
+}
+
+object t7 inherits ElementoTutorialFrutas {
 
 	override method position() = game.at(11, 5)
 
