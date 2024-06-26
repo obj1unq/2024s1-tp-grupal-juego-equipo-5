@@ -1,8 +1,5 @@
-import alimentos.*
-import ambiente.*
 import config.*
-import enemigos.*
-import pokemons.*
+//import pokemons.*
 import posicionamiento.*
 import transiciones.*
 import wollok.game.*

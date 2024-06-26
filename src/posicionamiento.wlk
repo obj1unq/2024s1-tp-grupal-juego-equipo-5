@@ -1,5 +1,3 @@
-import alimentos.*
-import pokemons.*
 import wollok.game.*
 
 //DIRECCIONES 

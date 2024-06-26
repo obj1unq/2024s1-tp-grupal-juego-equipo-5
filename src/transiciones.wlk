@@ -3,9 +3,9 @@ import config.*
 import enemigos.*
 import pokemons.*
 import posicionamiento.*
-import wollok.game.*
-import menu.*
 import alimentos.*
+import menu.*
+import wollok.game.*
 
 // VACIO
 object _ {

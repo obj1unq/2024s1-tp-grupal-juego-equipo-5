@@ -1,11 +1,6 @@
-import alimentos.*
-import enemigos.*
 import pokemons.*
-import posicionamiento.*
-import randomizer.*
-import transiciones.*
-import wollok.game.*
 import config.*
+import wollok.game.*
 
 // PAREDES
 class Pared inherits Articulo {

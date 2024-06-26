@@ -1,5 +1,4 @@
 import config.*
-import posicionamiento.*
 import pokemons.*
 import randomizer.*
 import transiciones.*

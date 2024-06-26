@@ -1,10 +1,9 @@
 import alimentos.*
 import ambiente.*
 import posicionamiento.*
-import randomizer.*
 import transiciones.*
-import wollok.game.*
 import config.*
+import wollok.game.*
 
 // DETECTIVE
 object pikachu {

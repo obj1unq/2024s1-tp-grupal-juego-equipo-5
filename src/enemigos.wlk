@@ -1,9 +1,7 @@
-import alimentos.*
 import pokemons.*
 import posicionamiento.*
-import randomizer.*
-import wollok.game.*
 import config.*
+import wollok.game.*
 
 // EQUIPO ROCKET
 class EquipoRocket {
