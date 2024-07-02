@@ -40,28 +40,17 @@ object sonidosManager {
 	var musica
 	var estado = on 
 	
-	method generarMusica(nivel){	// OBS: generarMusicaSiPuede, sería un nombre más apropiado.
-		if (self.estaEncendido()) {
-			musica = game.sound("musica-nivel-" + nivel.toString() + ".mp3")
-			musica.volume(0.15)
-			musica.shouldLoop(true)
-			musica.play()
-		}
-		
+	method generarMusica(nivel) {
+		musica = game.sound("musica-nivel-" + nivel.toString() + ".mp3")
+		estado.generarMusica(musica)
 	}
 	
-	method sonar(sonido){			// OBS: sonarSiPuede, sería un nombre más apropiado.
-		if (self.estaEncendido()) {
-			game.sound(sonido).play()
-		} 
-		
+	method sonar(sonido) {
+		estado.sonar(sonido)
 	}
 	
-	method stop(){					// OBS: stopSiPuede, sería el nombre más apropiado.
-		if (self.estaEncendido()) {
-			musica.stop()
-		}
-		 
+	method stop() {
+		estado.stop(musica)
 	}
 	
 	method estaEncendido(){
@@ -101,17 +90,43 @@ class EstadoSonido {
 	
 	method siguiente()
 	
+	method generarMusica(musica)
+	
+	method sonar(sonido)
+	
+	method stop(musica)
+	
 }
 
 object on inherits EstadoSonido {
 	
 	override method siguiente() = off
 	
+	override method generarMusica(musica) {
+		musica.volume(0.15)
+		musica.shouldLoop(true)
+		musica.play()
+	}
+	
+	override method sonar(sonido) {
+		game.sound(sonido).play()
+	}
+	
+	override method stop(musica) {
+		musica.stop()
+	}
+	
 }
 
 object off inherits EstadoSonido {
 	
 	override method siguiente() = on
+	
+	override method generarMusica(musica) {}
+	
+	override method sonar(sonido) {}
+	
+	override method stop(musica) {}
 	
 }
 
